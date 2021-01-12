@@ -54,7 +54,7 @@ export default class MyProjects extends Component {
 
     groupDetail(id) {
         setTimeout(() => {
-            window.location.href = '/freedom-cells-react/timeLine/' + id;
+            window.location.href = '/timeLine/' + id;
             window.location.reload(true)
         }, 200);
     }
@@ -152,12 +152,12 @@ export default class MyProjects extends Component {
                                                                         <li>
                                                                             <div className="nearly-pepls">
                                                                                 <figure>
-                                                                                    <Link to={`/freedom-cells-react/groupdetail/${item.id}`}
+                                                                                    <Link to={`/groupdetail/${item.id}`}
                                                                                         onClick={this.groupDetail.bind(this, item.id)} title="">
                                                                                         <img className="discover_image" src={item.vatar} alt="" /></Link>
                                                                                 </figure>
                                                                                 <div className="pepl-info">
-                                                                                    <h4><Link to={`/freedom-cells-react/groupdetail/${item.id}`} onClick={this.groupDetail.bind(this, item.id)}
+                                                                                    <h4><Link to={`/groupdetail/${item.id}`} onClick={this.groupDetail.bind(this, item.id)}
                                                                                         title="">{item.group_name}</Link></h4>
                                                                                     <span>{item.type}</span>
 

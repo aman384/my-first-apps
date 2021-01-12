@@ -69,7 +69,7 @@ export default class MyGroups extends Component {
 
         setTimeout(() => {
 
-            window.location.href = '/freedom-cells-react/timeLine/' + id;
+            window.location.href = '/timeLine/' + id;
             window.location.reload(true)
         }, 200);
     }
@@ -95,7 +95,7 @@ export default class MyGroups extends Component {
                                 $('#root').css('opacity', '1');
                             }, 1000);
                             this.componentDidMount()
-                            // window.location.href = '/freedom-cells-react/dashboard'
+                            // window.location.href = '/dashboard'
 
                         }).catch((error) => {
                         })
@@ -175,12 +175,12 @@ export default class MyGroups extends Component {
                                                                         <li>
                                                                             <div className="nearly-pepls">
                                                                                 <figure>
-                                                                                    <Link to={`/freedom-cells-react/groupdetail/${item.id}`}
+                                                                                    <Link to={`/groupdetail/${item.id}`}
                                                                                         onClick={this.groupDetail.bind(this, item.id)} title="">
                                                                                         <img className="discover_image" src={item.vatar} alt="" /></Link>
                                                                                 </figure>
                                                                                 <div className="pepl-info">
-                                                                                    <h4><Link to={`/freedom-cells-react/groupdetail/${item.id}`} onClick={this.groupDetail.bind(this, item.id)}
+                                                                                    <h4><Link to={`/groupdetail/${item.id}`} onClick={this.groupDetail.bind(this, item.id)}
                                                                                         title="">{item.group_name}</Link></h4>
                                                                                     <span>{item.type}</span>
                                                                                     {/* <a href="#/" alt="Nothing Found" title="" className="add-butn more-action" data-ripple="">unfriend<span className="ripple"><span className="ink" style={{ height: '70px', width: '70px', backgroundColor: 'rgb(143, 163, 184)', top: '-33.9063px', left: '4.96875px' }}></span></span></a> */}

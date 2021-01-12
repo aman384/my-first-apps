@@ -60,7 +60,7 @@ export default class Twofa extends Component {
                         message: response.data
                     })
                     window.location.reload(true);
-                    window.location.href = '/freedom-cells-react/dashboard'
+                    window.location.href = '/dashboard'
 
                 }
 

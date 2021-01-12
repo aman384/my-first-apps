@@ -1,6 +1,6 @@
 {
   "homepage": "./",
-  "proxy":"http://espsofttechnologies.com/",
+  "proxy":"https://espsofttechnologies.com/",
   "name": "freedomcells",
   "version": "0.1.0",
   "private": true,

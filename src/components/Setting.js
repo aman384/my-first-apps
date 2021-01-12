@@ -988,8 +988,8 @@ export default class Setting extends Component {
                                                                             <div id="hide_section3">
                                                                                 <div className="m-nestedMenu__headerLabel1">Account Upgrade</div>
                                                                                 <ul className="nav nav-tabs tabs-left ">
-                                                                                    <li className="active"><Link to="/freedom-cells-react/pro" onClick={this.loadingData}>Upgrade to Pro<i className="fa fa-angle-right right-angle"></i></Link></li>
-                                                                                    <li><Link to="/freedom-cells-react/plus" onClick={this.loadingData} style={{ borderBottom: '1px solid #c3bbbb' }}>Upgrade to Plus<i className="fa fa-angle-right right-angle"></i></Link></li>
+                                                                                    <li className="active"><Link to="/pro" onClick={this.loadingData}>Upgrade to Pro<i className="fa fa-angle-right right-angle"></i></Link></li>
+                                                                                    <li><Link to="/plus" onClick={this.loadingData} style={{ borderBottom: '1px solid #c3bbbb' }}>Upgrade to Plus<i className="fa fa-angle-right right-angle"></i></Link></li>
                                                                                 </ul>
                                                                             </div>
                                                                             <br />

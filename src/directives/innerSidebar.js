@@ -71,7 +71,7 @@ export default class InnerSidebar extends Component {
         $('#main_loader').show();
         $('#root').css('opacity', '0.5');
         setTimeout(() => {
-            window.location.href = '/freedom-cells-react/timeLine/' + id;
+            window.location.href = '/timeLine/' + id;
             $('#main_loader').hide();
             $('#root').css('opacity', '1.0');
         }, 200);
@@ -81,7 +81,7 @@ export default class InnerSidebar extends Component {
         $('#main_loader').show();
         $('#root').css('opacity', '0.5');
         setTimeout(() => {
-            window.location.href = '/freedom-cells-react/timeLine/' + id;
+            window.location.href = '/timeLine/' + id;
             $('#main_loader').hide();
             $('#root').css('opacity', '1.0');
         }, 200);
@@ -114,25 +114,25 @@ export default class InnerSidebar extends Component {
                         <ul className="naves">
                             <li id="li_self">
                                 <i className="ti-user"></i>
-                                <Link to={`/freedom-cells-react/timeLine/${this.loginData?.id}`} onClick={this.loading.bind(this, this.loginData?.id)}>{this.state.list?.display_name} </Link>
+                                <Link to={`/timeLine/${this.loginData?.id}`} onClick={this.loading.bind(this, this.loginData?.id)}>{this.state.list?.display_name} </Link>
                             </li>
                             <li id="li_dashboard">
                                 <i className="fa fa-home" aria-hidden="true"></i>
-                                <Link to="/freedom-cells-react/dashboard" > Home </Link>
+                                <Link to="/dashboard" > Home </Link>
                             </li>
                             <li id="li_wallet">
                                 <i className="ti-wallet"></i>
-                                <Link to="/freedom-cells-react/wallet" title="" > Wallet </Link>
+                                <Link to="/wallet" title="" > Wallet </Link>
                             </li>
                             <li className="sidebar-dropdown">
-                                <a href="#" className="group_arrow" style={{ marginLeft: '23px' }}> <img style={{ color: '#999', marginLeft: '-28px' }} src="https://espsofttechnologies.com/freedom-cells-react/Projects_icon_small.png" /><span>Projects</span></a>
+                                <a href="#" className="group_arrow" style={{ marginLeft: '23px' }}> <img style={{ color: '#999', marginLeft: '-28px' }} src="https://espsofttechnologies.com/Projects_icon_small.png" /><span>Projects</span></a>
                                 <div className="sidebar-submenu" style={{ display: 'none' }}>
                                     <ul>
                                         <li id="li_projects">
-                                            <Link to="/freedom-cells-react/createproject" title="" >  Create New Project </Link>
+                                            <Link to="/createproject" title="" >  Create New Project </Link>
                                         </li>
-                                        <li id="li_my_projects"><Link to="/freedom-cells-react/MyProject" ><span>My Projects</span> </Link></li>
-                                        <li id="li_discovery_projects"><Link to="/freedom-cells-react/DiscoveryProject" ><span>Discover Projects</span> </Link></li>
+                                        <li id="li_my_projects"><Link to="/MyProject" ><span>My Projects</span> </Link></li>
+                                        <li id="li_discovery_projects"><Link to="/DiscoveryProject" ><span>Discover Projects</span> </Link></li>
                                     </ul>
                                 </div>
                             </li>
@@ -140,20 +140,20 @@ export default class InnerSidebar extends Component {
                                 <a href="#" className="group_arrow" style={{ marginLeft: '23px' }}>  <i className="fa fa-users" style={{ color: '#999', marginLeft: '-42px' }} aria-hidden="true"></i><span>Groups</span></a>
                                 <div className="sidebar-submenu" style={{ display: 'none' }}>
                                     <ul>
-                                        <li id="li_creategroup"><Link to="/freedom-cells-react/creategroup" >
+                                        <li id="li_creategroup"><Link to="/creategroup" >
                                             <span>Create Group</span> </Link></li>
-                                        <li id="li_my_groups"><Link to="/freedom-cells-react/MyGroup" ><span>My Groups</span> </Link></li>
-                                        <li id="li_discovery_groups"><Link to="/freedom-cells-react/discoverygroups" ><span>Discover Group</span> </Link></li>
+                                        <li id="li_my_groups"><Link to="/MyGroup" ><span>My Groups</span> </Link></li>
+                                        <li id="li_discovery_groups"><Link to="/discoverygroups" ><span>Discover Group</span> </Link></li>
                                     </ul>
                                 </div>
                             </li>
                             <li id="li_analytics_traffic">
                                 <i className="fa fa-bar-chart-o"></i>
-                                <Link to="/freedom-cells-react/analyticstraffic" title=""> Analytics </Link>
+                                <Link to="/analyticstraffic" title=""> Analytics </Link>
                             </li>
                             <li id="li_settings">
                                 <i className="fa fa-gear"></i>
-                                <Link to="/freedom-cells-react/setting" title=""> Settings  </Link>
+                                <Link to="/setting" title=""> Settings  </Link>
                             </li>
                         </ul>
                     </div>

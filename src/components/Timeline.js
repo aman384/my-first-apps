@@ -1026,7 +1026,7 @@ export default class Timeline extends Component {
 
         setTimeout(() => {
 
-            window.location.href = '/freedom-cells-react/timeLine/' + id;
+            window.location.href = '/timeLine/' + id;
             window.location.reload(true)
         }, 200);
     }
@@ -1038,7 +1038,7 @@ export default class Timeline extends Component {
 
         setTimeout(() => {
 
-            window.location.href = '/freedom-cells-react/timeLine/' + id;
+            window.location.href = '/timeLine/' + id;
             window.location.reload(true)
         }, 200);
     }
@@ -1254,7 +1254,7 @@ export default class Timeline extends Component {
 
         setTimeout(() => {
 
-            window.location.href = '/freedom-cells-react/timeLine/' + id;
+            window.location.href = '/timeLine/' + id;
             window.location.reload(true)
         }, 200);
     }
@@ -1873,7 +1873,7 @@ export default class Timeline extends Component {
                                                                             <img src={item.profile_pic} style={{ width: '44px', height: '43px' }} alt="" />
                                                                         </figure>
                                                                         <div className="friend-name">
-                                                                            <ins><Link to={`/freedom-cells-react/timeLine/${item.user_id}`} title="">{item.full_name}</Link></ins>
+                                                                            <ins><Link to={`/timeLine/${item.user_id}`} title="">{item.full_name}</Link></ins>
                                                                             <div className="time_line_ago">published: {item.duration}</div>
                                                                         </div>
                                                                         <div className="post-meta">
@@ -1908,14 +1908,14 @@ export default class Timeline extends Component {
                                                                                             <div className="user-post">
                                                                                                 <div className="friend-info">
                                                                                                     <figure>
-                                                                                                        <Link to={`/freedom-cells-react/timeLine/${item.repost_user_id}`}>
+                                                                                                        <Link to={`/timeLine/${item.repost_user_id}`}>
                                                                                                             <img src={item.repost_profile_pic} alt="" style={{ height: '47px', width: '47px' }} />
                                                                                                         </Link>
                                                                                                     </figure>
 
                                                                                                     <div className="friend-name">
-                                                                                                        <ins><Link to={`/freedom-cells-react/timeLine/${item.repost_user_id}`}>{item.repost_user}</Link></ins>
-                                                                                                        {item.group_id === '' ? '' : <Link to={`/freedom-cells-react/groupdetail/${item.group_id}`}>
+                                                                                                        <ins><Link to={`/timeLine/${item.repost_user_id}`}>{item.repost_user}</Link></ins>
+                                                                                                        {item.group_id === '' ? '' : <Link to={`/groupdetail/${item.group_id}`}>
                                                                                                             <ins>({item.group_name})</ins></Link>}
 
                                                                                                         <span>published: {item.repost_duration}</span>
@@ -2063,7 +2063,7 @@ export default class Timeline extends Component {
                                                                                         </div>
                                                                                         {/* <!-- Modal footer --> */}
                                                                                         <div className="modal-footer">
-                                                                                            <div className="m-poweredBy col-sm-6" ><img className="m-poweredBy__bulb" alt="Nothing Found" src="http://espsofttechnologies.com/freedom-cells-react/favicon.ico" /><span className="m-poweredBy__text"> Powered by <a href="/pay">Freedom Cell Pay</a></span></div>
+                                                                                            <div className="m-poweredBy col-sm-6" ><img className="m-poweredBy__bulb" alt="Nothing Found" src="http://espsofttechnologies.com/favicon.ico" /><span className="m-poweredBy__text"> Powered by <a href="/pay">Freedom Cell Pay</a></span></div>
                                                                                             <div className="m-wireCreatorToolbar__message col-sm-4">
                                                                                                 <div className="m-wireCreatorToolbarMessage__error "> Cannot spend more than {this.state.walletBalance?.fcell_balance} tokens </div>
                                                                                                 {/*  */}
@@ -2103,7 +2103,7 @@ export default class Timeline extends Component {
 <a className="dropdown-item" href="#">Something else here</a> */}
                                                                                                     </div>
                                                                                                 </div> : ''}
-                                                                                                <h5><Link to={`/freedom-cells-react/timeLine/${item1.user_id}`} title="">{item1.full_name}</Link></h5>
+                                                                                                <h5><Link to={`/timeLine/${item1.user_id}`} title="">{item1.full_name}</Link></h5>
                                                                                                 <span>{item1.duration}</span>
                                                                                                 <a className="we-reply" href="#/" onClick={this.reply_box.bind(this, item1)} title="Reply"><i className="fa fa-reply"></i> {item1.reply_count > 0 ? item1.reply_count + ' Replies' : ''} </a>
                                                                                             </div>
@@ -2164,7 +2164,7 @@ export default class Timeline extends Component {
 <a className="dropdown-item" href="#">Something else here</a> */}
                                                                                                                         </div>
                                                                                                                     </div> : ''}
-                                                                                                                    <h5><Link to={`/freedom-cells-react/timeLine/${item2.user_id}`} title="">{item2.full_name}</Link></h5>
+                                                                                                                    <h5><Link to={`/timeLine/${item2.user_id}`} title="">{item2.full_name}</Link></h5>
                                                                                                                     <span>{item2.duration}</span>
 
                                                                                                                 </div>
@@ -2245,11 +2245,11 @@ export default class Timeline extends Component {
                                                                             <>
                                                                                 <div className="nearly-pepls" key={item.id}>
                                                                                     <figure>
-                                                                                        <Link to={`/freedom-cells-react/timeLine/${item.user_id}`}
+                                                                                        <Link to={`/timeLine/${item.user_id}`}
                                                                                             onClick={this.loading.bind(this, item.user_id)} title=""><img src={item.profile_pic} alt="" /></Link>
                                                                                     </figure>
                                                                                     <div className="pepl-info">
-                                                                                        <h4><Link to={`/freedom-cells-react/timeLine/${item.user_id}`}
+                                                                                        <h4><Link to={`/timeLine/${item.user_id}`}
                                                                                             onClick={this.loading.bind(this, item.user_id)} title="">{item.full_name}</Link></h4>
                                                                                         <span>{item.duration}</span>
                                                                                         {this.loginData.id === this.userId ? <a href="#/" title="" onClick={this.postBlock.bind(this, item)}
@@ -2284,11 +2284,11 @@ export default class Timeline extends Component {
 
                                                                                     <div className="nearly-pepls" key={item.id} style={{ marginBottom: '5px' }}>
                                                                                         <figure>
-                                                                                            <Link to={`/freedom-cells-react/timeLine/${item.user_id}`}
+                                                                                            <Link to={`/timeLine/${item.user_id}`}
                                                                                                 onClick={this.loading.bind(this, item.user_id)} title=""><img src={item.profile_pic} alt="" style={{ height: '54px', width: '54px' }} /></Link>
                                                                                         </figure>
                                                                                         <div className="pepl-info">
-                                                                                            <h4><Link to={`/freedom-cells-react/timeLine/${item.user_id}`}
+                                                                                            <h4><Link to={`/timeLine/${item.user_id}`}
                                                                                                 onClick={this.loading.bind(this, item.user_id)} title="">{item.full_name}</Link></h4>
                                                                                             <span>{item.duration}</span>
                                                                                             {this.loginData.id === this.userId ? <a href="#/" title="" onClick={this.postFollow.bind(this, item)}
@@ -2319,10 +2319,10 @@ export default class Timeline extends Component {
                                                                 <li>
                                                                     <div className="nearly-pepls">
                                                                         <figure>
-                                                                            <Link to={`/freedom-cells-react/groupdetail/${item.id}`} onClick={this.groupDetail.bind(this, item.id)} title=""><img src={item.vatar} style={{ width: '60px', height: '59px' }} alt="" /></Link>
+                                                                            <Link to={`/groupdetail/${item.id}`} onClick={this.groupDetail.bind(this, item.id)} title=""><img src={item.vatar} style={{ width: '60px', height: '59px' }} alt="" /></Link>
                                                                         </figure>
                                                                         <div className="pepl-info">
-                                                                            <h4><Link to={`/freedom-cells-react/groupdetail/${item.id}`} onClick={this.groupDetail.bind(this, item.id)} title="">{item.group_name}</Link></h4>
+                                                                            <h4><Link to={`/groupdetail/${item.id}`} onClick={this.groupDetail.bind(this, item.id)} title="">{item.group_name}</Link></h4>
                                                                             <span>{item.type} group</span>
                                                                             <em>{item.member_count} Members</em>
                                                                             {this.loginData.id === this.userId ? <a href="#/" title="" onClick={this.postGroupMemberDelete.bind(this, item)}
@@ -2429,7 +2429,7 @@ export default class Timeline extends Component {
                                                                             <img style={{ borderRadius: '50%', height: '35px', width: '35px' }} src={item.profile_pic} />
                                                                         </div>
                                                                         <div className="m-suggestionsSidebarListItem__body">
-                                                                            <Link to={`/freedom-cells-react/timeline/${item.user_id}`} onClick={this.groupDetail.bind(this, item.id)} class="">
+                                                                            <Link to={`/timeline/${item.user_id}`} onClick={this.groupDetail.bind(this, item.id)} class="">
                                                                                 <div>
                                                                                     <h4 >{item.full_name}</h4>
                                                                                     <span title="follower">
@@ -2563,7 +2563,7 @@ export default class Timeline extends Component {
                                                                                         {/* <span class="status f-online"></span> */}
                                                                                     </figure>
                                                                                     <div class="friendz-meta">
-                                                                                        <Link to={`/freedom-cells-react/timeLine/${item.id}`}
+                                                                                        <Link to={`/timeLine/${item.id}`}
                                                                                             onClick={this.loading.bind(this, item.id)}>{item.full_name}</Link>
                                                                                     </div>
                                                                                 </li>
@@ -2694,7 +2694,7 @@ export default class Timeline extends Component {
                                                                                         <span class="status f-online"></span>
                                                                                     </figure>
                                                                                     <div class="friendz-meta">
-                                                                                        <Link to={`/freedom-cells-react/groupdetail/${item.id}`} onClick={this.groupDetail.bind(this, item.id)}>{item.group_name}</Link>
+                                                                                        <Link to={`/groupdetail/${item.id}`} onClick={this.groupDetail.bind(this, item.id)}>{item.group_name}</Link>
                                                                                     </div>
                                                                                 </li>
                                                                             ))}
@@ -2731,7 +2731,7 @@ export default class Timeline extends Component {
                                 <div className="m-composerTags__trending">
                                     <m-hashtags__trending>
                                         <ul className="m-hashtags__trending">
-                                            <li className="m-hashtagsTrending__decoration "><img alt="" src="http://espsofttechnologies.com/freedom-cells-react/favicon.ico" /></li>
+                                            <li className="m-hashtagsTrending__decoration "><img alt="" src="http://espsofttechnologies.com/favicon.ico" /></li>
                                             {/*  */}
 
 

@@ -124,7 +124,7 @@ export default class InnerHeader extends Component {
                 setTimeout(() => {
                     Cookies.remove('name');
 
-                    window.location.href = '/freedom-cells-react/';
+                    window.location.href = '/';
                 }, 200);
             }
         }).catch((error) => {
@@ -137,20 +137,20 @@ export default class InnerHeader extends Component {
         Cookies.remove('name');
         setTimeout(() => {
 
-            window.location.href = '/freedom-cells-react/';
+            window.location.href = '/';
         }, 200);
     }
 
     loading(id) {
         setTimeout(() => {
-            window.location.href = '/freedom-cells-react/timeLine/' + id;
+            window.location.href = '/timeLine/' + id;
             window.location.reload(true)
         }, 500);
     }
 
     loadingGroup(id) {
         setTimeout(() => {
-            window.location.href = '/freedom-cells-react/groupdetail/' + id;
+            window.location.href = '/groupdetail/' + id;
             window.location.reload(true)
         }, 500);
     }
@@ -219,7 +219,7 @@ export default class InnerHeader extends Component {
         axios.post(`/freedomcell/api/users/notification_read`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'notification_id': "0" }).then((res) => {
             this.codeDataNotificationReadAll = res.data.code
             if (this.codeDataNotificationReadAll === true) {
-                window.location.href = '/freedom-cells-react/AllNotification';
+                window.location.href = '/AllNotification';
                 window.location.reload(true)
 
             }
@@ -278,7 +278,7 @@ export default class InnerHeader extends Component {
         return (
             <div className="topbar stick stickClass">
                 <div className="logo text-right innerLogo">
-                    <Link title="" to="/freedom-cells-react/" onClick={this.loginPage}><img src="http://espsofttechnologies.com/freedom-cells-react/logo_freedom.png" alt="" /></Link>
+                    <Link title="" to="/" onClick={this.loginPage}><img src="http://espsofttechnologies.com/logo_freedom.png" alt="" /></Link>
 
                 </div>
                 <Notifications />
@@ -290,11 +290,11 @@ export default class InnerHeader extends Component {
                         <button className="add-butn menu-button" style={{ color: '#fff', borderRadius: '5px', marginRight: '10px' }}>Vtube</button>
                         <button className="add-butn menu-button" style={{ color: '#fff', borderRadius: '5px', marginRight: '10px' }}>Vote</button>
 
-                        <Link to="/freedom-cells-react/allprojects">
+                        <Link to="/allprojects">
                             <button className="add-butn menu-button" style={{ color: '#fff', borderRadius: '5px', marginRight: '10px' }}>CrowdFund</button>
                         </Link>
                         <button className="add-butn menu-button" style={{ color: '#fff', borderRadius: '5px', marginRight: '10px' }}>Market</button>
-                        {/* <Link to="/freedom-cells-react/BuyEth">
+                        {/* <Link to="/BuyEth">
 
                             <button className="add-butn menu-button" style={{ color: '#fff', borderRadius: '5px' }} >BuyETH</button>
                         </Link> */}
@@ -321,7 +321,7 @@ export default class InnerHeader extends Component {
                                                 (item.type === 'user') ?
                                                     <>
                                                         <li style={{ cursor: 'pointer', textAlign: 'left', width: '100%' }} title={item.fullname} >
-                                                            <Link to={`/freedom-cells-react/timeLine/${item.id}`} onClick={this.loading.bind(this, item.id)}>
+                                                            <Link to={`/timeLine/${item.id}`} onClick={this.loading.bind(this, item.id)}>
 
                                                                 <img src={item.profile_pic} alt="Nothing Found" style={{ height: '50px', width: '50px', borderRadius: '50%' }} /> <span data-id={item.id} style={{ marginLeft: "10px" }}>{item.name}</span>
 
@@ -331,7 +331,7 @@ export default class InnerHeader extends Component {
                                                     :
                                                     <>
                                                         <li style={{ cursor: 'pointer', textAlign: 'left', width: '100%' }} title={item.fullname}>
-                                                            <Link to={`/freedom-cells-react/groupdetail/${item.id}`} onClick={this.loadingGroup.bind(this, item.id)}>
+                                                            <Link to={`/groupdetail/${item.id}`} onClick={this.loadingGroup.bind(this, item.id)}>
                                                                 <img src={item.profile_pic} alt="Nothing Found" style={{ height: '50px', width: '50px', borderRadius: '50%' }} /> <span data-id={item.id} style={{ marginLeft: "10px" }}>{item.name}</span>
                                                             </Link>
                                                         </li>
@@ -381,7 +381,7 @@ export default class InnerHeader extends Component {
                                             </li>
                                     ))}
                                 </ul>
-                                <Link to="/freedom-cells-react/AllNotification" onClick={this.notificationRead} title="" className="more-mesg">view more</Link>
+                                <Link to="/AllNotification" onClick={this.notificationRead} title="" className="more-mesg">view more</Link>
                             </div>
                             {/* </span> */}
                         </li>
@@ -469,12 +469,12 @@ export default class InnerHeader extends Component {
                             <a href="#/" title=""><span className="status f-away"></span>away</a>
                             <a href="#/" title=""><span className="status f-off"></span>offline</a> */}
                             <span style={{ marginLeft: '15px' }}>{this.state?.bannerImage?.full_name}</span>
-                            <Link to={`/freedom-cells-react/timeLine/${this.loginData?.id}`} onClick={this.loading.bind(this, this.loginData?.id)} title=""><i className="fa fa-user-o" aria-hidden="true"></i>
+                            <Link to={`/timeLine/${this.loginData?.id}`} onClick={this.loading.bind(this, this.loginData?.id)} title=""><i className="fa fa-user-o" aria-hidden="true"></i>
                                 view profile</Link>
-                            {/* <Link to={`/freedom-cells-react/timeLine/${this.loginData?.id}`} onClick={this.loading.bind(this, this.loginData?.id)} title=""><i className="ti-pencil-alt"></i>edit profile</Link> */}
+                            {/* <Link to={`/timeLine/${this.loginData?.id}`} onClick={this.loading.bind(this, this.loginData?.id)} title=""><i className="ti-pencil-alt"></i>edit profile</Link> */}
                             {/* <a href="#/" title=""><i className="ti-target"></i>activity log</a> */}
-                            <Link to={`/freedom-cells-react/setting`} onClick={this.loading.bind(this, this.loginData?.id)} title=""><i className="ti-settings"></i>account setting</Link>
-                            <Link to="/freedom-cells-react/freedom-cells-react" onClick={this.Logout} title=""><i className="ti-power-off"></i>log out</Link>
+                            <Link to={`/setting`} onClick={this.loading.bind(this, this.loginData?.id)} title=""><i className="ti-settings"></i>account setting</Link>
+                            <Link to="/freedom-cells-react" onClick={this.Logout} title=""><i className="ti-power-off"></i>log out</Link>
                         </div>
                     </div>
                     {/* <span className="ti-menu main-menu" data-ripple=""><span className="ripple"><span className="ink" style={{ height: '20px', width: '20px', backgroundColor: 'rgb(217, 217, 217)', top: '-3px', left: '-1.39062px' }}></span></span></span> */}

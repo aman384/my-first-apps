@@ -287,7 +287,7 @@ export default class Messaging extends Component {
 
       setTimeout(() => {
 
-         window.location.href = '/freedom-cells-react/timeLine/' + id;
+         window.location.href = '/timeLine/' + id;
          window.location.reload(true)
       }, 200);
    }

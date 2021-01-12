@@ -101,7 +101,7 @@ export default class Resetpassword extends Component {
                             loading: false,
                             message: response.data,
                         })
-                        window.location.href = '/freedom-cells-react/'
+                        window.location.href = '/'
                         setTimeout(() => {
                             window.location.reload(true)
                         }, 2000);

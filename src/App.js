@@ -57,7 +57,8 @@ import BuyEther from './components/BuyEth'
 
 
 import { HashRouter, Route, Switch } from 'react-router-dom'
-
+// "homepage": "https://www.freedomcells.net/",
+// "proxy": "https://www.freedomcells.net/",
 
 function App() {
   return (
@@ -65,43 +66,43 @@ function App() {
     <HashRouter>
       <div>
         <Switch>
-        {/* <Route path="/freedom-cells-react/" exact component={Home} /> */}
+        {/* <Route path="/" exact component={Home} /> */}
           
-          <Route path="/freedom-cells-react/" exact component={Home} />
-          <Route path="/freedom-cells-react/Login=:id" component={Home1} />
+          <Route path="/" exact component={Home} />
+          <Route path="/Login=:id" component={Home1} />
 
-          <Route path="/freedom-cells-react/header" component={Header} />
-          <Route path="/freedom-cells-react/footer" component={Footer} />
-          <Route path="/freedom-cells-react/dashboard" component={Dashboard} />
-          <Route path="/freedom-cells-react/innerHeader" component={InnerHeader} />
-          <Route path="/freedom-cells-react/innerSidebar" component={InnerSidebar} />
-          <Route path="/freedom-cells-react/rightSidebar" component={RightSidebar} />
-          <Route path="/freedom-cells-react/timeLine/:id/:post_id" component={Timeline} />
-          <Route path="/freedom-cells-react/timeLine/:id" component={Timeline} />
-          <Route path="/freedom-cells-react/creategroup" component={Creategroup} />
-          <Route path="/freedom-cells-react/fixedsidebarright" component={Fixedsidebarright} />
-          <Route path="/freedom-cells-react/wallet" component={Wallet} />
-          <Route path="/freedom-cells-react/analyticstraffic" component={AnalyticsTraffic} />
-          <Route path="/freedom-cells-react/discoverygroups" component={DiscoveryGroups} />
-          <Route path="/freedom-cells-react/forgetpassword" component={Forgetpassword} />
-          <Route path="/freedom-cells-react/setting" component={Setting} />
-          <Route path="/freedom-cells-react/messaging" component={Messaging} />
-          <Route path="/freedom-cells-react/twofa" component={Twofa} />
-          <Route path="/freedom-cells-react/resetpassword/:code" component={Resetpassword} />
-          <Route path="/freedom-cells-react/groupdetail/:group_id" component={Groupdetail} />
-          <Route path="/freedom-cells-react/Headerhome" component={Headerhome} />
-          <Route path="/freedom-cells-react/overview" component={Overview} />
-          <Route path="/freedom-cells-react/createproject" component={Createproject} />
-          <Route path="/freedom-cells-react/allprojects" component={Allprojects} />
-          <Route path="/freedom-cells-react/profilesetup" component={Profilesetup} />
-          <Route path="/freedom-cells-react/pro" component={Pro} />
-          <Route path="/freedom-cells-react/plus" component={Plus} />
-          <Route path="/freedom-cells-react/allprojectslist" component={Allprojectshome} />
-          <Route path="/freedom-cells-react/MyGroup" component={MyGroups} />
-          <Route path="/freedom-cells-react/MyProject" component={MyProjects} />
-          <Route path="/freedom-cells-react/DiscoveryProject" component={DiscoveryProjects} />
-          <Route path="/freedom-cells-react/AllNotification" component={AllNotifications} />
-          <Route path="/freedom-cells-react/BuyEth" component={BuyEther} />
+          <Route path="/header" component={Header} />
+          <Route path="/footer" component={Footer} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/innerHeader" component={InnerHeader} />
+          <Route path="/innerSidebar" component={InnerSidebar} />
+          <Route path="/rightSidebar" component={RightSidebar} />
+          <Route path="/timeLine/:id/:post_id" component={Timeline} />
+          <Route path="/timeLine/:id" component={Timeline} />
+          <Route path="/creategroup" component={Creategroup} />
+          <Route path="/fixedsidebarright" component={Fixedsidebarright} />
+          <Route path="/wallet" component={Wallet} />
+          <Route path="/analyticstraffic" component={AnalyticsTraffic} />
+          <Route path="/discoverygroups" component={DiscoveryGroups} />
+          <Route path="/forgetpassword" component={Forgetpassword} />
+          <Route path="/setting" component={Setting} />
+          <Route path="/messaging" component={Messaging} />
+          <Route path="/twofa" component={Twofa} />
+          <Route path="/resetpassword/:code" component={Resetpassword} />
+          <Route path="/groupdetail/:group_id" component={Groupdetail} />
+          <Route path="/Headerhome" component={Headerhome} />
+          <Route path="/overview" component={Overview} />
+          <Route path="/createproject" component={Createproject} />
+          <Route path="/allprojects" component={Allprojects} />
+          <Route path="/profilesetup" component={Profilesetup} />
+          <Route path="/pro" component={Pro} />
+          <Route path="/plus" component={Plus} />
+          <Route path="/allprojectslist" component={Allprojectshome} />
+          <Route path="/MyGroup" component={MyGroups} />
+          <Route path="/MyProject" component={MyProjects} />
+          <Route path="/DiscoveryProject" component={DiscoveryProjects} />
+          <Route path="/AllNotification" component={AllNotifications} />
+          <Route path="/BuyEth" component={BuyEther} />
         </Switch>
       </div>
     </HashRouter>

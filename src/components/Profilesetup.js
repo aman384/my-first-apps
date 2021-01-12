@@ -181,7 +181,7 @@ export default class Profilesetup extends Component {
                     if(res.data.code === true){
                         Cookies.set('name', res.data);
                         window.location.reload(true);
-                        window.location.href = '/freedom-cells-react/dashboard'
+                        window.location.href = '/dashboard'
                     }
                     else{
                     toastr.error(res.data.message, { displayDuration: 3000 })

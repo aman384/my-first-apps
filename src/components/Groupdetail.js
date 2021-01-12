@@ -1091,7 +1091,7 @@ export default class Groupdetail extends Component {
                                 $('#main_loader').hide();
                                 $('#root').css('opacity', '1');
                             }, 1000);
-                            window.location.href = '/freedom-cells-react/dashboard'
+                            window.location.href = '/dashboard'
 
                         }).catch((error) => {
                         })
@@ -2237,7 +2237,7 @@ export default class Groupdetail extends Component {
                                                                         <figure className="group_member_icon">
                                                                             {
                                                                                 this.state.groupMemberList.map(item => (
-                                                                                    <Link to={`/freedom-cells-react/timeLine/${item.user_id}`} key={item.user_id}>
+                                                                                    <Link to={`/timeLine/${item.user_id}`} key={item.user_id}>
                                                                                         <img src={item.profile_pic} alt="Nothing Found" className="member-profile1" />
                                                                                     </Link>
                                                                                 ))}
@@ -2421,7 +2421,7 @@ export default class Groupdetail extends Component {
                                                                                         </div>
                                                                                         {/* <!-- Modal footer --> */}
                                                                                         <div className="modal-footer">
-                                                                                            <div className="m-poweredBy col-sm-6" ><img className="m-poweredBy__bulb" alt="Nothing Found" src="http://espsofttechnologies.com/freedom-cells-react/favicon.ico" /><span className="m-poweredBy__text"> Powered by <a href="/pay">Freedom Cell Pay</a></span></div>
+                                                                                            <div className="m-poweredBy col-sm-6" ><img className="m-poweredBy__bulb" alt="Nothing Found" src="http://espsofttechnologies.com/favicon.ico" /><span className="m-poweredBy__text"> Powered by <a href="/pay">Freedom Cell Pay</a></span></div>
                                                                                             <div className="m-wireCreatorToolbar__message col-sm-4">
                                                                                                 <div className="m-wireCreatorToolbarMessage__error "> Cannot spend more than {this.state.walletBalance?.fcell_balance} tokens </div>
                                                                                             </div>
@@ -2475,7 +2475,7 @@ export default class Groupdetail extends Component {
                                                                 {
                                                                     this.state.groupMemberList.map(item => (
                                                                         <>
-                                                                            <Link to={`/freedom-cells-react/timeLine/${item.user_id}`} >
+                                                                            <Link to={`/timeLine/${item.user_id}`} >
                                                                                 <div className="mdl-cell mdl-cell--6-col m-groupMembers__memberCard ng-star-inserted">
                                                                                     <div className="mdl-card m-border">
                                                                                         <minds-card-user style={{ margin: '15px 15px 15px 15px' }}>
@@ -2665,13 +2665,13 @@ export default class Groupdetail extends Component {
                                                                                             </div>
                                                                                         </div>}
                                                                                     <figure>
-                                                                                        <Link to={`/freedom-cells-react/timeLine/${item.user_id}`}>
+                                                                                        <Link to={`/timeLine/${item.user_id}`}>
                                                                                             <img src={item.profile_pic} style={{ width: '44px', height: '43px', objectFit: 'cover' }} alt="" />
                                                                                         </Link>
                                                                                     </figure>
 
                                                                                     <div className="friend-name">
-                                                                                        <ins><Link to={`/freedom-cells-react/timeLine/${item.user_id}`} title="">{item.full_name}</Link></ins>
+                                                                                        <ins><Link to={`/timeLine/${item.user_id}`} title="">{item.full_name}</Link></ins>
                                                                                         <div className="time_line_ago">published111: {item.duration}</div>
                                                                                     </div>
                                                                                     <div className="post-meta">
@@ -2825,7 +2825,7 @@ export default class Groupdetail extends Component {
                                                                                                     </div>
                                                                                                     {/* <!-- Modal footer --> */}
                                                                                                     <div className="modal-footer">
-                                                                                                        <div className="m-poweredBy col-sm-6" ><img className="m-poweredBy__bulb" alt="Nothing Found" src="http://espsofttechnologies.com/freedom-cells-react/favicon.ico" /><span className="m-poweredBy__text"> Powered by <a href="/pay">Freedom Cell Pay</a></span></div>
+                                                                                                        <div className="m-poweredBy col-sm-6" ><img className="m-poweredBy__bulb" alt="Nothing Found" src="http://espsofttechnologies.com/favicon.ico" /><span className="m-poweredBy__text"> Powered by <a href="/pay">Freedom Cell Pay</a></span></div>
                                                                                                         <div className="m-wireCreatorToolbar__message col-sm-4">
                                                                                                             <div className="m-wireCreatorToolbarMessage__error "> Cannot spend more than {this.state.walletBalance?.fcell_balance} tokens </div>
                                                                                                             {/*  */}
@@ -2865,7 +2865,7 @@ export default class Groupdetail extends Component {
 <a className="dropdown-item" href="#">Something else here</a> */}
                                                                                                                 </div>
                                                                                                             </div> : ''}
-                                                                                                            <h5><Link to={`/freedom-cells-react/timeLine/${item1.user_id}`} title="">{item1.full_name}</Link></h5>
+                                                                                                            <h5><Link to={`/timeLine/${item1.user_id}`} title="">{item1.full_name}</Link></h5>
                                                                                                             <span>{item1.duration}</span>
                                                                                                             <a className="we-reply" href="#/" onClick={this.reply_box.bind(this, item1)} title="Reply"><i className="fa fa-reply"></i> {item1.reply_count > 0 ? item1.reply_count + ' Replies' : ''} </a>
                                                                                                         </div>
@@ -2926,7 +2926,7 @@ export default class Groupdetail extends Component {
 <a className="dropdown-item" href="#">Something else here</a> */}
                                                                                                                                     </div>
                                                                                                                                 </div> : ''}
-                                                                                                                                <h5><Link to={`/freedom-cells-react/timeLine/${item2.user_id}`} title="">{item2.full_name}</Link></h5>
+                                                                                                                                <h5><Link to={`/timeLine/${item2.user_id}`} title="">{item2.full_name}</Link></h5>
                                                                                                                                 <span>{item2.duration}</span>
 
                                                                                                                             </div>
@@ -3288,7 +3288,7 @@ export default class Groupdetail extends Component {
                                 <div className="m-composerTags__trending">
                                     <m-hashtags__trending>
                                         <ul className="m-hashtags__trending">
-                                            <li className="m-hashtagsTrending__decoration "><img alt="" src="http://espsofttechnologies.com/freedom-cells-react/favicon.ico" /></li>
+                                            <li className="m-hashtagsTrending__decoration "><img alt="" src="http://espsofttechnologies.com/favicon.ico" /></li>
                                             {this.state.listHashtags.map(item => (
 
                                                 <li style={{ cursor: 'pointer' }} className=""><a>{item.hashtag}</a></li>

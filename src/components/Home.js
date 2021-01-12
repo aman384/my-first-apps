@@ -126,11 +126,11 @@ export default class Home extends Component {
                         })
                         if (this.state.message.user_data.is_enable_google_auth_code === '0') {
                             window.location.reload(true);
-                            window.location.href = '/freedom-cells-react/dashboard'
+                            window.location.href = '/dashboard'
                         }
                         else if (this.state.message.user_data.is_enable_google_auth_code === '1') {
                             window.location.reload(true);
-                            window.location.href = '/freedom-cells-react/twofa'
+                            window.location.href = '/twofa'
                         }
 
                     }
@@ -219,7 +219,7 @@ export default class Home extends Component {
 
                                                             </div>
                                                             <div className="foot">
-                                                                <Link to="/freedom-cells-react/forgetpassword" onClick={this.forgot} className="forgot pull-left">
+                                                                <Link to="/forgetpassword" onClick={this.forgot} className="forgot pull-left">
                                                                     <small style={{ fontSize: '110%' }}>Forgot your password?</small>
                                                                 </Link>
                                                                 <button type="submit" disabled={!this.state.email || !this.state.password} className="btn btn-gradient W100 pull-right">Login!</button>

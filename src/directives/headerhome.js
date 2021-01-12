@@ -179,13 +179,13 @@ export default class Headerhome extends Component {
                                     <a href="javasript:void(0);">
                                         {this.loginData ? <>
                                             <button className="btn12 btn-gradient outline-button" style={{ marginBottom: '0px', marginRight: '10px' }}><div style={{ background: '#1C589B', transition: 'all 0.3s' }}>
-                                                <Link to="/freedom-cells-react/dashboard" onClick={this.loginPage}> Dashboard</Link> </div></button>
+                                                <Link to="/dashboard" onClick={this.loginPage}> Dashboard</Link> </div></button>
                                             {/* <button className="btn12 btn-gradient outline-button" style={{ marginBottom: '0px', marginRight: '10px' }} data-toggle="modal" data-target="#pop-register"><div style={{ background: '#1C589B', transition: 'all 0.3s' }}>Register</div></button> */}
                                             <button className="btn12 btn-gradient outline-button" style={{ marginBottom: '0px', marginRight: '10px' }}><div style={{ background: '#1C589B', transition: 'all 0.3s' }}>
-                                                <Link to="/freedom-cells-react/allprojectslist" onClick={this.loginPage}> All Projects</Link> </div></button>
+                                                <Link to="/allprojectslist" onClick={this.loginPage}> All Projects</Link> </div></button>
                                         </> : <> <button className="btn12 btn-gradient outline-button" style={{ marginBottom: '0px', marginRight: '10px' }} data-toggle="modal" data-target="#pop-register"><div style={{ background: '#1C589B', transition: 'all 0.3s' }}>Register</div></button>
                                                 <button className="btn12 btn-gradient outline-button" style={{ marginBottom: '0px', marginRight: '10px' }}><div style={{ background: '#1C589B', transition: 'all 0.3s' }}>
-                                                    <Link to="/freedom-cells-react/allprojectslist" onClick={this.loginPage}> All Projects</Link> </div></button>
+                                                    <Link to="/allprojectslist" onClick={this.loginPage}> All Projects</Link> </div></button>
                                             </>
                                         }
 
@@ -195,7 +195,7 @@ export default class Headerhome extends Component {
                             </ul>
                             {/* <ul id="navigation" className="nav navbar-nav navbar-right">
 
-                                <li><Link to="/freedom-cells-react/" onClick={this.loginPage}>Login</Link></li>
+                                <li><Link to="/" onClick={this.loginPage}>Login</Link></li>
                             </ul> */}
                             <ul className="nav navbar-nav navbar-right visible-xs visible-sm">
                                 <li className="gold" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }} ><a href="javasript:void(0);" data-toggle="modal" data-target="#pop-register">Register</a></li>

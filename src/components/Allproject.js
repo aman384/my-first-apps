@@ -84,7 +84,7 @@ export default class Allprojects extends Component {
 
         setTimeout(() => {
 
-            window.location.href = '/freedom-cells-react/groupdetail/' + id;
+            window.location.href = '/groupdetail/' + id;
             // window.location.reload(true)
         }, 200);
     }
@@ -110,7 +110,7 @@ export default class Allprojects extends Component {
                                     $('#root').css('opacity', '1');
                                 }, 1000);
                                 this.componentDidMount()
-                                // window.location.href = '/freedom-cells-react/dashboard'
+                                // window.location.href = '/dashboard'
     
                             }).catch((error) => {
                             })

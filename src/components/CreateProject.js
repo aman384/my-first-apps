@@ -149,7 +149,7 @@ export default class Createproject extends Component {
                 if (res.data.code === true) {
 
                     this.group_id = res.data.recdata.id
-                    window.location.href = '/freedom-cells-react/groupdetail/' + this.group_id
+                    window.location.href = '/groupdetail/' + this.group_id
                     $('#main_loader').hide();
                     $('#root').css('opacity', '1');
                 }

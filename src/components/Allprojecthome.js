@@ -53,7 +53,7 @@ export default class Allprojectshome extends Component {
     projectLogin(id) {
         setTimeout(() => {
 
-            window.location.href = '/freedom-cells-react/Login=' + id;
+            window.location.href = '/Login=' + id;
             window.location.reload(true)
         }, 200);
     }
@@ -138,7 +138,7 @@ export default class Allprojectshome extends Component {
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                <div class="m-poweredBy col-sm-6 text-left"><img class="m-poweredBy__bulb" alt="Nothing Found" src="http://espsofttechnologies.com/freedom-cells-react/favicon.ico" /><span class="m-poweredBy__text"> Powered by <a href="#">Freedom Cell Pay</a></span></div>
+                                                                                <div class="m-poweredBy col-sm-6 text-left"><img class="m-poweredBy__bulb" alt="Nothing Found" src="http://espsofttechnologies.com/favicon.ico" /><span class="m-poweredBy__text"> Powered by <a href="#">Freedom Cell Pay</a></span></div>
                                                                                 <div class="m-wireCreatorToolbar__message col-sm-4">
                                                                                     <div class="m-wireCreatorToolbarMessage__error "> Cannot spend more than  tokens </div>
                                                                                 </div>

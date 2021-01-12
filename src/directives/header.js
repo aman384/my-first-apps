@@ -182,7 +182,7 @@ export default class Header extends Component {
                             </ul>
                             <ul id="navigation" className="nav navbar-nav navbar-right">
 
-                                <li><Link to="/freedom-cells-react/" onClick={this.loginPage}>Login</Link></li>
+                                <li><Link to="/" onClick={this.loginPage}>Login</Link></li>
                             </ul>
                             <ul className="nav navbar-nav navbar-right visible-xs visible-sm">
                                 <li className="gold" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }} ><a href="javasript:void(0);" data-toggle="modal" data-target="#pop-register">Register</a></li>
