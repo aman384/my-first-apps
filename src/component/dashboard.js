@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import {Link} from 'react-router-dom'
 
 // require("bootstrap/less/bootstrap.less");
@@ -20,13 +20,13 @@ export default class Dashboard extends Component {
 
 
     componentDidMount() {
-        // axios.get(`http://espsofttechnologies.com/utou/api/users/all_user_list`, { }).then((res) => {
-        //     this.setState({
-        //         list: res.data.recdata
-        //     });
-        //    }).catch((error) => {
+        axios.get(`http://espsofttechnologies.com/utou/api/users/all_user_list`, { }).then((res) => {
+            this.setState({
+                list: res.data.recdata
+            });
+           }).catch((error) => {
 
-        // });
+        });
         
 
     }
@@ -38,13 +38,13 @@ export default class Dashboard extends Component {
 
         return (
             <>
-            <h1>Page 1</h1>
+            <h>Page 1</h>
             <tbody>
-            {/* {this.state.list.map(item => (
+            {this.state.list.map(item => (
             <tr>
                 <td>{item.username}</td>
             </tr>
-            ))} */}
+            ))}
             </tbody>
             <Link to="/profile">View more</Link>
             </>

@@ -16,7 +16,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <div> */}
+      <div>
         {/* <Menu /> */}
         <Switch>
 
@@ -28,7 +28,7 @@ function App() {
 
 
         </Switch>
-      {/* </div> */}
+      </div>
     </BrowserRouter>
 
   );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import {Link} from 'react-router-dom'
 
 
@@ -21,14 +21,13 @@ export default class Profile extends Component {
 
 
     componentDidMount() {
+        axios.get(`http://espsofttechnologies.com/utou/api/users/all_user_list`, { }).then((res) => {
+            this.setState({
+                list: res.data.recdata
+            });
+           }).catch((error) => {
 
-        // axios.get(`http://espsofttechnologies.com/utou/api/users/all_user_list`, { }).then((res) => {
-        //     this.setState({
-        //         list: res.data.recdata
-        //     });
-        //    }).catch((error) => {
-
-        // });
+        });
         
 
     }
@@ -40,13 +39,13 @@ export default class Profile extends Component {
 
         return (
             <>
-            <h1>Pagesadsadsa 2</h1>
+            <h>Page 2</h>
             <tbody>
-            {/* {this.state.list.map(item => (
+            {this.state.list.map(item => (
             <tr>
                 <td>{item.id}</td>
             </tr>
-            ))} */}
+            ))}
             </tbody>
             <Link to="/page3">View more</Link>
             </>
