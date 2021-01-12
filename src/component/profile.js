@@ -21,7 +21,7 @@ export default class Profile extends Component {
 
 
     componentDidMount() {
-        axios.get(`http://espsofttechnologies.com/utou/api/users/all_user_list`, { }).then((res) => {
+        axios.get(`https://espsofttechnologies.com/utou/api/users/all_user_list`, { }).then((res) => {
             this.setState({
                 list: res.data.recdata
             });
