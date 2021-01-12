@@ -6,7 +6,7 @@ import Page3 from './component/page3'
 
 
 // import './assets/js/bootstrap.js';
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { HashRouter, Route, Switch } from 'react-router-dom'
 
 function App() {
   // var myStyle = {
@@ -15,7 +15,7 @@ function App() {
   // }
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div>
         {/* <Menu /> */}
         <Switch>
@@ -29,7 +29,7 @@ function App() {
 
         </Switch>
       </div>
-    </BrowserRouter>
+    </HashRouter>
 
   );
 }
