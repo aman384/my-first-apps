@@ -6,7 +6,9 @@ import { Link } from 'react-router-dom';
 // import '../assets/css/bootstrap.css';
 import Cookies from 'js-cookie';
 
-
+const headers = {
+    'Content-Type': 'text/plain'
+ };
 const initialState = {
     full_name: '',
     email: '',
@@ -115,7 +117,7 @@ export default class Headerhome extends Component {
             const data = this.state
 
 
-            axios.post('/freedomcell/api/users/register', data)
+            axios.post('https://freedomcells.net/freedomcell/api/users/register', data,{headers})
                 .then(response => {
 
                     if (response.data.code === true) {
@@ -170,7 +172,7 @@ export default class Headerhome extends Component {
                                 <span className="icon-bar"></span>
                                 <span className="icon-bar"></span>
                             </button>
-                            <a className="navbar-brand" href="#/"><img className="img-responsive" alt="Notjing" src="logo_freedom_white.png" /></a>
+                            <a className="navbar-brand" href="javascript:;"><img className="img-responsive" alt="Notjing" src="logo_freedom_white.png" /></a>
                         </div>
 
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

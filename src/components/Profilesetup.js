@@ -11,7 +11,7 @@ import Cookies from 'js-cookie';
 const TITLE = 'Freedom-cells-Profilesetup'
 
 export default class Profilesetup extends Component {
-    custom_file_upload_url = `/freedomcell/api/users/add_user_interest`;
+    custom_file_upload_url = `https://freedomcells.net/freedomcell/api/users/add_user_interest`;
 
     constructor(props) {
         super(props);
@@ -69,7 +69,7 @@ export default class Profilesetup extends Component {
             $('div.setup-panel div a.btn-success').trigger('click');
         });
 
-        var pageURL = window.location.href;
+        var pageURL = window.location.hash;
         let res = pageURL.split("/");
 
         this.investFind = res[5]
@@ -93,7 +93,7 @@ export default class Profilesetup extends Component {
     //==================================  Detail of Hashtag List  ==============================
 
     AllHashtagListAPI() {
-        axios.get(`/freedomcell/api/users/interest_list`, {}).then((res) => {
+        axios.get(`https://freedomcells.net/freedomcell/api/users/interest_list`, {}).then((res) => {
             //on success
             this.codeDataHashtagList = res.data.code
             if (this.codeDataHashtagList === true) {
@@ -181,7 +181,7 @@ export default class Profilesetup extends Component {
                     if(res.data.code === true){
                         Cookies.set('name', res.data);
                         window.location.reload(true);
-                        window.location.href = '/dashboard'
+                        window.location.hash = '/dashboard'
                     }
                     else{
                     toastr.error(res.data.message, { displayDuration: 3000 })

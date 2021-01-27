@@ -11,6 +11,9 @@ const initialState = {
     email: '',
     emailError: '',
 }
+const headers = {
+    'Content-Type': 'text/plain'
+};
 export default class Forgetpassword extends Component {
 
     constructor(props) {
@@ -66,7 +69,7 @@ export default class Forgetpassword extends Component {
             const data = this.state
 
 
-            axios.post('/freedomcell/api/users/forget_password', data)
+            axios.post('https://freedomcells.net/freedomcell/api/users/forget_password', data, { headers })
                 .then(response => {
 
                     if (response.data.code === true) {
@@ -167,7 +170,7 @@ export default class Forgetpassword extends Component {
                 {/* <!-- Footer Section --> */}
                 <Footer />
             </>
-       
-       )
+
+        )
     }
 }

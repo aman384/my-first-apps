@@ -6,13 +6,15 @@ import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 // import '../assets/css/bootstrap.css';
-
+const headers = {
+    'Content-Type': 'text/plain'
+};
 
 const initialState = {
     full_name: '',
     email: '',
     password: '',
-    referral_code:'',
+    referral_code: '',
     confirm_password: '',
     firstnameError: '',
     emailError: '',
@@ -115,7 +117,7 @@ export default class Header extends Component {
             const data = this.state
 
 
-            axios.post('/freedomcell/api/users/register', data)
+            axios.post('https://freedomcells.net/freedomcell/api/users/register', data, { headers })
                 .then(response => {
 
                     if (response.data.code === true) {

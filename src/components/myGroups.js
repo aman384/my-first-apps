@@ -10,15 +10,17 @@ import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
-
+const headers = {
+    'Content-Type': 'text/plain'
+ };
 const TITLE = 'Freedom-cells-My-Groups'
 
 export default class MyGroups extends Component {
 
 
-    // custom_file_upload_url = `/freedomcell/api/users/group_create`;
-    // custom_file_upload_url1 = `/freedomcell/api/users/post_comment`;
-    // // custom_file_upload_url2 = `/freedomcell/api/users/post_comment_reply`;
+    // custom_file_upload_url = `https://freedomcells.net/freedomcell/api/users/group_create`;
+    // custom_file_upload_url1 = `https://freedomcells.net/freedomcell/api/users/post_comment`;
+    // // custom_file_upload_url2 = `https://freedomcells.net/freedomcell/api/users/post_comment_reply`;
 
     constructor(props) {
         super(props);
@@ -44,7 +46,7 @@ export default class MyGroups extends Component {
 
 
     groupAPI() {
-        axios.post(`/freedomcell/api/users/group_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id,'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/group_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id,'api_key': this.loginData.api_key },{headers}).then((res) => {
             //on success
             this.codeDataGroup = res.data.code
             if (this.codeDataGroup === true) {
@@ -69,7 +71,7 @@ export default class MyGroups extends Component {
 
         setTimeout(() => {
 
-            window.location.href = '/timeLine/' + id;
+            window.location.hash = '/timeLine/' + id;
             window.location.reload(true)
         }, 200);
     }
@@ -86,7 +88,7 @@ export default class MyGroups extends Component {
                 {
                     label: 'Yes',
                     onClick: () =>
-                        axios.post(`/freedomcell/api/users/group_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_id': id }).then((res) => {
+                        axios.post(`https://freedomcells.net/freedomcell/api/users/group_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_id': id },{headers}).then((res) => {
                             $('#main_loader').show();
                             $('#root').css('opacity', '0.5');
 
@@ -183,8 +185,8 @@ export default class MyGroups extends Component {
                                                                                     <h4><Link to={`/groupdetail/${item.id}`} onClick={this.groupDetail.bind(this, item.id)}
                                                                                         title="">{item.group_name}</Link></h4>
                                                                                     <span>{item.type}</span>
-                                                                                    {/* <a href="#/" alt="Nothing Found" title="" className="add-butn more-action" data-ripple="">unfriend<span className="ripple"><span className="ink" style={{ height: '70px', width: '70px', backgroundColor: 'rgb(143, 163, 184)', top: '-33.9063px', left: '4.96875px' }}></span></span></a> */}
-                                                                                    { item.user_type === 'admin'?<a href="#/" onClick={this.groupDelete.bind(this, item.id)} alt="Nothing Found" title="" className="add-butn" data-ripple="">Delete Group<span className="ripple"><span className="ink" style={{ height: '83px', width: '83px', backgroundColor: 'rgb(10, 169, 246)', top: '-28.4063px', left: '39.9219px' }}></span></span></a>:'' }
+                                                                                    {/* <a href="javascript:;" alt="Nothing Found" title="" className="add-butn more-action" data-ripple="">unfriend<span className="ripple"><span className="ink" style={{ height: '70px', width: '70px', backgroundColor: 'rgb(143, 163, 184)', top: '-33.9063px', left: '4.96875px' }}></span></span></a> */}
+                                                                                    { item.user_type === 'admin'?<a href="javascript:;" onClick={this.groupDelete.bind(this, item.id)} alt="Nothing Found" title="" className="add-butn" data-ripple="">Delete Group<span className="ripple"><span className="ink" style={{ height: '83px', width: '83px', backgroundColor: 'rgb(10, 169, 246)', top: '-28.4063px', left: '39.9219px' }}></span></span></a>:'' }
                                                                                     
                                                                                 </div>
                                                                             </div>
@@ -196,13 +198,13 @@ export default class MyGroups extends Component {
                                                                     <li>
                                                                         <div className="nearly-pepls">
                                                                             <figure>
-                                                                                <a href="#/" title=""><img src="./nearly5.jpg" alt="" /></a>
+                                                                                <a href="javascript:;" title=""><img src="./nearly5.jpg" alt="" /></a>
                                                                             </figure>
                                                                             <div className="pepl-info">
-                                                                                <h4><a href="#/" title="">Amy watson</a></h4>
+                                                                                <h4><a href="javascript:;" title="">Amy watson</a></h4>
                                                                                 <span>ftv model</span>
-                                                                                <a href="#/" title="" className="add-butn more-action" data-ripple="">delete Request</a>
-                                                                                <a href="#/" title="" className="add-butn" data-ripple="">Confirm</a>
+                                                                                <a href="javascript:;" title="" className="add-butn more-action" data-ripple="">delete Request</a>
+                                                                                <a href="javascript:;" title="" className="add-butn" data-ripple="">Confirm</a>
                                                                             </div>
                                                                         </div>
                                                                     </li>
@@ -210,91 +212,91 @@ export default class MyGroups extends Component {
                                                                     <li>
                                                                         <div className="nearly-pepls">
                                                                             <figure>
-                                                                                <a href="#/" title=""><img src="./nearly1.jpg" alt="" /></a>
+                                                                                <a href="javascript:;" title=""><img src="./nearly1.jpg" alt="" /></a>
                                                                             </figure>
                                                                             <div className="pepl-info">
-                                                                                <h4><a href="#/" title="">sophia Gate</a></h4>
+                                                                                <h4><a href="javascript:;" title="">sophia Gate</a></h4>
                                                                                 <span>ftv model</span>
-                                                                                <a href="#/" title="" className="add-butn more-action" data-ripple="">delete Request</a>
-                                                                                <a href="#/" title="" className="add-butn" data-ripple="">Confirm</a>
+                                                                                <a href="javascript:;" title="" className="add-butn more-action" data-ripple="">delete Request</a>
+                                                                                <a href="javascript:;" title="" className="add-butn" data-ripple="">Confirm</a>
                                                                             </div>
                                                                         </div>
                                                                     </li>
                                                                     <li>
                                                                         <div className="nearly-pepls">
                                                                             <figure>
-                                                                                <a href="#/" title=""><img src="./nearly6.jpg" alt="" /></a>
+                                                                                <a href="javascript:;" title=""><img src="./nearly6.jpg" alt="" /></a>
                                                                             </figure>
                                                                             <div className="pepl-info">
-                                                                                <h4><a href="#/" title="">caty lasbo</a></h4>
+                                                                                <h4><a href="javascript:;" title="">caty lasbo</a></h4>
                                                                                 <span>ftv model</span>
-                                                                                <a href="#/" title="" className="add-butn more-action" data-ripple="">delete Request</a>
-                                                                                <a href="#/" title="" className="add-butn" data-ripple="">Confirm</a>
+                                                                                <a href="javascript:;" title="" className="add-butn more-action" data-ripple="">delete Request</a>
+                                                                                <a href="javascript:;" title="" className="add-butn" data-ripple="">Confirm</a>
                                                                             </div>
                                                                         </div>
                                                                     </li>
                                                                     <li>
                                                                         <div className="nearly-pepls">
                                                                             <figure>
-                                                                                <a href="#/" title=""><img src="./friend-avatar9.jpg" alt="" /></a>
+                                                                                <a href="javascript:;" title=""><img src="./friend-avatar9.jpg" alt="" /></a>
                                                                             </figure>
                                                                             <div className="pepl-info">
-                                                                                <h4><a href="#/" title="">jhon kates</a></h4>
+                                                                                <h4><a href="javascript:;" title="">jhon kates</a></h4>
                                                                                 <span>ftv model</span>
-                                                                                <a href="#/" title="" className="add-butn more-action" data-ripple="">delete Request</a>
-                                                                                <a href="#/" title="" className="add-butn" data-ripple="">Confirm</a>
+                                                                                <a href="javascript:;" title="" className="add-butn more-action" data-ripple="">delete Request</a>
+                                                                                <a href="javascript:;" title="" className="add-butn" data-ripple="">Confirm</a>
                                                                             </div>
                                                                         </div>
                                                                     </li>
                                                                     <li>
                                                                         <div className="nearly-pepls">
                                                                             <figure>
-                                                                                <a href="#/" title=""><img src="./nearly2.jpg" alt="" /></a>
+                                                                                <a href="javascript:;" title=""><img src="./nearly2.jpg" alt="" /></a>
                                                                             </figure>
                                                                             <div className="pepl-info">
-                                                                                <h4><a href="#/" title="">sara grey</a></h4>
+                                                                                <h4><a href="javascript:;" title="">sara grey</a></h4>
                                                                                 <span>ftv model</span>
-                                                                                <a href="#/" title="" className="add-butn more-action" data-ripple="">delete Request</a>
-                                                                                <a href="#/" title="" className="add-butn" data-ripple="">Confirm</a>
+                                                                                <a href="javascript:;" title="" className="add-butn more-action" data-ripple="">delete Request</a>
+                                                                                <a href="javascript:;" title="" className="add-butn" data-ripple="">Confirm</a>
                                                                             </div>
                                                                         </div>
                                                                     </li>
                                                                     <li>
                                                                         <div className="nearly-pepls">
                                                                             <figure>
-                                                                                <a href="#/" title=""><img src="./nearly4.jpg" alt="" /></a>
+                                                                                <a href="javascript:;" title=""><img src="./nearly4.jpg" alt="" /></a>
                                                                             </figure>
                                                                             <div className="pepl-info">
-                                                                                <h4><a href="#/" title="">Sara grey</a></h4>
+                                                                                <h4><a href="javascript:;" title="">Sara grey</a></h4>
                                                                                 <span>ftv model</span>
-                                                                                <a href="#/" title="" className="add-butn more-action" data-ripple="">delete Request</a>
-                                                                                <a href="#/" title="" className="add-butn" data-ripple="">Confirm</a>
+                                                                                <a href="javascript:;" title="" className="add-butn more-action" data-ripple="">delete Request</a>
+                                                                                <a href="javascript:;" title="" className="add-butn" data-ripple="">Confirm</a>
                                                                             </div>
                                                                         </div>
                                                                     </li>
                                                                     <li>
                                                                         <div className="nearly-pepls">
                                                                             <figure>
-                                                                                <a href="#/" title=""><img src="./nearly3.jpg" alt="" /></a>
+                                                                                <a href="javascript:;" title=""><img src="./nearly3.jpg" alt="" /></a>
                                                                             </figure>
                                                                             <div className="pepl-info">
-                                                                                <h4><a href="#/" title="">Sexy cat</a></h4>
+                                                                                <h4><a href="javascript:;" title="">Sexy cat</a></h4>
                                                                                 <span>ftv model</span>
-                                                                                <a href="#/" title="" className="add-butn more-action" data-ripple="">delete Request</a>
-                                                                                <a href="#/" title="" className="add-butn" data-ripple="">Confirm</a>
+                                                                                <a href="javascript:;" title="" className="add-butn more-action" data-ripple="">delete Request</a>
+                                                                                <a href="javascript:;" title="" className="add-butn" data-ripple="">Confirm</a>
                                                                             </div>
                                                                         </div>
                                                                     </li>
                                                                     <li>
                                                                         <div className="nearly-pepls">
                                                                             <figure>
-                                                                                <a href="#/" title=""><img src="./friend-avatar9.jpg" alt="" /></a>
+                                                                                <a href="javascript:;" title=""><img src="./friend-avatar9.jpg" alt="" /></a>
                                                                             </figure>
                                                                             <div className="pepl-info">
-                                                                                <h4><a href="#/" title="">jhon kates</a></h4>
+                                                                                <h4><a href="javascript:;" title="">jhon kates</a></h4>
                                                                                 <span>ftv model</span>
-                                                                                <a href="#/" title="" className="add-butn more-action" data-ripple="">delete Request</a>
-                                                                                <a href="#/" title="" className="add-butn" data-ripple="">Confirm</a>
+                                                                                <a href="javascript:;" title="" className="add-butn more-action" data-ripple="">delete Request</a>
+                                                                                <a href="javascript:;" title="" className="add-butn" data-ripple="">Confirm</a>
                                                                             </div>
                                                                         </div>
                                                                     </li>

@@ -13,7 +13,9 @@ import toastr from 'reactjs-toastr';
 import Messaging from '../components/messaging'
 import { TwitterShareButton, TwitterIcon, FacebookShareButton, FacebookIcon, EmailIcon, EmailShareButton } from 'react-share';
 
-
+const headers = {
+    'Content-Type': 'text/plain'
+};
 const TITLE = 'Freedom-cells-Group-detail'
 const initialState = {
     message: '',
@@ -29,13 +31,13 @@ const initialState = {
 export default class Groupdetail extends Component {
 
 
-    custom_file_upload_url = `/freedomcell/api/users/add_post`;
-    custom_file_upload_urlEdit = `/freedomcell/api/users/edit_post`;
+    custom_file_upload_url = `https://freedomcells.net/freedomcell/api/users/add_post`;
+    custom_file_upload_urlEdit = `https://freedomcells.net/freedomcell/api/users/edit_post`;
 
-    custom_file_upload_url1 = `/freedomcell/api/users/post_comment`;
-    custom_file_upload_url2 = `/freedomcell/api/users/post_comment_reply`;
-    custom_file_upload_urlMessage = `/freedomcell/api/users/group_chat`;
-    custom_file_upload_url2Message = `/freedomcell/api/users/group_chat_reply`;
+    custom_file_upload_url1 = `https://freedomcells.net/freedomcell/api/users/post_comment`;
+    custom_file_upload_url2 = `https://freedomcells.net/freedomcell/api/users/post_comment_reply`;
+    custom_file_upload_urlMessage = `https://freedomcells.net/freedomcell/api/users/group_chat`;
+    custom_file_upload_url2Message = `https://freedomcells.net/freedomcell/api/users/group_chat_reply`;
 
 
 
@@ -272,8 +274,9 @@ export default class Groupdetail extends Component {
     //==================================  Detail of Hashtag List  ==============================
 
     AllHashtagListAPI() {
+       
         var search = $('input[name="input_tag"]').val().replace(/\s/g, '');
-        axios.post(`/freedomcell/api/users/search_hashtag`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'search': search }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/search_hashtag`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'search': search },{headers}).then((res) => {
             //on success
             this.codeDataHashtagList = res.data.code
             if (this.codeDataHashtagList === true) {
@@ -298,7 +301,7 @@ export default class Groupdetail extends Component {
     //==================================  List of nsfw List  ==============================
 
     AllNSFWAPI() {
-        axios.get(`/freedomcell/api/users/nsfw`, {}).then((res) => {
+        axios.get(`https://freedomcells.net/freedomcell/api/users/nsfw`, {headers}).then((res) => {
             //on success
             this.codeDataNsfwList = res.data.code
             if (this.codeDataNsfwList === true) {
@@ -323,7 +326,8 @@ export default class Groupdetail extends Component {
     //==================================  Detail of Hashtag List  ==============================
 
     hashtagListAPI() {
-        axios.post(`/freedomcell/api/users/select_hashtag`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        
+        axios.post(`https://freedomcells.net/freedomcell/api/users/select_hashtag`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key },{headers}).then((res) => {
             //on success
             this.codeDataHashtagsList = res.data.code
             if (this.codeDataHashtagsList === true) {
@@ -344,8 +348,8 @@ export default class Groupdetail extends Component {
 
     groupMemberAddAPI() {
         //=======================================  Group Member Add data ======================
-
-        axios.post(`/freedomcell/api/users/group_member_add`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, "group_id": this.group_id, "add_user_id": this.add_user_id }).then((res) => {
+        
+        axios.post(`https://freedomcells.net/freedomcell/api/users/group_member_add`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, "group_id": this.group_id, "add_user_id": this.add_user_id },{headers}).then((res) => {
             //on success
             this.codeDataGroupAdd = res.data.code
             if (this.codeDataGroupAdd === true) {
@@ -383,8 +387,8 @@ export default class Groupdetail extends Component {
 
     timelineAPI() {
         //=======================================  Timeline data ======================
-
-        axios.post(`/freedomcell/api/users/group_timeline`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, "group_id": this.group_id }).then((res) => {
+        
+        axios.post(`https://freedomcells.net/freedomcell/api/users/group_timeline`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, "group_id": this.group_id },{headers}).then((res) => {
             //on success
             this.codeData1 = res.data.code
             if (this.codeData1 === true) {
@@ -408,7 +412,8 @@ export default class Groupdetail extends Component {
         //=======================================  Group Detail data ======================
         $('#main_loader').show();
         $('#root').css('opacity', '0.5');
-        axios.post(`/freedomcell/api/users/group_detail`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, group_id: this.group_id }).then((res) => {
+        
+        axios.post(`https://freedomcells.net/freedomcell/api/users/group_detail`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, group_id: this.group_id },{headers}).then((res) => {
             //on success
             this.codeDataGroup = res.data.code
             if (this.codeDataGroup === true) {
@@ -430,7 +435,8 @@ export default class Groupdetail extends Component {
         //=======================================  Group Member data ======================
         $('#main_loader').show();
         $('#root').css('opacity', '0.5');
-        axios.post(`/freedomcell/api/users/group_member_list`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, group_id: this.group_id }).then((res) => {
+        
+        axios.post(`https://freedomcells.net/freedomcell/api/users/group_member_list`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, group_id: this.group_id },{headers}).then((res) => {
             //on success
             this.codeDataGroupMember = res.data.code
             if (this.codeDataGroupMember === true) {
@@ -464,9 +470,9 @@ export default class Groupdetail extends Component {
 
     followingAPI() {
 
+        
 
-
-        axios.post(`/freedomcell/api/users/following_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/following_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key },{headers}).then((res) => {
             //on success
             this.codeDataFollowing = res.data.code
             if (this.codeDataFollowing === true) {
@@ -488,9 +494,9 @@ export default class Groupdetail extends Component {
 
     followerAPI() {
 
+        
 
-
-        axios.post(`/freedomcell/api/users/follower_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/follower_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key },{headers}).then((res) => {
             //on success
             this.codeDataFollower = res.data.code
             if (this.codeDataFollower === true) {
@@ -691,12 +697,7 @@ export default class Groupdetail extends Component {
         axios.post(
             url,
             formData,
-            {
-                headers: {
-                    "Authorization": `/redblock/api/users/setting_update_test`,
-                    "Content-type": "multipart/form-data",
-                },
-            }
+            {headers}
         )
 
             .then(res => {
@@ -739,8 +740,8 @@ export default class Groupdetail extends Component {
     //=======================================  Like API   ===============================================
 
     submitLike(id) {
-
-        axios.post('/freedomcell/api/users/post_like', { 'post_id': id.post_id, 'user_id': this.loginData.id, 'api_key': this.loginData.api_key })
+        
+        axios.post('https://freedomcells.net/freedomcell/api/users/post_like', { 'post_id': id.post_id, 'user_id': this.loginData.id, 'api_key': this.loginData.api_key },{headers})
             .then(response => {
                 if (response.data.code === true) {
 
@@ -765,8 +766,8 @@ export default class Groupdetail extends Component {
     //=======================================  Like API   ===============================================
 
     submitdisLike(id) {
-
-        axios.post('/freedomcell/api/users/post_dislike', { 'post_id': id.post_id, 'user_id': this.loginData.id, 'api_key': this.loginData.api_key })
+        
+        axios.post('https://freedomcells.net/freedomcell/api/users/post_dislike', { 'post_id': id.post_id, 'user_id': this.loginData.id, 'api_key': this.loginData.api_key },{headers})
             .then(response => {
                 if (response.data.code === true) {
 
@@ -829,12 +830,7 @@ export default class Groupdetail extends Component {
         axios.post(
             this.custom_file_upload_url1,
             formData,
-            {
-                headers: {
-                    "Authorization": `/redblock/api/users/setting_update_test`,
-                    "Content-type": "multipart/form-data",
-                },
-            }
+            {headers}
         )
             .then(res => {
                 this.setState({
@@ -892,12 +888,7 @@ export default class Groupdetail extends Component {
         axios.post(
             this.custom_file_upload_url2,
             formData,
-            {
-                headers: {
-                    "Authorization": `/redblock/api/users/setting_update_test`,
-                    "Content-type": "multipart/form-data",
-                },
-            }
+            {headers}
         )
             .then(res => {
                 this.timelineAPI()
@@ -918,7 +909,7 @@ export default class Groupdetail extends Component {
     //==========================================  Delete Post  ================================
 
     postDelete = (id) => {
-
+        
         confirmAlert(
 
             {
@@ -928,7 +919,7 @@ export default class Groupdetail extends Component {
                     {
                         label: 'Yes',
                         onClick: () =>
-                            axios.post(`/freedomcell/api/users/post_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'post_id': id.post_id }).then((res) => {
+                            axios.post(`https://freedomcells.net/freedomcell/api/users/post_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'post_id': id.post_id },{headers}).then((res) => {
                                 this.timelineAPI()
                                 $('#main_loader').show();
                                 $('#root').css('opacity', '0.5');
@@ -953,7 +944,7 @@ export default class Groupdetail extends Component {
     //==========================================  Block/Unblock Post  ================================
 
     postBlock = (id) => {
-
+        
         confirmAlert({
             title: 'Confirm to submit',
             message: 'Are you sure to Block this.',
@@ -962,7 +953,7 @@ export default class Groupdetail extends Component {
                     label: 'Yes',
                     onClick: () =>
 
-                        axios.post(`/freedomcell/api/users/block`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'blocked_user_id': id.user_id }).then((res) => {
+                        axios.post(`https://freedomcells.net/freedomcell/api/users/block`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'blocked_user_id': id.user_id },{headers}).then((res) => {
                             this.timelineAPI()
 
                         }).catch((error) => {
@@ -979,6 +970,7 @@ export default class Groupdetail extends Component {
     //==========================================  Follow/Unfollow Post  ================================
 
     postFollow = (id) => {
+        
         if (id.is_following === '0') {
             confirmAlert({
                 title: 'Confirm to submit',
@@ -987,7 +979,7 @@ export default class Groupdetail extends Component {
                     {
                         label: 'Yes',
                         onClick: () =>
-                            axios.post(`/freedomcell/api/users/follow`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'following_id': id.user_id }).then((res) => {
+                            axios.post(`https://freedomcells.net/freedomcell/api/users/follow`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'following_id': id.user_id },{headers}).then((res) => {
                                 this.timelineAPI()
 
                             }).catch((error) => {
@@ -1007,7 +999,7 @@ export default class Groupdetail extends Component {
                     {
                         label: 'Yes',
                         onClick: () =>
-                            axios.post(`/freedomcell/api/users/unfollow`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'following_id': id.user_id }).then((res) => {
+                            axios.post(`https://freedomcells.net/freedomcell/api/users/unfollow`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'following_id': id.user_id },{headers}).then((res) => {
                                 this.timelineAPI()
 
                             }).catch((error) => {
@@ -1025,7 +1017,7 @@ export default class Groupdetail extends Component {
     //==========================================  Delete Comment Post  ================================
 
     postCommentDelete = (id) => {
-
+        
         confirmAlert({
             title: 'Confirm to submit',
             message: 'Are you sure to delete this.',
@@ -1033,7 +1025,7 @@ export default class Groupdetail extends Component {
                 {
                     label: 'Yes',
                     onClick: () =>
-                        axios.post(`/freedomcell/api/users/post_comment_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'post_comment_id': id.post_comment_id }).then((res) => {
+                        axios.post(`https://freedomcells.net/freedomcell/api/users/post_comment_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'post_comment_id': id.post_comment_id },{headers}).then((res) => {
                             this.timelineAPI()
 
                         }).catch((error) => {
@@ -1050,7 +1042,7 @@ export default class Groupdetail extends Component {
     //==========================================  Delete comment reply Post  ================================
 
     postCommentReplyDelete = (id) => {
-
+        
         confirmAlert({
             title: 'Confirm to submit',
             message: 'Are you sure to delete this.',
@@ -1058,7 +1050,7 @@ export default class Groupdetail extends Component {
                 {
                     label: 'Yes',
                     onClick: () =>
-                        axios.post(`/freedomcell/api/users/post_comment_reply_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'post_comment_id': id.post_comment_reply_id }).then((res) => {
+                        axios.post(`https://freedomcells.net/freedomcell/api/users/post_comment_reply_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'post_comment_id': id.post_comment_reply_id },{headers}).then((res) => {
                             this.timelineAPI()
 
                         }).catch((error) => {
@@ -1075,7 +1067,7 @@ export default class Groupdetail extends Component {
     //==========================================  Delete Group  ================================
 
     groupDelete = (id) => {
-
+        
         confirmAlert({
             title: 'Confirm to submit',
             message: 'Are you sure to delete this.',
@@ -1083,7 +1075,7 @@ export default class Groupdetail extends Component {
                 {
                     label: 'Yes',
                     onClick: () =>
-                        axios.post(`/freedomcell/api/users/group_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_id': id }).then((res) => {
+                        axios.post(`https://freedomcells.net/freedomcell/api/users/group_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_id': id },{headers}).then((res) => {
                             $('#main_loader').show();
                             $('#root').css('opacity', '0.5');
 
@@ -1091,7 +1083,7 @@ export default class Groupdetail extends Component {
                                 $('#main_loader').hide();
                                 $('#root').css('opacity', '1');
                             }, 1000);
-                            window.location.href = '/dashboard'
+                            window.location.hash = '/dashboard'
 
                         }).catch((error) => {
                         })
@@ -1107,6 +1099,7 @@ export default class Groupdetail extends Component {
     //==========================================  Delete Group  ================================
 
     groupType = (id) => {
+        
         if (id.type === "Public") {
             confirmAlert({
                 title: 'Confirm to submit',
@@ -1115,7 +1108,7 @@ export default class Groupdetail extends Component {
                     {
                         label: 'Yes',
                         onClick: () =>
-                            axios.post(`/freedomcell/api/users/group_type_update`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_id': id.id, 'type': 1 }).then((res) => {
+                            axios.post(`https://freedomcells.net/freedomcell/api/users/group_type_update`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_id': id.id, 'type': 1 },{headers}).then((res) => {
                                 $('#main_loader').show();
                                 $('#root').css('opacity', '0.5');
 
@@ -1141,7 +1134,7 @@ export default class Groupdetail extends Component {
                     {
                         label: 'Yes',
                         onClick: () =>
-                            axios.post(`/freedomcell/api/users/group_type_update`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_id': id.id, 'type': "0" }).then((res) => {
+                            axios.post(`https://freedomcells.net/freedomcell/api/users/group_type_update`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_id': id.id, 'type': "0" },{headers}).then((res) => {
                                 $('#main_loader').show();
                                 $('#root').css('opacity', '0.5');
 
@@ -1169,10 +1162,10 @@ export default class Groupdetail extends Component {
 
     //=================================================  Search API   ==================================
     getInputValue(id) {
-
+        
         var inputVal = document.getElementById("myInput").value;
 
-        axios.post('/freedomcell/api/users/user_search', { 'user_id': id.id, 'api_key': id.api_key, 'search': inputVal })
+        axios.post('https://freedomcells.net/freedomcell/api/users/user_search', { 'user_id': id.id, 'api_key': id.api_key, 'search': inputVal },{headers})
             .then(response => {
 
                 if (response.data.code === true) {
@@ -1221,11 +1214,11 @@ export default class Groupdetail extends Component {
 
 
         axios.post(
-            '/freedomcell/api/users/group_update',
+            'https://freedomcells.net/freedomcell/api/users/group_update',
             formData,
             {
                 headers: {
-                    "Authorization": `/freedomcell/api/users/group_create`,
+                    "Authorization": `https://freedomcells.net/freedomcell/api/users/group_create`,
                     "Content-type": "multipart/form-data",
                 },
             }
@@ -1264,7 +1257,7 @@ export default class Groupdetail extends Component {
 
     postGroupMemberDelete = (id) => {
         console.log(id);
-
+        
         confirmAlert(
 
             {
@@ -1274,7 +1267,7 @@ export default class Groupdetail extends Component {
                     {
                         label: 'Yes',
                         onClick: () =>
-                            axios.post(`/freedomcell/api/users/group_member_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_id': this.group_id, 'delete_user_id': id.user_id }).then((res) => {
+                            axios.post(`https://freedomcells.net/freedomcell/api/users/group_member_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_id': this.group_id, 'delete_user_id': id.user_id },{headers}).then((res) => {
                                 this.timelineAPI()
                                 $('#main_loader').show();
                                 $('#root').css('opacity', '0.5');
@@ -1297,7 +1290,7 @@ export default class Groupdetail extends Component {
 
 
     postGroupMemberDelete1 = (id) => {
-
+        
         confirmAlert(
 
             {
@@ -1307,7 +1300,7 @@ export default class Groupdetail extends Component {
                     {
                         label: 'Yes',
                         onClick: () =>
-                            axios.post(`/freedomcell/api/users/group_member_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_id': this.group_id, 'delete_user_id': id }).then((res) => {
+                            axios.post(`https://freedomcells.net/freedomcell/api/users/group_member_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_id': this.group_id, 'delete_user_id': id },{headers}).then((res) => {
                                 this.timelineAPI()
                                 $('#main_loader').show();
                                 $('#root').css('opacity', '0.5');
@@ -1342,11 +1335,11 @@ export default class Groupdetail extends Component {
     //==================================  Wallet Balance List  ==============================
 
     walletBalanceAPI() {
-
+        
 
         $('#main_loader').show();
         $('#root').css('opacity', '0.5');
-        axios.post(`/freedomcell/api/users/wallet_balance`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/wallet_balance`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key },{headers}).then((res) => {
             //on success
             this.codeDataWalletBalance = res.data.code
             if (this.codeDataWalletBalance === true) {
@@ -1368,6 +1361,7 @@ export default class Groupdetail extends Component {
     //==========================================  Tip Add Post  ================================
 
     tipAPI = () => {
+        
         $('div#myModal2').css('z-index', '99');
 
         confirmAlert({
@@ -1377,7 +1371,7 @@ export default class Groupdetail extends Component {
                 {
                     label: 'Yes',
                     onClick: () =>
-                        axios.post(`/freedomcell/api/users/crowdfunding`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_id': this.state.groupDetail.id, 'token': this.state.token }).then((res) => {
+                        axios.post(`https://freedomcells.net/freedomcell/api/users/crowdfunding`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_id': this.state.groupDetail.id, 'token': this.state.token },{headers}).then((res) => {
 
                             if (res.data.code === true) {
 
@@ -1407,7 +1401,8 @@ export default class Groupdetail extends Component {
 
 
     postEdit(editPost) {
-        axios.post(`/freedomcell/api/users/post_detail`, { 'user_id': this.loginData.id, 'post_id': editPost.post_id, 'api_key': this.loginData.api_key }).then((res) => {
+        
+        axios.post(`https://freedomcells.net/freedomcell/api/users/post_detail`, { 'user_id': this.loginData.id, 'post_id': editPost.post_id, 'api_key': this.loginData.api_key },{headers}).then((res) => {
             //on success
             this.codeDataPostDetail = res.data.code
             if (this.codeDataPostDetail === true) {
@@ -1479,12 +1474,12 @@ export default class Groupdetail extends Component {
 
     exchangeDataSubmit(e) {
         e.preventDefault()
+        
 
-
-        axios.post('/freedomcell/api/users/repost', {
+        axios.post('https://freedomcells.net/freedomcell/api/users/repost', {
             'user_id': this.loginData.id, 'api_key': this.loginData.api_key,
             'post_id': this.state.exchangeData?.post_id, 'repost_comment': this.state.repost_comment
-        })
+        },{headers})
             .then(response => {
 
                 if (response.data.code === true) {
@@ -1506,10 +1501,11 @@ export default class Groupdetail extends Component {
     //================================  JoinOpen Group  ==============
 
     groupJoinOpen(id) {
-        axios.post('/freedomcell/api/users/join_group', {
+        
+        axios.post('https://freedomcells.net/freedomcell/api/users/join_group', {
             'user_id': this.loginData.id, 'api_key': this.loginData.api_key,
             'group_id': id
-        })
+        },{headers})
             .then(response => {
 
                 if (response.data.code === true) {
@@ -1622,12 +1618,7 @@ export default class Groupdetail extends Component {
         axios.post(
             this.custom_file_upload_urlMessage,
             formData,
-            {
-                headers: {
-                    "Authorization": `/redblock/api/users/setting_update_test`,
-                    "Content-type": "multipart/form-data",
-                },
-            }
+            {headers}
         )
 
             .then(res => {
@@ -1676,10 +1667,10 @@ export default class Groupdetail extends Component {
 
     MessageChatList() {
 
-
+        
         // $('#main_loader').show();
         // $('#root').css('opacity', '0.5');
-        axios.post(`/freedomcell/api/users/group_chat_list`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_chat_id': this.group_id }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/group_chat_list`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_chat_id': this.group_id },{headers}).then((res) => {
             //on success
             this.codeDataMessageChat = res.data.code
             if (this.codeDataMessageChat === true) {
@@ -1711,7 +1702,7 @@ export default class Groupdetail extends Component {
     // =========================================  GroupChat Delete ===================================
 
     groupChatDelete = (id) => {
-
+        
         confirmAlert(
 
             {
@@ -1721,7 +1712,7 @@ export default class Groupdetail extends Component {
                     {
                         label: 'Yes',
                         onClick: () =>
-                            axios.post(`/freedomcell/api/users/group_chat_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_chat_id': id.chat_id }).then((res) => {
+                            axios.post(`https://freedomcells.net/freedomcell/api/users/group_chat_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_chat_id': id.chat_id },{headers}).then((res) => {
                                 this.MessageChatList()
                                 $('#main_loader').show();
                                 $('#root').css('opacity', '0.5');
@@ -1746,7 +1737,7 @@ export default class Groupdetail extends Component {
     //==============================================  GroupChatReply delete  ======================
 
     groupChatReplyDelete = (id) => {
-
+        
         confirmAlert(
 
             {
@@ -1756,7 +1747,7 @@ export default class Groupdetail extends Component {
                     {
                         label: 'Yes',
                         onClick: () =>
-                            axios.post(`/freedomcell/api/users/group_chat_reply_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_chat_reply_id': id.chat_reply_id }).then((res) => {
+                            axios.post(`https://freedomcells.net/freedomcell/api/users/group_chat_reply_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_chat_reply_id': id.chat_reply_id },{headers}).then((res) => {
                                 this.MessageChatList()
                                 $('#main_loader').show();
                                 $('#root').css('opacity', '0.5');
@@ -1849,12 +1840,7 @@ export default class Groupdetail extends Component {
         axios.post(
             this.custom_file_upload_url2Message,
             formData,
-            {
-                headers: {
-                    "Authorization": `/redblock/api/users/setting_update_test`,
-                    "Content-type": "multipart/form-data",
-                },
-            }
+            {headers}
         )
             .then(res => {
                 this.MessageChatList()
@@ -1875,8 +1861,8 @@ export default class Groupdetail extends Component {
     //======================================================  like Message/chat  =======================
 
     submitLikeMessage(id) {
-
-        axios.post('/freedomcell/api/users/group_chat_like', { 'group_chat_id': id.chat_id, 'user_id': this.loginData.id, 'api_key': this.loginData.api_key })
+        
+        axios.post('https://freedomcells.net/freedomcell/api/users/group_chat_like', { 'group_chat_id': id.chat_id, 'user_id': this.loginData.id, 'api_key': this.loginData.api_key },{headers})
             .then(response => {
                 if (response.data.code === true) {
 
@@ -1901,8 +1887,8 @@ export default class Groupdetail extends Component {
     //==============================================   Dislike Message/chat  ====================================
 
     submitdisLikeMessage(id) {
-
-        axios.post('/freedomcell/api/users/group_chat_dislike', { 'group_chat_id': id.chat_id, 'user_id': this.loginData.id, 'api_key': this.loginData.api_key })
+        
+        axios.post('https://freedomcells.net/freedomcell/api/users/group_chat_dislike', { 'group_chat_id': id.chat_id, 'user_id': this.loginData.id, 'api_key': this.loginData.api_key },{headers})
             .then(response => {
                 if (response.data.code === true) {
 
@@ -1933,8 +1919,8 @@ export default class Groupdetail extends Component {
 
 
     BannerImageAPI() {
-
-        axios.post(`/freedomcell/api/users/avatar_banner`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        
+        axios.post(`https://freedomcells.net/freedomcell/api/users/avatar_banner`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key },{headers}).then((res) => {
             //on success
             this.codeDataAvatarBanner = res.data.code
             if (this.codeDataAvatarBanner === true) {
@@ -1973,7 +1959,8 @@ export default class Groupdetail extends Component {
     hashtagListData(id) {
         $('#main_loader').show();
         $('#root').css('opacity', '0.5');
-        axios.post(`/freedomcell/api/users/hashtag_timeline`, { 'user_id': this.loginData.id, 'hashtag': id.hashtag, 'api_key': this.loginData.api_key }).then((res) => {
+        
+        axios.post(`https://freedomcells.net/freedomcell/api/users/hashtag_timeline`, { 'user_id': this.loginData.id, 'hashtag': id.hashtag, 'api_key': this.loginData.api_key },{headers}).then((res) => {
             //on success
             this.codeDataHashtagDetail = res.data.code
             if (this.codeDataHashtagDetail === true) {
@@ -2244,7 +2231,7 @@ export default class Groupdetail extends Component {
                                                                             <form className="edit-phto" style={{ display: 'none' }}>
                                                                                 <i className="fa fa-camera-retro"></i>
                                                                             </form>
-                                                                            {this.loginData?.id === this.state.groupDetail?.user_id ? <a href="#/" className="member-btn" onClick={this.addMember.bind(this, 1)}>+ Member</a> : ''}
+                                                                            {this.loginData?.id === this.state.groupDetail?.user_id ? <a href="javascript:;" className="member-btn" onClick={this.addMember.bind(this, 1)}>+ Member</a> : ''}
 
                                                                         </figure>
 
@@ -2258,14 +2245,14 @@ export default class Groupdetail extends Component {
                                                                                 <i className="fa fa-cog" aria-hidden="true"></i>
                                                                             </button>
                                                                             <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                                {this.state.editData === 0 ? <a className="dropdown-item" href="#/" onClick={this.editClick.bind(this, 1)}>Edit</a>
-                                                                                    : <a className="dropdown-item" button="submit" href="#/" onClick={this.updateClick}>Update</a>}
+                                                                                {this.state.editData === 0 ? <a className="dropdown-item" href="javascript:;" onClick={this.editClick.bind(this, 1)}>Edit</a>
+                                                                                    : <a className="dropdown-item" button="submit" href="javascript:;" onClick={this.updateClick}>Update</a>}
 
-                                                                                <a className="dropdown-item" href="#/" onClick={this.groupType.bind(this, this.state.groupDetail)}>
+                                                                                <a className="dropdown-item" href="javascript:;" onClick={this.groupType.bind(this, this.state.groupDetail)}>
                                                                                     {this.state.groupDetail?.type === 'Public' ? 'Make Closed' : 'Make Open'}
                                                                                 </a>
-                                                                                {this.state.groupDetail?.is_project === '1' ? <a className="dropdown-item" onClick={this.groupDelete.bind(this, this.state.groupDetail?.id)} href="#/">Delete Project</a> :
-                                                                                    <a className="dropdown-item" onClick={this.groupDelete.bind(this, this.state.groupDetail?.id)} href="#/">Delete Group</a>}
+                                                                                {this.state.groupDetail?.is_project === '1' ? <a className="dropdown-item" onClick={this.groupDelete.bind(this, this.state.groupDetail?.id)} href="javascript:;">Delete Project</a> :
+                                                                                    <a className="dropdown-item" onClick={this.groupDelete.bind(this, this.state.groupDetail?.id)} href="javascript:;">Delete Group</a>}
 
 
                                                                             </div>
@@ -2290,15 +2277,15 @@ export default class Groupdetail extends Component {
 
                                                                                             {this.state.groupDetail?.is_group_member === 'Leave' ?
 
-                                                                                                <a className="dropdown-item" onClick={this.postGroupMemberDelete1.bind(this, this.loginData?.id)} href="#/">Remove From  Project</a> :
-                                                                                                <a className="dropdown-item" onClick={this.groupJoinOpen.bind(this, this.state.groupDetail?.id)} href="#/">Join Project</a>}
+                                                                                                <a className="dropdown-item" onClick={this.postGroupMemberDelete1.bind(this, this.loginData?.id)} href="javascript:;">Remove From  Project</a> :
+                                                                                                <a className="dropdown-item" onClick={this.groupJoinOpen.bind(this, this.state.groupDetail?.id)} href="javascript:;">Join Project</a>}
                                                                                         </>
 
                                                                                         :
                                                                                         <>
                                                                                             {this.state.groupDetail?.is_group_member === 'Leave' ?
-                                                                                                <a className="dropdown-item" onClick={this.postGroupMemberDelete1.bind(this, this.loginData?.id)} href="#/">Remove From Group</a> :
-                                                                                                <a className="dropdown-item" onClick={this.groupJoinOpen.bind(this, this.state.groupDetail?.id)} href="#/">Join Group</a>
+                                                                                                <a className="dropdown-item" onClick={this.postGroupMemberDelete1.bind(this, this.loginData?.id)} href="javascript:;">Remove From Group</a> :
+                                                                                                <a className="dropdown-item" onClick={this.groupJoinOpen.bind(this, this.state.groupDetail?.id)} href="javascript:;">Join Group</a>
                                                                                             }
                                                                                         </>
                                                                                     }
@@ -2330,15 +2317,15 @@ export default class Groupdetail extends Component {
 
                                                                                             {this.state.groupDetail?.is_group_member === 'Leave' ?
 
-                                                                                                <a className="dropdown-item" onClick={this.postGroupMemberDelete1.bind(this, this.loginData?.id)} href="#/">Remove From  Project</a> :
-                                                                                                <a className="dropdown-item" onClick={this.groupJoinOpen.bind(this, this.state.groupDetail?.id)} href="#/">Join Project</a>}
+                                                                                                <a className="dropdown-item" onClick={this.postGroupMemberDelete1.bind(this, this.loginData?.id)} href="javascript:;">Remove From  Project</a> :
+                                                                                                <a className="dropdown-item" onClick={this.groupJoinOpen.bind(this, this.state.groupDetail?.id)} href="javascript:;">Join Project</a>}
                                                                                         </>
 
                                                                                         :
                                                                                         <>
                                                                                             {this.state.groupDetail?.is_group_member === 'Leave' ?
-                                                                                                <a className="dropdown-item" onClick={this.postGroupMemberDelete1.bind(this, this.loginData?.id)} href="#/">Remove From Group</a> :
-                                                                                                <a className="dropdown-item" onClick={this.groupJoinOpen.bind(this, this.state.groupDetail?.id)} href="#/">Join Group</a>
+                                                                                                <a className="dropdown-item" onClick={this.postGroupMemberDelete1.bind(this, this.loginData?.id)} href="javascript:;">Remove From Group</a> :
+                                                                                                <a className="dropdown-item" onClick={this.groupJoinOpen.bind(this, this.state.groupDetail?.id)} href="javascript:;">Join Group</a>
                                                                                             }
                                                                                         </>
                                                                                     }
@@ -2454,7 +2441,7 @@ export default class Groupdetail extends Component {
                                                                     </div> : ''}
                                                                     {this.state.groupDetail?.is_project === '1' ?
                                                                         <li className="pull-left" onClick={this.detailCrowd.bind(this, this.state.groupDetail)} style={{ marginRight: '5px', cursor: 'pointer', listStyle: 'none' }}>
-                                                                            <a data-toggle="modal" href="#/" data-target="#myModal2" ><button className="btn btn-primary btn-sm">Crowdfund&nbsp;<i className="fa fa-dollar"></i></button>
+                                                                            <a data-toggle="modal" href="javascript:;" data-target="#myModal2" ><button className="btn btn-primary btn-sm">Crowdfund&nbsp;<i className="fa fa-dollar"></i></button>
 
                                                                             </a>
                                                                         </li> : ''}
@@ -2486,7 +2473,7 @@ export default class Groupdetail extends Component {
                                                                                                 <div className="minds-banner-overlay">
                                                                                                 </div>
                                                                                             </div>
-                                                                                            <a className="mdl-card__supporting-text minds-usercard-block" href="#/">
+                                                                                            <a className="mdl-card__supporting-text minds-usercard-block" href="javascript:;">
                                                                                                 <div className="avatar">
                                                                                                     <img src={item.profile_pic} alt="Nothing Found" />
                                                                                                 </div>
@@ -2635,11 +2622,11 @@ export default class Groupdetail extends Component {
                                                                                             <>
                                                                                                 <a className="dropdown-item" style={{ cursor: 'pointer' }} data-toggle="modal" data-target="#myModalShare" onClick={this.postShare.bind(this, item)}>Share</a>
 
-                                                                                                <a className="dropdown-item" href="#/" onClick={this.postDelete.bind(this, item)}>Delete Post</a>
-                                                                                                <a className="dropdown-item" href="#/" onClick={this.postEdit.bind(this, item)}>Edit Post</a>
+                                                                                                <a className="dropdown-item" href="javascript:;" onClick={this.postDelete.bind(this, item)}>Delete Post</a>
+                                                                                                <a className="dropdown-item" href="javascript:;" onClick={this.postEdit.bind(this, item)}>Edit Post</a>
                                                                                             </>
                                                                                             {/* <>
-                                                                                            <a className="dropdown-item" href="#/" onClick={this.postEdit.bind(this, item)}>Edit Post</a> */}
+                                                                                            <a className="dropdown-item" href="javascript:;" onClick={this.postEdit.bind(this, item)}>Edit Post</a> */}
                                                                                             {/* </>} */}
 
                                                                                             {/* <a className="dropdown-item" href="#">Something else here</a> */}
@@ -2653,14 +2640,14 @@ export default class Groupdetail extends Component {
                                                                                                 {this.loginData.id === item.group_owner_id ?
                                                                                                     <>
                                                                                                         {/* <a className="dropdown-item" style={{ cursor: 'pointer' }} data-toggle="modal" data-target="#myModalShare" onClick={this.postShare.bind(this, item)}>Share</a> */}
-                                                                                                        <a className="dropdown-item" href="#/" onClick={this.postDelete.bind(this, item)}>Delete Post</a>
+                                                                                                        <a className="dropdown-item" href="javascript:;" onClick={this.postDelete.bind(this, item)}>Delete Post</a>
                                                                                                     </> :
                                                                                                     ''}
                                                                                                 <a className="dropdown-item" style={{ cursor: 'pointer' }} data-toggle="modal" data-target="#myModalShare" onClick={this.postShare.bind(this, item)}>Share</a>
 
-                                                                                                <a className="dropdown-item" href="#/" onClick={this.postBlock.bind(this, item)}>Block User</a>
-                                                                                                {item.is_following === '0' ? <a className="dropdown-item" href="#/" onClick={this.postFollow.bind(this, item)}>Follow User</a>
-                                                                                                    : <a className="dropdown-item" href="#/" onClick={this.postFollow.bind(this, item)}>Unfollow User</a>}
+                                                                                                <a className="dropdown-item" href="javascript:;" onClick={this.postBlock.bind(this, item)}>Block User</a>
+                                                                                                {item.is_following === '0' ? <a className="dropdown-item" href="javascript:;" onClick={this.postFollow.bind(this, item)}>Follow User</a>
+                                                                                                    : <a className="dropdown-item" href="javascript:;" onClick={this.postFollow.bind(this, item)}>Unfollow User</a>}
 
                                                                                             </div>
                                                                                         </div>}
@@ -2737,13 +2724,13 @@ export default class Groupdetail extends Component {
                                                                                                 <li>
                                                                                                     <span className="comment" data-toggle="tooltip">
 
-                                                                                                        <a data-toggle="modal" href="#/" onClick={this.exchangeDetail.bind(this, item)} data-target="#myModalExchange"><i className="fa fa-exchange"></i></a>
+                                                                                                        <a data-toggle="modal" href="javascript:;" onClick={this.exchangeDetail.bind(this, item)} data-target="#myModalExchange"><i className="fa fa-exchange"></i></a>
 
                                                                                                         <ins>{item.repost_count}</ins>
                                                                                                     </span>
                                                                                                 </li>
                                                                                                 {this.loginData?.id === item.user_id ? '' : <li className="pull-right" onClick={this.detailCrowd.bind(this, item)} style={{ marginRight: '5px', cursor: 'pointer' }}>
-                                                                                                    <a data-toggle="modal" href="#/" data-target="#myModal2" ><button>CrowdFund&nbsp;<i className="fa fa-dollar"></i></button></a>
+                                                                                                    <a data-toggle="modal" href="javascript:;" data-target="#myModal2" ><button>CrowdFund&nbsp;<i className="fa fa-dollar"></i></button></a>
                                                                                                 </li>}
                                                                                                 <li>
                                                                                                     <span className="comment" data-toggle="tooltip" title="Comments">
@@ -2860,14 +2847,14 @@ export default class Groupdetail extends Component {
                                                                                                                     className="fa fa-ellipsis-v" aria-hidden="true"></i>
 
                                                                                                                 <div className="dropdown-menu" style={{ fontSize: '15px' }} aria-labelledby="dropdownMenuButton">
-                                                                                                                    <a className="dropdown-item" href="#/" onClick={this.postCommentDelete.bind(this, item1)}>Delete</a>
+                                                                                                                    <a className="dropdown-item" href="javascript:;" onClick={this.postCommentDelete.bind(this, item1)}>Delete</a>
                                                                                                                     {/* <a className="dropdown-item" href="#">Another action</a>
 <a className="dropdown-item" href="#">Something else here</a> */}
                                                                                                                 </div>
                                                                                                             </div> : ''}
                                                                                                             <h5><Link to={`/timeLine/${item1.user_id}`} title="">{item1.full_name}</Link></h5>
                                                                                                             <span>{item1.duration}</span>
-                                                                                                            <a className="we-reply" href="#/" onClick={this.reply_box.bind(this, item1)} title="Reply"><i className="fa fa-reply"></i> {item1.reply_count > 0 ? item1.reply_count + ' Replies' : ''} </a>
+                                                                                                            <a className="we-reply" href="javascript:;" onClick={this.reply_box.bind(this, item1)} title="Reply"><i className="fa fa-reply"></i> {item1.reply_count > 0 ? item1.reply_count + ' Replies' : ''} </a>
                                                                                                         </div>
                                                                                                         <p dangerouslySetInnerHTML={{ __html: item1.comment }}></p>
                                                                                                         {item1.file ? item1.file_type === 'video' ? <Player src={item1.file} alt="" style={{ width: '100%', height: '160px' }} /> :
@@ -2921,7 +2908,7 @@ export default class Groupdetail extends Component {
                                                                                                                                         className="fa fa-ellipsis-v" aria-hidden="true"></i>
 
                                                                                                                                     <div className="dropdown-menu" style={{ fontSize: '15px' }} aria-labelledby="dropdownMenuButton">
-                                                                                                                                        <a className="dropdown-item" href="#/" onClick={this.postCommentReplyDelete.bind(this, item2)}>Delete</a>
+                                                                                                                                        <a className="dropdown-item" href="javascript:;" onClick={this.postCommentReplyDelete.bind(this, item2)}>Delete</a>
                                                                                                                                         {/* <a className="dropdown-item" href="#">Another action</a>
 <a className="dropdown-item" href="#">Something else here</a> */}
                                                                                                                                     </div>
@@ -3067,7 +3054,7 @@ export default class Groupdetail extends Component {
                                                                                                         className="fa fa-ellipsis-v" aria-hidden="true"></i>
 
                                                                                                     <div className="dropdown-menu" style={{ fontSize: '15px' }} aria-labelledby="dropdownMenuButton">
-                                                                                                        <a className="dropdown-item" onClick={this.groupChatDelete.bind(this, item)} href="#/">Delete</a>
+                                                                                                        <a className="dropdown-item" onClick={this.groupChatDelete.bind(this, item)} href="javascript:;">Delete</a>
 
                                                                                                     </div>
                                                                                                 </div> : ''}
@@ -3119,7 +3106,7 @@ export default class Groupdetail extends Component {
                                                                                                                             className="fa fa-ellipsis-v" aria-hidden="true"></i>
 
                                                                                                                         <div className="dropdown-menu" style={{ fontSize: '15px' }} aria-labelledby="dropdownMenuButton">
-                                                                                                                            <a className="dropdown-item" onClick={this.groupChatReplyDelete.bind(this, item1)} href="#/">Delete</a>
+                                                                                                                            <a className="dropdown-item" onClick={this.groupChatReplyDelete.bind(this, item1)} href="javascript:;">Delete</a>
 
                                                                                                                         </div>
                                                                                                                     </div>
@@ -3350,7 +3337,7 @@ export default class Groupdetail extends Component {
                                     {this.state.listNSFWtag.map(item => (
                                         <div class={($.inArray(item.nsfw, this.state.selectnsfw) !== -1) ? 'select_nsfw active' : 'select_nsfw '} style={{ marginLeft: '10px' }}>
                                             <>
-                                                <a href="#/">{item.nsfw}</a>
+                                                <a href="javascript:;">{item.nsfw}</a>
                                             </>
                                         </div>
                                     ))}

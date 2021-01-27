@@ -23,7 +23,9 @@ import { TwitterShareButton, TwitterIcon, FacebookShareButton, FacebookIcon, Ema
 //     PinterestShareButton,
 //     VKShareButton,
 // } = ShareButtons;
-
+const headers = {
+    'Content-Type': 'text/plain'
+};
 const TITLE = 'Freedom-cells-Dashboard'
 const initialState = {
     message: '',
@@ -35,11 +37,11 @@ const initialState = {
 }
 export default class Dashboard extends Component {
 
-    custom_file_upload_url = `/freedomcell/api/users/add_post`;
-    custom_file_upload_urlEdit = `/freedomcell/api/users/edit_post`;
+    custom_file_upload_url = `https://freedomcells.net/freedomcell/api/users/add_post`;
+    custom_file_upload_urlEdit = `https://freedomcells.net/freedomcell/api/users/edit_post`;
 
-    custom_file_upload_url1 = `/freedomcell/api/users/post_comment`;
-    custom_file_upload_url2 = `/freedomcell/api/users/post_comment_reply`;
+    custom_file_upload_url1 = `https://freedomcells.net/freedomcell/api/users/post_comment`;
+    custom_file_upload_url2 = `https://freedomcells.net/freedomcell/api/users/post_comment_reply`;
 
     constructor(props) {
         super(props);
@@ -88,7 +90,7 @@ export default class Dashboard extends Component {
         $('.sidebar').find('ul').find('li').removeClass('active');
         $('#li_dashboard').addClass('active');
 
-        var urlGroup = window.location.href.split('groupdetail/')[1]
+        var urlGroup = window.location.hash.split('groupdetail/')[1]
 
         this.setState({
             urlGroup: urlGroup
@@ -221,10 +223,11 @@ export default class Dashboard extends Component {
     }
 
     timelineAPI() {
+       
         //=======================================  Timeline data ======================
         // $('#main_loader').show();
         // $('#root').css('opacity', '0.5');
-        axios.post(`/freedomcell/api/users/timeline`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/timeline`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }, { headers }).then((res) => {
             //on success
             this.codeData1 = res.data.code
             if (this.codeData1 === true) {
@@ -250,9 +253,7 @@ export default class Dashboard extends Component {
 
     followingAPI() {
 
-
-
-        axios.post(`/freedomcell/api/users/following_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/following_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key }, { headers }).then((res) => {
             //on success
             this.codeDataFollowing = res.data.code
             if (this.codeDataFollowing === true) {
@@ -272,8 +273,9 @@ export default class Dashboard extends Component {
     //==================================  Detail of Hashtag List  ==============================
 
     AllHashtagListAPI() {
+        
         var search = $('input[name="input_tag"]').val().replace(/\s/g, '');
-        axios.post(`/freedomcell/api/users/search_hashtag`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'search': search }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/search_hashtag`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'search': search }, { headers }).then((res) => {
             //on success
             this.codeDataHashtagList = res.data.code
             if (this.codeDataHashtagList === true) {
@@ -297,7 +299,7 @@ export default class Dashboard extends Component {
     //==================================  List of nsfw List  ==============================
 
     AllNSFWAPI() {
-        axios.get(`/freedomcell/api/users/nsfw`, {}).then((res) => {
+        axios.get(`https://freedomcells.net/freedomcell/api/users/nsfw`, {}).then((res) => {
             //on success
             this.codeDataNsfwList = res.data.code
             if (this.codeDataNsfwList === true) {
@@ -321,7 +323,8 @@ export default class Dashboard extends Component {
     //==================================  Detail of Hashtag List  ==============================
 
     hashtagListAPI() {
-        axios.post(`/freedomcell/api/users/select_hashtag`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        
+        axios.post(`https://freedomcells.net/freedomcell/api/users/select_hashtag`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }, { headers }).then((res) => {
             //on success
             this.codeDataHashtagsList = res.data.code
             if (this.codeDataHashtagsList === true) {
@@ -343,8 +346,7 @@ export default class Dashboard extends Component {
     friendsAPI() {
 
 
-
-        axios.post(`/freedomcell/api/users/friend_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/friend_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key }, { headers }).then((res) => {
             //on success
             this.codeDataFriends = res.data.code
             if (this.codeDataFriends === true) {
@@ -367,8 +369,7 @@ export default class Dashboard extends Component {
     followerAPI() {
 
 
-
-        axios.post(`/freedomcell/api/users/follower_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/follower_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key }, { headers }).then((res) => {
             //on success
             this.codeDataFollower = res.data.code
             if (this.codeDataFollower === true) {
@@ -390,8 +391,7 @@ export default class Dashboard extends Component {
     walletBalanceAPI() {
 
 
-
-        axios.post(`/freedomcell/api/users/wallet_balance`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/wallet_balance`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }, { headers }).then((res) => {
             //on success
             this.codeDataWalletBalance = res.data.code
             if (this.codeDataWalletBalance === true) {
@@ -551,12 +551,7 @@ export default class Dashboard extends Component {
         axios.post(
             url,
             formData,
-            {
-                headers: {
-                    "Authorization": `/redblock/api/users/setting_update_test`,
-                    "Content-type": "multipart/form-data",
-                },
-            }
+            {headers}
         )
 
             .then(res => {
@@ -598,8 +593,8 @@ export default class Dashboard extends Component {
     //=======================================  Like API   ===============================================
 
     submitLike(id) {
-
-        axios.post('/freedomcell/api/users/post_like', { 'post_id': id.post_id, 'user_id': this.loginData.id, 'api_key': this.loginData.api_key })
+        
+        axios.post('https://freedomcells.net/freedomcell/api/users/post_like', { 'post_id': id.post_id, 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }, { headers })
             .then(response => {
                 if (response.data.code === true) {
 
@@ -623,8 +618,8 @@ export default class Dashboard extends Component {
     //=======================================  Like API   ===============================================
 
     submitdisLike(id) {
-
-        axios.post('/freedomcell/api/users/post_dislike', { 'post_id': id.post_id, 'user_id': this.loginData.id, 'api_key': this.loginData.api_key })
+        
+        axios.post('https://freedomcells.net/freedomcell/api/users/post_dislike', { 'post_id': id.post_id, 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }, { headers })
             .then(response => {
                 if (response.data.code === true) {
 
@@ -691,12 +686,7 @@ export default class Dashboard extends Component {
         axios.post(
             this.custom_file_upload_url1,
             formData,
-            {
-                headers: {
-                    "Authorization": `/redblock/api/users/setting_update_test`,
-                    "Content-type": "multipart/form-data",
-                },
-            }
+            {headers}
         )
             .then(res => {
                 this.setState({
@@ -748,12 +738,7 @@ export default class Dashboard extends Component {
         axios.post(
             this.custom_file_upload_url1,
             formData,
-            {
-                headers: {
-                    "Authorization": `/redblock/api/users/setting_update_test`,
-                    "Content-type": "multipart/form-data",
-                },
-            }
+            {headers}
         )
             .then(res => {
                 this.setState({
@@ -819,12 +804,7 @@ export default class Dashboard extends Component {
         axios.post(
             this.custom_file_upload_url2,
             formData,
-            {
-                headers: {
-                    "Authorization": `/redblock/api/users/setting_update_test`,
-                    "Content-type": "multipart/form-data",
-                },
-            }
+            {headers}
         )
             .then(res => {
                 this.timelineAPI()
@@ -845,7 +825,7 @@ export default class Dashboard extends Component {
     //==========================================  Delete Post  ================================
 
     postDelete = (id) => {
-
+        
         confirmAlert(
 
             {
@@ -855,7 +835,7 @@ export default class Dashboard extends Component {
                     {
                         label: 'Yes',
                         onClick: () =>
-                            axios.post(`/freedomcell/api/users/post_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'post_id': id.post_id }).then((res) => {
+                            axios.post(`https://freedomcells.net/freedomcell/api/users/post_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'post_id': id.post_id }, { headers }).then((res) => {
                                 this.timelineAPI()
                                 $('#main_loader').show();
                                 $('#root').css('opacity', '0.5');
@@ -879,7 +859,7 @@ export default class Dashboard extends Component {
     //==========================================  Block/Unblock Post  ================================
 
     postBlock = (id) => {
-
+        
         confirmAlert({
             title: 'Confirm to submit',
             message: 'Are you sure to Block this.',
@@ -888,7 +868,7 @@ export default class Dashboard extends Component {
                     label: 'Yes',
                     onClick: () =>
 
-                        axios.post(`/freedomcell/api/users/block`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'blocked_user_id': id.user_id }).then((res) => {
+                        axios.post(`https://freedomcells.net/freedomcell/api/users/block`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'blocked_user_id': id.user_id }, { headers }).then((res) => {
                             this.timelineAPI()
 
                         }).catch((error) => {
@@ -904,6 +884,7 @@ export default class Dashboard extends Component {
     //==========================================  Follow/Unfollow Post  ================================
 
     postFollow = (id) => {
+        
         if (id.is_following === '0') {
             confirmAlert({
                 title: 'Confirm to submit',
@@ -912,7 +893,7 @@ export default class Dashboard extends Component {
                     {
                         label: 'Yes',
                         onClick: () =>
-                            axios.post(`/freedomcell/api/users/follow`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'following_id': id.user_id }).then((res) => {
+                            axios.post(`https://freedomcells.net/freedomcell/api/users/follow`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'following_id': id.user_id }, { headers }).then((res) => {
                                 this.timelineAPI()
 
                             }).catch((error) => {
@@ -932,7 +913,7 @@ export default class Dashboard extends Component {
                     {
                         label: 'Yes',
                         onClick: () =>
-                            axios.post(`/freedomcell/api/users/unfollow`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'following_id': id.user_id }).then((res) => {
+                            axios.post(`https://freedomcells.net/freedomcell/api/users/unfollow`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'following_id': id.user_id }, { headers }).then((res) => {
                                 this.timelineAPI()
 
                             }).catch((error) => {
@@ -950,7 +931,7 @@ export default class Dashboard extends Component {
     //==========================================  Delete Comment Post  ================================
 
     postCommentDelete = (id) => {
-
+        
         confirmAlert({
             title: 'Confirm to submit',
             message: 'Are you sure to delete this.',
@@ -958,7 +939,7 @@ export default class Dashboard extends Component {
                 {
                     label: 'Yes',
                     onClick: () =>
-                        axios.post(`/freedomcell/api/users/post_comment_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'post_comment_id': id.post_comment_id }).then((res) => {
+                        axios.post(`https://freedomcells.net/freedomcell/api/users/post_comment_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'post_comment_id': id.post_comment_id }, { headers }).then((res) => {
                             this.timelineAPI()
                             $('#main_loader').show();
                             $('#root').css('opacity', '0.5');
@@ -982,7 +963,7 @@ export default class Dashboard extends Component {
     //==========================================  Delete comment reply Post  ================================
 
     postCommentReplyDelete = (id) => {
-
+        
         confirmAlert({
             title: 'Confirm to submit',
             message: 'Are you sure to delete this.',
@@ -990,7 +971,7 @@ export default class Dashboard extends Component {
                 {
                     label: 'Yes',
                     onClick: () =>
-                        axios.post(`/freedomcell/api/users/post_comment_reply_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'post_comment_id': id.post_comment_reply_id }).then((res) => {
+                        axios.post(`https://freedomcells.net/freedomcell/api/users/post_comment_reply_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'post_comment_id': id.post_comment_reply_id }, { headers }).then((res) => {
                             this.timelineAPI()
                             $('#main_loader').show();
                             $('#root').css('opacity', '0.5');
@@ -1025,7 +1006,7 @@ export default class Dashboard extends Component {
 
     tipAPI = () => {
         $('div#myModal2').css('z-index', '99');
-
+        
         confirmAlert({
             title: 'Confirm to submit',
             message: 'Are you sure to Pay this.',
@@ -1033,7 +1014,7 @@ export default class Dashboard extends Component {
                 {
                     label: 'Yes',
                     onClick: () =>
-                        axios.post(`/freedomcell/api/users/tip`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'post_id': this.state.crowdDetail.post_id, 'token': this.state.token }).then((res) => {
+                        axios.post(`https://freedomcells.net/freedomcell/api/users/tip`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'post_id': this.state.crowdDetail.post_id, 'token': this.state.token }, { headers }).then((res) => {
 
                             if (res.data.code === true) {
 
@@ -1065,7 +1046,8 @@ export default class Dashboard extends Component {
     //==================================  Detail of Group List  ==============================
 
     groupAPI() {
-        axios.post(`/freedomcell/api/users/group_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        
+        axios.post(`https://freedomcells.net/freedomcell/api/users/group_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key }, { headers }).then((res) => {
             //on success
             this.codeDataGroup = res.data.code
             if (this.codeDataGroup === true) {
@@ -1081,12 +1063,11 @@ export default class Dashboard extends Component {
     //====================================   Group Detail   =======================
 
     groupDetail(id) {
-
+        window.location.hash = '/timeLine/' + id;
         setTimeout(() => {
 
-            window.location.href = '/timeLine/' + id;
-            // window.location.reload(true)
-        }, 200);
+            window.location.reload(true)
+        }, 500);
     }
 
 
@@ -1094,9 +1075,9 @@ export default class Dashboard extends Component {
 
         setTimeout(() => {
 
-            window.location.href = '/timeLine/' + id;
+            window.location.hash = '/timeLine/' + id;
             // window.location.reload(true)
-        }, 200);
+        }, 500);
     }
     show_hide_comment(id) {
         $("#comment_box" + id).toggle(100);
@@ -1110,7 +1091,8 @@ export default class Dashboard extends Component {
 
 
     postEdit(editPost) {
-        axios.post(`/freedomcell/api/users/post_detail`, { 'user_id': this.loginData.id, 'post_id': editPost.post_id, 'api_key': this.loginData.api_key }).then((res) => {
+        
+        axios.post(`https://freedomcells.net/freedomcell/api/users/post_detail`, { 'user_id': this.loginData.id, 'post_id': editPost.post_id, 'api_key': this.loginData.api_key }, { headers }).then((res) => {
             //on success
             this.codeDataPostDetail = res.data.code
             if (this.codeDataPostDetail === true) {
@@ -1162,7 +1144,8 @@ export default class Dashboard extends Component {
     }
 
     suggestedChannel() {
-        axios.post(`/freedomcell/api/users/sujjested_channels`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        
+        axios.post(`https://freedomcells.net/freedomcell/api/users/sujjested_channels`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }, { headers }).then((res) => {
             //on success
             this.codeDataSuggested = res.data.code
             if (this.codeDataSuggested === true) {
@@ -1178,16 +1161,17 @@ export default class Dashboard extends Component {
 
     groupDetail(id) {
 
+        window.location.hash = '/timeLine/' + id;
         setTimeout(() => {
 
-            window.location.href = '/timeLine/' + id;
-            window.location.reload(true)``
-        }, 200);
+            window.location.reload(true)
+        }, 500);
     }
 
 
     deleteChannnels(channelsId) {
-        axios.post(`/freedomcell/api/users/block`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'blocked_user_id': channelsId.user_id }).then((res) => {
+        
+        axios.post(`https://freedomcells.net/freedomcell/api/users/block`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'blocked_user_id': channelsId.user_id }, { headers }).then((res) => {
             //on success
             this.codeDataBlockChannels = res.data.code
             if (this.codeDataBlockChannels === true) {
@@ -1201,7 +1185,8 @@ export default class Dashboard extends Component {
     //============================================   Join Open Group  ===============================================
 
     joinGroup(channelsId) {
-        axios.post(`/freedomcell/api/users/follow`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'following_id': channelsId.user_id }).then((res) => {
+        
+        axios.post(`https://freedomcells.net/freedomcell/api/users/follow`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'following_id': channelsId.user_id },{headers}).then((res) => {
             //on success
             this.codeDataJoinChannels = res.data.code
             if (this.codeDataJoinChannels === true) {
@@ -1220,7 +1205,8 @@ export default class Dashboard extends Component {
     //============================================   Suggested Hash Tags  ===============================================
 
     suggestedTags() {
-        axios.post(`/freedomcell/api/users/sujjested_hashtag`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        
+        axios.post(`https://freedomcells.net/freedomcell/api/users/sujjested_hashtag`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }, { headers }).then((res) => {
             //on success
             this.codeDataSuggestedHasTags = res.data.code
             if (this.codeDataSuggestedHasTags === true) {
@@ -1251,11 +1237,11 @@ export default class Dashboard extends Component {
 
     exchangeDataSubmit(e) {
         e.preventDefault()
-
-        axios.post('/freedomcell/api/users/repost', {
+        
+        axios.post('https://freedomcells.net/freedomcell/api/users/repost', {
             'user_id': this.loginData.id, 'api_key': this.loginData.api_key,
             'post_id': this.state.exchangeData?.post_id, 'repost_comment': this.state.repost_comment
-        })
+        }, { headers })
             .then(response => {
 
                 if (response.data.code === true) {
@@ -1286,8 +1272,8 @@ export default class Dashboard extends Component {
 
 
     BannerImageAPI() {
-
-        axios.post(`/freedomcell/api/users/avatar_banner`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        
+        axios.post(`https://freedomcells.net/freedomcell/api/users/avatar_banner`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key }, { headers }).then((res) => {
             //on success
             this.codeDataAvatarBanner = res.data.code
             if (this.codeDataAvatarBanner === true) {
@@ -1324,9 +1310,10 @@ export default class Dashboard extends Component {
     //===================================  hashtag detail data  =======================
 
     hashtagListData(id) {
+        
         $('#main_loader').show();
         $('#root').css('opacity', '0.5');
-        axios.post(`/freedomcell/api/users/hashtag_timeline`, { 'user_id': this.loginData.id, 'hashtag': id.hashtag, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/hashtag_timeline`, { 'user_id': this.loginData.id, 'hashtag': id.hashtag, 'api_key': this.loginData.api_key }, { headers }).then((res) => {
             //on success
             this.codeDataHashtagDetail = res.data.code
             if (this.codeDataHashtagDetail === true) {
@@ -1637,7 +1624,7 @@ export default class Dashboard extends Component {
                                                                                 className="fa fa-ellipsis-v" aria-hidden="true"></i>
 
                                                                             <div className="dropdown-menu" style={{ fontSize: '15px' }} aria-labelledby="dropdownMenuButton">
-                                                                                {/* <a className="dropdown-item" href="#/">Share</a> */}
+                                                                                {/* <a className="dropdown-item" href="javascript:;">Share</a> */}
                                                                                 {/* <FacebookShareButton>Share</FacebookShareButton>
                                                                             <FacebookShareCount url={item.message} /> */}
                                                                                 {/* <TwitterShareButton
@@ -1649,9 +1636,9 @@ export default class Dashboard extends Component {
                                                                                         round />
                                                                                 </TwitterShareButton> */}
                                                                                 <a className="dropdown-item" style={{ cursor: 'pointer' }} data-toggle="modal" data-target="#myModalShare" onClick={this.postShare.bind(this, item)}>Share</a>
-                                                                                <a className="dropdown-item" href="#/" onClick={this.postDelete.bind(this, item)}>Delete</a>
-                                                                                <a className="dropdown-item" href="#/" onClick={this.postEdit.bind(this, item)}>Edit Post</a>
-                                                                                {/* <a className="dropdown-item" href="#">Something else here</a> */}
+                                                                                <a className="dropdown-item" href="javascript:;" onClick={this.postDelete.bind(this, item)}>Delete</a>
+                                                                                <a className="dropdown-item" href="javascript:;" onClick={this.postEdit.bind(this, item)}>Edit Post</a>
+                                                                                {/* <a className="dropdown-item" href="javascript:;">Something else here</a> */}
 
 
                                                                             </div>
@@ -1663,8 +1650,8 @@ export default class Dashboard extends Component {
 
                                                                                 <div className="dropdown-menu" style={{ fontSize: '15px' }} aria-labelledby="dropdownMenuButton">
                                                                                     <a className="dropdown-item" style={{ cursor: 'pointer' }} data-toggle="modal" data-target="#myModalShare" onClick={this.postShare.bind(this, item)}>Share</a>
-                                                                                    <a className="dropdown-item" href="#/" onClick={this.postBlock.bind(this, item)}>Block User</a>
-                                                                                    {item.is_following === '0' ? <a className="dropdown-item" href="#/" onClick={this.postFollow.bind(this, item)}>Follow User</a> : <a className="dropdown-item" href="#/" onClick={this.postFollow.bind(this, item)}>Unfollow User</a>}
+                                                                                    <a className="dropdown-item" href="javascript:;" onClick={this.postBlock.bind(this, item)}>Block User</a>
+                                                                                    {item.is_following === '0' ? <a className="dropdown-item" href="javascript:;" onClick={this.postFollow.bind(this, item)}>Follow User</a> : <a className="dropdown-item" href="javascript:;" onClick={this.postFollow.bind(this, item)}>Unfollow User</a>}
 
                                                                                 </div>
                                                                             </div>}
@@ -1690,7 +1677,7 @@ export default class Dashboard extends Component {
                                                                                     <Player src={item.file} /> :
                                                                                     <>
                                                                                         {item.file === '' ? '' :
-                                                                                            // <a href="#/" data-toggle="modal" data-target="#myModal">
+                                                                                            // <a href="javascript:;" data-toggle="modal" data-target="#myModal">
                                                                                             <img className="image_post_css" style={{ height: '400px', width: '545px' }} onClick={this.imagePast.bind(this, item)} src={item.file} alt="" />
                                                                                             // </a>
                                                                                         }
@@ -1698,16 +1685,16 @@ export default class Dashboard extends Component {
                                                                                     </>
                                                                                 }
 
-                                                                                { item.is_repost === '0' ? <div className="description">
+                                                                                {item.is_repost === '0' ? <div className="description">
 
                                                                                     <p className="newLineText" dangerouslySetInnerHTML={{ __html: item.message }}>
 
                                                                                     </p>
 
-                                                                                    
+
                                                                                     {item.hashtag_link.map(hashtagitem => (
 
-                                                                                        <span style={{cursor:'pointer'}} onClick={this.hashtagListData.bind(this, hashtagitem)}>
+                                                                                        <span style={{ cursor: 'pointer' }} onClick={this.hashtagListData.bind(this, hashtagitem)}>
                                                                                             {hashtagitem.hashtag}&nbsp;
                                                                                         </span>
                                                                                     ))}
@@ -1790,14 +1777,14 @@ export default class Dashboard extends Component {
                                                                                     <li>
                                                                                         <span className="comment" data-toggle="tooltip">
 
-                                                                                            <a data-toggle="modal" href="#/" onClick={this.exchangeDetail.bind(this, item)} data-target="#myModalExchange"><i className="fa fa-exchange"></i></a>
+                                                                                            <a data-toggle="modal" href="javascript:;" onClick={this.exchangeDetail.bind(this, item)} data-target="#myModalExchange"><i className="fa fa-exchange"></i></a>
 
                                                                                             <ins>{item.repost_count}</ins>
                                                                                         </span>
                                                                                     </li>
 
                                                                                     {this.loginData?.id === item.user_id ? '' : <li className="pull-right" onClick={this.detailCrowd.bind(this, item)} style={{ marginRight: '5px', cursor: 'pointer' }}>
-                                                                                        <a data-toggle="modal" href="#/" data-target="#myModal2" ><span>Reward&nbsp;<i className="fa fa-dollar"></i></span></a>
+                                                                                        <a data-toggle="modal" href="javascript:;" data-target="#myModal2" ><span>Reward&nbsp;<i className="fa fa-dollar"></i></span></a>
                                                                                     </li>}
 
                                                                                     <li>
@@ -1809,7 +1796,7 @@ export default class Dashboard extends Component {
 
                                                                                 </ul>
                                                                                 {(item.comments_count > 0) ?
-                                                                                    <div><a href="#/" onClick={this.show_hide_comment.bind(this, item.post_id)}>View {item.comments_count} comments</a></div>
+                                                                                    <div><a href="javascript:;" onClick={this.show_hide_comment.bind(this, item.post_id)}>View {item.comments_count} comments</a></div>
                                                                                     : ''
                                                                                 }
                                                                             </div>
@@ -1914,14 +1901,14 @@ export default class Dashboard extends Component {
                                                                                                         className="fa fa-ellipsis-v" aria-hidden="true"></i>
 
                                                                                                     <div className="dropdown-menu" style={{ fontSize: '15px' }} aria-labelledby="dropdownMenuButton">
-                                                                                                        <a className="dropdown-item" href="#/" onClick={this.postCommentDelete.bind(this, item1)}>Delete</a>
-                                                                                                        {/* <a className="dropdown-item" href="#">Another action</a>
-                                <a className="dropdown-item" href="#">Something else here</a> */}
+                                                                                                        <a className="dropdown-item" href="javascript:;" onClick={this.postCommentDelete.bind(this, item1)}>Delete</a>
+                                                                                                        {/* <a className="dropdown-item" href="javascript:;">Another action</a>
+                                <a className="dropdown-item" href="javascript:;">Something else here</a> */}
                                                                                                     </div>
                                                                                                 </div> : ''}
                                                                                                 <h5><Link to={`/timeLine/${item1.user_id}`} title="">{item1.full_name}</Link></h5>
                                                                                                 <span>{item1.duration}</span>
-                                                                                                <a className="we-reply" href="#/" onClick={this.reply_box.bind(this, item1)} title="Reply"><i className="fa fa-reply"></i> {item1.reply_count > 0 ? item1.reply_count + ' Replies' : ''} </a>
+                                                                                                <a className="we-reply" href="javascript:;" onClick={this.reply_box.bind(this, item1)} title="Reply"><i className="fa fa-reply"></i> {item1.reply_count > 0 ? item1.reply_count + ' Replies' : ''} </a>
                                                                                             </div>
                                                                                             <p className="newLineText" dangerouslySetInnerHTML={{ __html: item1.comment }}></p>
                                                                                             {item1.file ? item1.file_type === 'video' ? <Player src={item1.file} alt="" style={{ width: '100%', height: '160px' }} /> :
@@ -1975,9 +1962,9 @@ export default class Dashboard extends Component {
                                                                                                                             className="fa fa-ellipsis-v" aria-hidden="true"></i>
 
                                                                                                                         <div className="dropdown-menu" style={{ fontSize: '15px' }} aria-labelledby="dropdownMenuButton">
-                                                                                                                            <a className="dropdown-item" href="#/" onClick={this.postCommentReplyDelete.bind(this, item2)}>Delete</a>
-                                                                                                                            {/* <a className="dropdown-item" href="#">Another action</a>
-                                <a className="dropdown-item" href="#">Something else here</a> */}
+                                                                                                                            <a className="dropdown-item" href="javascript:;" onClick={this.postCommentReplyDelete.bind(this, item2)}>Delete</a>
+                                                                                                                            {/* <a className="dropdown-item" href="javascript:;">Another action</a>
+                                <a className="dropdown-item" href="javascript:;">Something else here</a> */}
                                                                                                                         </div>
                                                                                                                     </div> : ''}
                                                                                                                     <h5><Link to={`/timeLine/${item2.user_id}`} title="">{item2.full_name}</Link></h5>
@@ -2158,7 +2145,7 @@ export default class Dashboard extends Component {
                                                                                 {this.state.suggestedHashTagList.map(item => (
 
                                                                                     <li _ngcontent-m-app-c376="" className="m-discoveryTrends__trend ng-star-inserted" onClick={this.hashtagListData.bind(this, item)} style={{ listStyle: 'none' }}>
-                                                                                        <a _ngcontent-m-app-c376="" href="#/">
+                                                                                        <a _ngcontent-m-app-c376="" href="javascript:;">
                                                                                             <div _ngcontent-m-app-c376=""><h5 _ngcontent-m-app-c376="">{item.hashtag}</h5>
                                                                                                 <div _ngcontent-m-app-c376="" className="m-discoveryTrendListItem__supportingText--below ng-star-inserted">
                                                                                                     <span _ngcontent-m-app-c376="">{item.post_count} posts</span>
@@ -2436,7 +2423,7 @@ export default class Dashboard extends Component {
                                     {this.state.listNSFWtag.map(item => (
                                         <div className={($.inArray(item.nsfw, this.state.selectnsfw) !== -1) ? 'select_nsfw active' : 'select_nsfw '} style={{ marginLeft: '10px' }}>
                                             <>
-                                                <a href="#/">{item.nsfw}</a>
+                                                <a href="javascript:;">{item.nsfw}</a>
                                             </>
                                         </div>
                                     ))}
@@ -2467,14 +2454,14 @@ export default class Dashboard extends Component {
                                         <div className="m-activity__ownerBlock ">
                                             <div className="aviator_circle"><a href=""><img className="m-border" src={this.state.dataImage.profile_pic} /></a></div>
                                             <div className="aviator__body">
-                                                <a className="aviator__displayName" href="#">
+                                                <a className="aviator__displayName" href="javascript:;">
                                                     <strong title="aman_gupta11">{this.state.dataImage.full_name}</strong>
                                                     <div className="div-activity">
                                                         <ul className="div">
                                                         </ul>
                                                     </div>
                                                 </a>
-                                                <a className="aviator__permalink " href="#">
+                                                <a className="aviator__permalink " href="javascript:;">
                                                     <span className="aviatorPermalink__text--timestamp " title="Oct 8, 2020, 2:55:08 AM"> {this.state.dataImage.duration} </span>
                                                 </a>
                                             </div>
@@ -2515,14 +2502,14 @@ export default class Dashboard extends Component {
                                                         <li>
                                                             <span className="comment" data-toggle="tooltip">
 
-                                                                <a data-toggle="modal" href="#/" onClick={this.exchangeDetail.bind(this, this.state.dataImage)} data-target="#myModalExchange"><i className="fa fa-exchange"></i></a>
+                                                                <a data-toggle="modal" href="javascript:;" onClick={this.exchangeDetail.bind(this, this.state.dataImage)} data-target="#myModalExchange"><i className="fa fa-exchange"></i></a>
 
                                                                 <ins>{this.state.dataImage?.repost_count}</ins>
                                                             </span>
                                                         </li>
 
                                                         {this.loginData?.id === this.state.dataImage?.user_id ? '' : <li className="pull-right" onClick={this.detailCrowd.bind(this, this.state.dataImage)} style={{ marginRight: '5px', cursor: 'pointer' }}>
-                                                            <a data-toggle="modal" href="#/" data-target="#myModal2" ><span>Reward&nbsp;<i className="fa fa-dollar"></i></span></a>
+                                                            <a data-toggle="modal" href="javascript:;" data-target="#myModal2" ><span>Reward&nbsp;<i className="fa fa-dollar"></i></span></a>
                                                         </li>}
 
                                                         <li>
@@ -2602,14 +2589,14 @@ export default class Dashboard extends Component {
                                                                             className="fa fa-ellipsis-v" aria-hidden="true"></i>
 
                                                                         <div className="dropdown-menu" style={{ fontSize: '15px' }} aria-labelledby="dropdownMenuButton">
-                                                                            <a className="dropdown-item" href="#/" onClick={this.postCommentDelete.bind(this, item1)}>Delete</a>
-                                                                            {/* <a className="dropdown-item" href="#">Another action</a>
-                                <a className="dropdown-item" href="#">Something else here</a> */}
+                                                                            <a className="dropdown-item" href="javascript:;" onClick={this.postCommentDelete.bind(this, item1)}>Delete</a>
+                                                                            {/* <a className="dropdown-item" href="javascript:;">Another action</a>
+                                <a className="dropdown-item" href="javascript:;">Something else here</a> */}
                                                                         </div>
                                                                     </div> : ''}
                                                                     <h5><Link to={`/timeLine/${item1.user_id}`} title="">{item1.full_name}</Link></h5>
                                                                     <span>{item1.duration}</span>
-                                                                    <a className="we-reply" href="#/" onClick={this.reply_box.bind(this, item1)} title="Reply"><i className="fa fa-reply"></i> {item1.reply_count > 0 ? item1.reply_count + ' Replies' : ''} </a>
+                                                                    <a className="we-reply" href="javascript:;" onClick={this.reply_box.bind(this, item1)} title="Reply"><i className="fa fa-reply"></i> {item1.reply_count > 0 ? item1.reply_count + ' Replies' : ''} </a>
                                                                 </div>
                                                                 <p className="newLineText" dangerouslySetInnerHTML={{ __html: item1.comment }}></p>
                                                                 {item1.file ? item1.file_type === 'video' ? <Player src={item1.file} alt="" style={{ width: '100%', height: '160px' }} /> :
@@ -2663,9 +2650,9 @@ export default class Dashboard extends Component {
                                                                                                 className="fa fa-ellipsis-v" aria-hidden="true"></i>
 
                                                                                             <div className="dropdown-menu" style={{ fontSize: '15px' }} aria-labelledby="dropdownMenuButton">
-                                                                                                <a className="dropdown-item" href="#/" onClick={this.postCommentReplyDelete.bind(this, item2)}>Delete</a>
-                                                                                                {/* <a className="dropdown-item" href="#">Another action</a>
-                                <a className="dropdown-item" href="#">Something else here</a> */}
+                                                                                                <a className="dropdown-item" href="javascript:;" onClick={this.postCommentReplyDelete.bind(this, item2)}>Delete</a>
+                                                                                                {/* <a className="dropdown-item" href="javascript:;">Another action</a>
+                                <a className="dropdown-item" href="javascript:;">Something else here</a> */}
                                                                                             </div>
                                                                                         </div> : ''}
                                                                                         <h5><Link to={`/timeLine/${item2.user_id}`} title="">{item2.full_name}</Link></h5>

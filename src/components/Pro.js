@@ -8,7 +8,9 @@ import Messaging from '../components/messaging'
 import Toggle from 'react-toggle'
 import toastr from 'reactjs-toastr';
 
-
+const headers = {
+    'Content-Type': 'text/plain'
+ };
 const TITLE = 'Freedom-cells-Pro'
 
 export default class Pro extends Component {
@@ -47,7 +49,7 @@ export default class Pro extends Component {
 
     planPriceAPI() {
 
-        axios.post(`/freedomcell/api/users/plan_price`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/plan_price`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key },{headers}).then((res) => {
             //on success
             this.codeDataPlanPrice = res.data.code
             if (this.codeDataPlanPrice === true) {
@@ -78,7 +80,7 @@ export default class Pro extends Component {
             // })
             this.state.cheeseIsReady = 'm'
         }
-        axios.post('/freedomcell/api/users/plan_update', { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'plan_id': this.state.listPlan.id,'duration':this.state.cheeseIsReady })
+        axios.post('https://freedomcells.net/freedomcell/api/users/plan_update', { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'plan_id': this.state.listPlan.id,'duration':this.state.cheeseIsReady },{headers})
             .then(response => {
                 if (response.data.code === true) {
                     toastr.success(response.data.message, { displayDuration: 30000 })

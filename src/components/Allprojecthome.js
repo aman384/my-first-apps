@@ -11,9 +11,9 @@ const TITLE = 'Freedom-cells-All-Projects'
 export default class Allprojectshome extends Component {
 
 
-    // custom_file_upload_url = `/freedomcell/api/users/group_create`;
-    // custom_file_upload_url1 = `/freedomcell/api/users/post_comment`;
-    // // custom_file_upload_url2 = `/freedomcell/api/users/post_comment_reply`;
+    // custom_file_upload_url = `https://freedomcells.net/freedomcell/api/users/group_create`;
+    // custom_file_upload_url1 = `https://freedomcells.net/freedomcell/api/users/post_comment`;
+    // // custom_file_upload_url2 = `https://freedomcells.net/freedomcell/api/users/post_comment_reply`;
 
     constructor(props) {
         super(props);
@@ -31,7 +31,7 @@ export default class Allprojectshome extends Component {
 
 
     projectAPI() {
-        axios.get(`/freedomcell/api/users/project_list`, {}).then((res) => {
+        axios.get(`https://freedomcells.net/freedomcell/api/users/project_list`, {}).then((res) => {
             //on success
             this.codeDataProject = res.data.code
             if (this.codeDataProject === true) {
@@ -53,7 +53,7 @@ export default class Allprojectshome extends Component {
     projectLogin(id) {
         setTimeout(() => {
 
-            window.location.href = '/Login=' + id;
+            window.location.hash = '/Login=' + id;
             window.location.reload(true)
         }, 200);
     }
@@ -94,15 +94,15 @@ export default class Allprojectshome extends Component {
                                                     <div class="dropdown">
                                                         <div class="dropdown-menu setting_menu" aria-labelledby="dropdownMenuButton">
                                                             <ul>
-                                                                <li><a class="dropdown-item" href="#/">Edit</a></li>
-                                                                <li><a class="dropdown-item" href="#/">Make Closed</a></li>
-                                                                <li><a class="dropdown-item" href="#/">Delete Group</a></li>
+                                                                <li><a class="dropdown-item" href="javascript:;">Edit</a></li>
+                                                                <li><a class="dropdown-item" href="javascript:;">Make Closed</a></li>
+                                                                <li><a class="dropdown-item" href="javascript:;">Delete Group</a></li>
                                                             </ul>
 
 
 
                                                             <li class="pull-right" style={{ marginRight: '5px', cursor: 'pointer', listStyle: 'none' }}>
-                                                                <a data-toggle="modal" href="#" data-target="#myModal2">
+                                                                <a data-toggle="modal" href="javascript:;" data-target="#myModal2">
                                                                     <span>Crowdfund&nbsp;<i class="fa fa-dollar"></i></span>
                                                                     <div>30days</div>
                                                                 </a>
@@ -138,7 +138,7 @@ export default class Allprojectshome extends Component {
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                <div class="m-poweredBy col-sm-6 text-left"><img class="m-poweredBy__bulb" alt="Nothing Found" src="http://espsofttechnologies.com/favicon.ico" /><span class="m-poweredBy__text"> Powered by <a href="#">Freedom Cell Pay</a></span></div>
+                                                                                <div class="m-poweredBy col-sm-6 text-left"><img class="m-poweredBy__bulb" alt="Nothing Found" src="http://espsofttechnologies.com/favicon.ico" /><span class="m-poweredBy__text"> Powered by <a href="javascript:;">Freedom Cell Pay</a></span></div>
                                                                                 <div class="m-wireCreatorToolbar__message col-sm-4">
                                                                                     <div class="m-wireCreatorToolbarMessage__error "> Cannot spend more than  tokens </div>
                                                                                 </div>

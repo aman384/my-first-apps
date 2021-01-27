@@ -10,15 +10,17 @@ import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
-
+const headers = {
+    'Content-Type': 'text/plain'
+};
 const TITLE = 'Freedom-cells-All-Projects'
 
 export default class Allprojects extends Component {
 
 
-    // custom_file_upload_url = `/freedomcell/api/users/group_create`;
-    // custom_file_upload_url1 = `/freedomcell/api/users/post_comment`;
-    // // custom_file_upload_url2 = `/freedomcell/api/users/post_comment_reply`;
+    // custom_file_upload_url = `https://freedomcells.net/freedomcell/api/users/group_create`;
+    // custom_file_upload_url1 = `https://freedomcells.net/freedomcell/api/users/post_comment`;
+    // // custom_file_upload_url2 = `https://freedomcells.net/freedomcell/api/users/post_comment_reply`;
 
     constructor(props) {
         super(props);
@@ -39,7 +41,8 @@ export default class Allprojects extends Component {
 
 
     projectAPI() {
-        axios.post(`/freedomcell/api/users/all_project_list`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        
+        axios.post(`https://freedomcells.net/freedomcell/api/users/all_project_list`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key },{headers}).then((res) => {
             //on success
             this.codeDataProject = res.data.code
             if (this.codeDataProject === true) {
@@ -62,7 +65,8 @@ export default class Allprojects extends Component {
 
 
     myProjectAPI() {
-        axios.post(`/freedomcell/api/users/project_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+       
+        axios.post(`https://freedomcells.net/freedomcell/api/users/project_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key },{headers}).then((res) => {
             //on success
             this.codeDataProjectMy = res.data.code
             if (this.codeDataProjectMy === true) {
@@ -84,7 +88,7 @@ export default class Allprojects extends Component {
 
         setTimeout(() => {
 
-            window.location.href = '/groupdetail/' + id;
+            window.location.hash = '/groupdetail/' + id;
             // window.location.reload(true)
         }, 200);
     }
@@ -93,7 +97,7 @@ export default class Allprojects extends Component {
         //==========================================  Delete Group  ================================
 
         groupDelete = (id) => {
-
+            
             confirmAlert({
                 title: 'Confirm to submit',
                 message: 'Are you sure to delete this.',
@@ -101,7 +105,7 @@ export default class Allprojects extends Component {
                     {
                         label: 'Yes',
                         onClick: () =>
-                            axios.post(`/freedomcell/api/users/group_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_id': id }).then((res) => {
+                            axios.post(`https://freedomcells.net/freedomcell/api/users/group_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_id': id },{headers}).then((res) => {
                                 $('#main_loader').show();
                                 $('#root').css('opacity', '0.5');
     
@@ -110,7 +114,7 @@ export default class Allprojects extends Component {
                                     $('#root').css('opacity', '1');
                                 }, 1000);
                                 this.componentDidMount()
-                                // window.location.href = '/dashboard'
+                                // window.location.hash = '/dashboard'
     
                             }).catch((error) => {
                             })
@@ -224,7 +228,7 @@ export default class Allprojects extends Component {
                                                                                         title="">{item.group_name}</Link></h4>
                                                                                     <span>{item.type}</span>
                                                                                     {/* <a href="#/" alt="Nothing Found" title="" className="add-butn more-action" data-ripple="">unfriend<span className="ripple"><span className="ink" style={{ height: '70px', width: '70px', backgroundColor: 'rgb(143, 163, 184)', top: '-33.9063px', left: '4.96875px' }}></span></span></a> */}
-                                                                                    <a href="#/" onClick={this.groupDelete.bind(this, item.id)} alt="Nothing Found" title="" className="add-butn" data-ripple="">Delete Project<span className="ripple"><span className="ink" style={{ height: '83px', width: '83px', backgroundColor: 'rgb(10, 169, 246)', top: '-28.4063px', left: '39.9219px' }}></span></span></a>
+                                                                                    <a href="javascript:;" onClick={this.groupDelete.bind(this, item.id)} alt="Nothing Found" title="" className="add-butn" data-ripple="">Delete Project<span className="ripple"><span className="ink" style={{ height: '83px', width: '83px', backgroundColor: 'rgb(10, 169, 246)', top: '-28.4063px', left: '39.9219px' }}></span></span></a>
                                                                                 </div>
                                                                             </div>
                                                                         </li>

@@ -8,7 +8,9 @@ import { Helmet } from 'react-helmet'
 import Cookies from 'js-cookie';
 
 const TITLE = 'Freedom-cells-Twofa'
-
+const headers = {
+    'Content-Type': 'text/plain'
+ };
 const initialState = {
     user_id: '',
     code: '',
@@ -50,7 +52,7 @@ export default class Twofa extends Component {
         this.state.is_enable_google_auth_code = this.loginData.is_enable_google_auth_code
 
 
-        axios.post('/freedomcell/api/users/two_factor_auth', data)
+        axios.post('https://freedomcells.net/freedomcell/api/users/two_factor_auth', data,{headers})
             .then(response => {
 
                 if (response.data.code === true) {
@@ -60,7 +62,7 @@ export default class Twofa extends Component {
                         message: response.data
                     })
                     window.location.reload(true);
-                    window.location.href = '/dashboard'
+                    window.location.hash = '/dashboard'
 
                 }
 

@@ -18,6 +18,9 @@ const initialState = {
     loggedIn: '',
     code: ''
 }
+const headers = {
+    'Content-Type': 'text/plain'
+};
 
 export default class Home1 extends Component {
 
@@ -30,7 +33,7 @@ export default class Home1 extends Component {
         this.submitForm = this.submitForm.bind(this);
 
 
-        var pageURL = window.location.href;
+        var pageURL = window.location.hash;
         let res = pageURL.split("/");
 
         this.investFind = res[5]
@@ -115,7 +118,7 @@ export default class Home1 extends Component {
             const data = this.state
 
 
-            axios.post('/freedomcell/api/users/login', data)
+            axios.post('https://freedomcells.net/freedomcell/api/users/login', data,{ headers })
                 .then(response => {
 
                     if (response.data.code === true) {
@@ -133,11 +136,11 @@ export default class Home1 extends Component {
                         // }
                         if(this.checkLastURL1 === 'Login'){
                             window.location.reload(true);
-                            window.location.href = '/groupdetail/' + this.lastUrl
+                            window.location.hash = '/groupdetail/' + this.lastUrl
                         }
                         else if (this.state.message.user_data.is_enable_google_auth_code === '1') {
                             window.location.reload(true);
-                            window.location.href = '/twofa'
+                            window.location.hash = '/twofa'
                         }
 
                     }
@@ -188,7 +191,10 @@ export default class Home1 extends Component {
 
 
 
-                        <section id="home-section" className="header-bg">
+                        <section id="home-section" className="header-bg" style={{
+                            background: "url('bg_banner_img.png') center no-repeat",
+                            backgroundSize: 'cover'
+                        }}> 
 
                             {/* <div id="particles-js"></div> */}
 
@@ -247,15 +253,15 @@ export default class Home1 extends Component {
                             <div className="m-grid m-marketing__asFeaturedIn">
                                
                                 <ul className="m-grid__column-10">
-                                    <li><a href="#/" rel="noopener noreferrer"><img alt="The Wall Street Journal" src="icon/free_speech.jpg" /><p>Free Speech</p></a></li>
-                                    <li><a href="#/" rel="noopener noreferrer"><img alt="Reuters" className="img_blck" src="icon/decentralisation.png" /><p>Decentralisation</p></a></li>
-                                    <li><a href="#/" rel="noopener noreferrer"><img alt="TechCrunch" src="icon/crowdfunding.jpg" /><p>Crowdfunding</p></a></li>
-                                    <li><a href="#/" rel="noopener noreferrer"><img alt="Fox News" src="icon/blockchain.png" /><p>Blockchain</p></a></li>
-                                    <li><a href="#/" rel="noopener noreferrer"><img alt="Independent" src="icon/transformation.jpg" /><p>Transformation</p></a></li>
-                                    <li><a href="#/" rel="noopener noreferrer"><img alt="The Joe Rogan Experience" src="icon/power2.jpg" /><p>Collective Power</p></a></li>
-                                    <li><a href="#/" rel="noopener noreferrer"><img alt="The Joe Rogan Experience" src="icon/vote3.png" /><p>Voting</p></a></li>
-                                    {/* <li><a href="#/" rel="noopener noreferrer"><img alt="Reuters" className="img_blck" src="icon/Cryptocurrency_decentralization-23-512.png" /><p>transformation</p></a></li> */}
-                                    {/* <li><a href="#/" rel="noopener noreferrer"><img alt="npr" src="icon/Projects_icon.png" /><p>Projects</p></a></li> */}
+                                    <li><a href="javascript:;" rel="noopener noreferrer"><img alt="The Wall Street Journal" src="icon/free_speech.jpg" /><p>Free Speech</p></a></li>
+                                    <li><a href="javascript:;" rel="noopener noreferrer"><img alt="Reuters" className="img_blck" src="icon/decentralisation.png" /><p>Decentralisation</p></a></li>
+                                    <li><a href="javascript:;" rel="noopener noreferrer"><img alt="TechCrunch" src="icon/crowdfunding.jpg" /><p>Crowdfunding</p></a></li>
+                                    <li><a href="javascript:;" rel="noopener noreferrer"><img alt="Fox News" src="icon/blockchain.png" /><p>Blockchain</p></a></li>
+                                    <li><a href="javascript:;" rel="noopener noreferrer"><img alt="Independent" src="icon/transformation.jpg" /><p>Transformation</p></a></li>
+                                    <li><a href="javascript:;" rel="noopener noreferrer"><img alt="The Joe Rogan Experience" src="icon/power2.jpg" /><p>Collective Power</p></a></li>
+                                    <li><a href="javascript:;" rel="noopener noreferrer"><img alt="The Joe Rogan Experience" src="icon/vote3.png" /><p>Voting</p></a></li>
+                                    {/* <li><a href="javascript:;" rel="noopener noreferrer"><img alt="Reuters" className="img_blck" src="icon/Cryptocurrency_decentralization-23-512.png" /><p>transformation</p></a></li> */}
+                                    {/* <li><a href="javascript:;" rel="noopener noreferrer"><img alt="npr" src="icon/Projects_icon.png" /><p>Projects</p></a></li> */}
                                 </ul>
                             </div>
                         </section>

@@ -209,10 +209,10 @@ a.g:hover{
 
 /*backgrounds-are-here*/
 
-.header-bg{
+/* .header-bg{
     background: url('/bg_banner_img.png') center no-repeat;
     background-size: cover;
-}
+} */
 .blue-bg{
     background: rgba(9,29,73,0.97);
 }

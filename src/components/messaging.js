@@ -3,7 +3,9 @@ import axios from 'axios';
 import $ from 'jquery';
 import Cookies from 'js-cookie';
 import { Link } from 'react-router-dom';
-
+const headers = {
+   'Content-Type': 'text/plain'
+};
 export default class Messaging extends Component {
    //==================================  Wallet Balance List  ==============================
 
@@ -63,7 +65,7 @@ export default class Messaging extends Component {
       // }
       // console.log(val);
       
-      axios.post(`/freedomcell/api/users/search_user`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'name': val }).then((res) => {
+      axios.post(`https://freedomcells.net/freedomcell/api/users/search_user`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'name': val },{headers}).then((res) => {
          //on success
       // alert('2')
 
@@ -90,7 +92,7 @@ export default class Messaging extends Component {
    }
 
    select_user(item) {
-      axios.post(`/freedomcell/api/users/start_chat`, { 'user_id': this.loginData.id, 'friend_id': item.id, 'api_key': this.loginData.api_key }).then((res) => {
+      axios.post(`https://freedomcells.net/freedomcell/api/users/start_chat`, { 'user_id': this.loginData.id, 'friend_id': item.id, 'api_key': this.loginData.api_key },{headers}).then((res) => {
          //on success
          if (res.data.code === true) {
             this.current_chating();
@@ -106,7 +108,7 @@ export default class Messaging extends Component {
    }
    current_chating() {
       
-      axios.post(`/freedomcell/api/users/current_chat`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+      axios.post(`https://freedomcells.net/freedomcell/api/users/current_chat`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key },{headers}).then((res) => {
          //on success
          if (res.data.code === true) {
             this.setState({
@@ -148,7 +150,7 @@ export default class Messaging extends Component {
          } else {
             var status = '1';
          }
-         axios.post(`/freedomcell/api/users/minimize_chat_box`, { 'user_id': this.loginData.id, 'chat_id': item.chat_id, 'status': status, 'api_key': this.loginData.api_key }).then((res) => {
+         axios.post(`https://freedomcells.net/freedomcell/api/users/minimize_chat_box`, { 'user_id': this.loginData.id, 'chat_id': item.chat_id, 'status': status, 'api_key': this.loginData.api_key },{headers}).then((res) => {
             //on success
             if (res.data.code === true) {
                // this.current_chating();
@@ -159,7 +161,7 @@ export default class Messaging extends Component {
       }, 600);
    }
    close_chat(item) {
-      axios.post(`/freedomcell/api/users/close_chat`, { 'user_id': this.loginData.id, 'chat_id': item.chat_id, 'api_key': this.loginData.api_key }).then((res) => {
+      axios.post(`https://freedomcells.net/freedomcell/api/users/close_chat`, { 'user_id': this.loginData.id, 'chat_id': item.chat_id, 'api_key': this.loginData.api_key },{headers}).then((res) => {
          //on success
          if (res.data.code === true) {
             this.current_chating();
@@ -189,7 +191,7 @@ export default class Messaging extends Component {
       }
       var msg = this.strip11(msg);
 
-      axios.post(`/freedomcell/api/users/send_massage`, { 'user_id': this.loginData.id, 'friend_id': item.id, 'message': msg, 'api_key': this.loginData.api_key }).then((res) => {
+      axios.post(`https://freedomcells.net/freedomcell/api/users/send_massage`, { 'user_id': this.loginData.id, 'friend_id': item.id, 'message': msg, 'api_key': this.loginData.api_key },{headers}).then((res) => {
          //on success
          if (res.data.code === true) {
             this.current_chating();
@@ -228,7 +230,7 @@ export default class Messaging extends Component {
             return;
          }
          var msg = this.strip(msg);
-         axios.post(`/freedomcell/api/users/send_massage`, { 'user_id': this.loginData.id, 'friend_id': item.id, 'message': msg, 'api_key': this.loginData.api_key }).then((res) => {
+         axios.post(`https://freedomcells.net/freedomcell/api/users/send_massage`, { 'user_id': this.loginData.id, 'friend_id': item.id, 'message': msg, 'api_key': this.loginData.api_key },{headers}).then((res) => {
             //on success
             if (res.data.code === true) {
                this.current_chating();
@@ -253,7 +255,7 @@ export default class Messaging extends Component {
       if (window.confirm('This action will block all parties site-wide. Are you sure?') == false) {
          return;
       }
-      axios.post(`/freedomcell/api/users/block_chat`, { 'user_id': this.loginData.id, 'friend_id': item.id, 'status': status, 'api_key': this.loginData.api_key }).then((res) => {
+      axios.post(`https://freedomcells.net/freedomcell/api/users/block_chat`, { 'user_id': this.loginData.id, 'friend_id': item.id, 'status': status, 'api_key': this.loginData.api_key },{headers}).then((res) => {
          //on success
          if (res.data.code === true) {
             this.current_chating();
@@ -268,7 +270,7 @@ export default class Messaging extends Component {
       if (window.confirm('All messages will be deleted. You cannot UNDO this action. Are you sure?') == false) {
          return;
       }
-      axios.post(`/freedomcell/api/users/destroy_chat`, { 'user_id': this.loginData.id, 'friend_id': item.id, 'api_key': this.loginData.api_key }).then((res) => {
+      axios.post(`https://freedomcells.net/freedomcell/api/users/destroy_chat`, { 'user_id': this.loginData.id, 'friend_id': item.id, 'api_key': this.loginData.api_key },{headers}).then((res) => {
          //on success
          if (res.data.code === true) {
             this.current_chating();
@@ -287,7 +289,7 @@ export default class Messaging extends Component {
 
       setTimeout(() => {
 
-         window.location.href = '/timeLine/' + id;
+         window.location.hash = '/timeLine/' + id;
          window.location.reload(true)
       }, 200);
    }
@@ -300,7 +302,7 @@ export default class Messaging extends Component {
    //       if (msg.trim() === '') {
    //          return;
    //       }
-   //       axios.post(`/freedomcell/api/users/send_massage`, { 'user_id': this.loginData.id, 'friend_id': item.id, 'message': msg, 'api_key': this.loginData.api_key }).then((res) => {
+   //       axios.post(`https://freedomcells.net/freedomcell/api/users/send_massage`, { 'user_id': this.loginData.id, 'friend_id': item.id, 'message': msg, 'api_key': this.loginData.api_key },{headers}).then((res) => {
    //          //on success
    //          if (res.data.code === true) {
    //             this.current_chating();
@@ -337,7 +339,7 @@ export default class Messaging extends Component {
 
     BannerImageAPI() {
 
-      axios.post(`/freedomcell/api/users/avatar_banner`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+      axios.post(`https://freedomcells.net/freedomcell/api/users/avatar_banner`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key },{headers}).then((res) => {
           this.codeDataAvatarBanner = res.data.code
           if (this.codeDataAvatarBanner === true) {
               this.setState({

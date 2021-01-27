@@ -8,7 +8,9 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const TITLE = 'Freedom-cells-All-Notifications'
-
+const headers = {
+    'Content-Type': 'text/plain'
+};
 export default class AllNotifications extends Component {
 
     constructor(props) {
@@ -22,12 +24,14 @@ export default class AllNotifications extends Component {
         let data = Cookies.getJSON('name');
         this.loginData = data.user_data
         this.notificationList()
+        
     }
 
     //==================================  Detail of Project List  ==============================
 
     notificationList() {
-        axios.post(`/freedomcell/api/users/notification_list`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        
+        axios.post(`https://freedomcells.net/freedomcell/api/users/notification_list`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key },{headers}).then((res) => {
             this.codeDataNotification = res.data.code
             if (this.codeDataNotification === true) {
                 this.notifCount = res.data

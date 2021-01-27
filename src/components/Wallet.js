@@ -10,7 +10,9 @@ import toastr from 'reactjs-toastr';
 import Messaging from '../components/messaging'
 
 var QRCode = require('qrcode.react');
-
+const headers = {
+    'Content-Type': 'text/plain'
+ };
 const TITLE = 'Freedom-cells-Wallet'
 const initialState = {
     user_id: '',
@@ -103,7 +105,7 @@ export default class Wallet extends Component {
         this.state.fees = this.state.fees2
         delete this.state.walletBalance
 
-        axios.post('/freedomcell/api/users/coin_transfer', data)
+        axios.post('https://freedomcells.net/freedomcell/api/users/coin_transfer', data,{headers})
             .then(response => {
 
                 if (response.data.code === true) {
@@ -163,7 +165,7 @@ export default class Wallet extends Component {
         delete this.state.currency
 
 
-        axios.post('/freedomcell/api/users/withdraw_eth', data)
+        axios.post('https://freedomcells.net/freedomcell/api/users/withdraw_eth', data,{headers})
             .then(response => {
 
                 if (response.data.code === true) {
@@ -208,7 +210,7 @@ export default class Wallet extends Component {
         delete this.state.walletBalance
 
 
-        axios.post('/freedomcell/api/users/buy_token', data)
+        axios.post('https://freedomcells.net/freedomcell/api/users/buy_token', data,{headers})
             .then(response => {
 
                 if (response.data.code === true) {
@@ -262,7 +264,7 @@ export default class Wallet extends Component {
 
 
 
-        axios.post('/freedomcell/api/users/withdraw_token', data)
+        axios.post('https://freedomcells.net/freedomcell/api/users/withdraw_token', data,{headers})
             .then(response => {
 
                 if (response.data.code === true) {
@@ -298,7 +300,7 @@ export default class Wallet extends Component {
 
         $('#main_loader').show();
         $('#root').css('opacity', '0.5');
-        axios.post(`/freedomcell/api/users/wallet_balance`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/wallet_balance`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key },{headers}).then((res) => {
             //on success
             this.codeDataWalletBalance = res.data.code
             if (this.codeDataWalletBalance === true) {
@@ -324,7 +326,7 @@ export default class Wallet extends Component {
 
         $('#main_loader').show();
         $('#root').css('opacity', '0.5');
-        axios.post(`/freedomcell/api/users/trx_type_list`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/trx_type_list`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key },{headers}).then((res) => {
             //on success
             this.codeDataTransactionType = res.data.code
             if (this.codeDataTransactionType === true) {
@@ -350,7 +352,7 @@ export default class Wallet extends Component {
 
         $('#main_loader').show();
         $('#root').css('opacity', '0.5');
-        axios.post(`/freedomcell/api/users/transaction_list`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'trx_type_id': '0' }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/transaction_list`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'trx_type_id': '0' },{headers}).then((res) => {
             //on success
             this.codeDataTransactionList = res.data.code
             if (this.codeDataTransactionList === true) {
@@ -439,7 +441,7 @@ export default class Wallet extends Component {
 
             $('#main_loader').show();
             $('#root').css('opacity', '0.5');
-            axios.post(`/freedomcell/api/users/transaction_list`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'trx_type_id': a }).then((res) => {
+            axios.post(`https://freedomcells.net/freedomcell/api/users/transaction_list`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'trx_type_id': a },{headers}).then((res) => {
                 //on success
                 this.codeDataTransactionList = res.data.code
 
@@ -511,16 +513,16 @@ export default class Wallet extends Component {
                     <div className="fixed-sidebar left">
                         <div className="menu-left">
                             <ul className="left-menu">
-                                <li><a href="#/" title="Newsfeed Page" data-toggle="tooltip" data-placement="right"><i className="ti-magnet"></i></a></li>
-                                <li><a href="#/" title="favourit page" data-toggle="tooltip" data-placement="right"><i className="fa fa-star-o"></i></a></li>
-                                <li><a href="#/" title="Account Stats" data-toggle="tooltip" data-placement="right"><i className="ti-stats-up"></i></a></li>
-                                <li><a href="#/" title="inbox" data-toggle="tooltip" data-placement="right"><i className="ti-import"></i></a></li>
-                                <li><a href="#/" title="Messages" data-toggle="tooltip" data-placement="right"><i className="ti-comment-alt"></i></a></li>
-                                <li><a href="#/" title="Setting" data-toggle="tooltip" data-placement="right"><i className="ti-panel"></i></a></li>
-                                <li><a href="#/" title="Faq's" data-toggle="tooltip" data-placement="right"><i className="ti-light-bulb"></i></a></li>
-                                <li><a href="#/" title="Friends" data-toggle="tooltip" data-placement="right"><i className="ti-themify-favicon"></i></a></li>
-                                <li><a href="#/" title="Widgets" data-toggle="tooltip" data-placement="right"><i className="ti-eraser"></i></a></li>
-                                <li><a href="#/" title="Notification" data-toggle="tooltip" data-placement="right"><i className="ti-bookmark-alt"></i></a></li>
+                                <li><a href="javascript:;" title="Newsfeed Page" data-toggle="tooltip" data-placement="right"><i className="ti-magnet"></i></a></li>
+                                <li><a href="javascript:;" title="favourit page" data-toggle="tooltip" data-placement="right"><i className="fa fa-star-o"></i></a></li>
+                                <li><a href="javascript:;" title="Account Stats" data-toggle="tooltip" data-placement="right"><i className="ti-stats-up"></i></a></li>
+                                <li><a href="javascript:;" title="inbox" data-toggle="tooltip" data-placement="right"><i className="ti-import"></i></a></li>
+                                <li><a href="javascript:;" title="Messages" data-toggle="tooltip" data-placement="right"><i className="ti-comment-alt"></i></a></li>
+                                <li><a href="javascript:;" title="Setting" data-toggle="tooltip" data-placement="right"><i className="ti-panel"></i></a></li>
+                                <li><a href="javascript:;" title="Faq's" data-toggle="tooltip" data-placement="right"><i className="ti-light-bulb"></i></a></li>
+                                <li><a href="javascript:;" title="Friends" data-toggle="tooltip" data-placement="right"><i className="ti-themify-favicon"></i></a></li>
+                                <li><a href="javascript:;" title="Widgets" data-toggle="tooltip" data-placement="right"><i className="ti-eraser"></i></a></li>
+                                <li><a href="javascript:;" title="Notification" data-toggle="tooltip" data-placement="right"><i className="ti-bookmark-alt"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -853,7 +855,7 @@ export default class Wallet extends Component {
                                                                     {/* <div className="row">
                                                                         <div className="verifyPhone col-sm-6">
                                                                             <div className="m-walletTokenOnboardingStep__title">
-                                                                                <span>1.</span><a href="#/">Verify your phone number</a>
+                                                                                <span>1.</span><a href="javascript:;">Verify your phone number</a>
                                                                             </div>
                                                                             <div className="m-walletTokenOnboardingStep__desc"> Used simply to verify your uniqueness. </div>
                                                                         </div>
@@ -874,7 +876,7 @@ export default class Wallet extends Component {
                                                                             </div>
                                                                         </div>
                                                                         <div className="col-sm-2 pad_spc">
-                                                                            <a className="m-walletBalance--tokens__buyButtonWrapper" href="#/">
+                                                                            <a className="m-walletBalance--tokens__buyButtonWrapper" href="javascript:;">
                                                                                 <button className="m-shadowboxSubmitButton green" type="submit">
                                                                                     <div className="m-shadowboxSubmitButton__status--unsaved ">Buy tokens</div>
                                                                                 </button>
@@ -921,7 +923,7 @@ export default class Wallet extends Component {
                                                                         <div className="m-walletBalance--tokens__payout "><div> Today's estimated payout <span className="m-walletBalance--tokens__payoutEstimate">0</span> tokens. </div><div> Next payout in <span>14h 46m 48s</span> (Daily at 7:00pm) </div></div>
                                                                     </div>
                                                                     <div className="row">
-                                                                        <div className="m-walletBalance--tokens__learnMore "><a href="#/">Learn more</a> about Minds Tokens and our Rewards System. </div>
+                                                                        <div className="m-walletBalance--tokens__learnMore "><a href="javascript:;">Learn more</a> about Minds Tokens and our Rewards System. </div>
 
                                                                     </div>
                                                                 */}
@@ -933,7 +935,7 @@ export default class Wallet extends Component {
 
 
                                                                                 <li className="nav-item">
-                                                                                    <a className="nav-link active" disabled style={{ fontSize: '18px', width: '162px' }} data-toggle="tab" href="#/" role="tab" aria-controls="four" aria-selected="true">Transactions</a>
+                                                                                    <a className="nav-link active" disabled style={{ fontSize: '18px', width: '162px' }} data-toggle="tab" href="javascript:;" role="tab" aria-controls="four" aria-selected="true">Transactions</a>
                                                                                 </li>
 
 

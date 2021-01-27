@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
-
+const headers = {
+    'Content-Type': 'text/plain'
+ };
 export default class RightSidebar extends Component {
 
 
@@ -29,7 +31,7 @@ export default class RightSidebar extends Component {
 
 
 
-        axios.post(`/freedomcell/api/users/following_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/following_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key },{headers}).then((res) => {
             //on success
             this.codeDataFollowing = res.data.code
             if (this.codeDataFollowing === true) {
@@ -53,7 +55,7 @@ export default class RightSidebar extends Component {
 
 
 
-        axios.post(`/freedomcell/api/users/follower_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/follower_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key },{headers}).then((res) => {
             //on success
             this.codeDataFollower = res.data.code
             if (this.codeDataFollower === true) {
@@ -89,7 +91,7 @@ export default class RightSidebar extends Component {
 
                                 {this.state.listFollower.map(item => (
                                     <li className="m-suggestionsSidebarList__item m-suggestionsSidebarList__item--user " key={item.id}>
-                                        <a href="#/" className="">
+                                        <a href="javascript:;" className="">
                                             {/* style="background-image: url(&quot;https://cdn.minds.com/icon/626772382194872329&quot;);" */}
                                             <div className="m-suggestionsSidebarListItem__avatar" >
                                                 <img alt="No" className="img-responsive suggested_channele" src={item.profile_pic} />
@@ -168,7 +170,7 @@ export default class RightSidebar extends Component {
                             </div>
                             {/* <!----> */}
                         </div>
-                        {/* <a href="#/" className="m-sidebarWidget__seeMore ">See more</a> */}
+                        {/* <a href="javascript:;" className="m-sidebarWidget__seeMore ">See more</a> */}
                     </div>
                 </aside>
                 <aside className="sidebar static">
@@ -187,7 +189,7 @@ export default class RightSidebar extends Component {
                                         {/* <span className="status f-online"></span> */}
                                     </figure>
                                     <div className="friendz-meta">
-                                        <a href="#/">{item.full_name}</a>
+                                        <a href="javascript:;">{item.full_name}</a>
                                         <i><a href="/cdn-cgi/l/email-protection" className="__cf_email__" data-cfemail="ddaab4b3a9b8afaeb2b1b9b8af9dbab0bcb4b1f3beb2b0">{item.duration}</a></i>
                                     </div>
                                 </li>

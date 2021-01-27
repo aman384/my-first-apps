@@ -14,7 +14,9 @@ import Messaging from '../components/messaging'
 import toastr from 'reactjs-toastr';
 import { TwitterShareButton, TwitterIcon, FacebookShareButton, FacebookIcon, EmailIcon, EmailShareButton } from 'react-share';
 
-
+const headers = {
+    'Content-Type': 'text/plain'
+};
 const TITLE = 'Freedom-cells-Timeline'
 const initialState = {
     message: '',
@@ -28,14 +30,14 @@ const initialState = {
 
 
 export default class Timeline extends Component {
-    custom_file_upload_urlEdit = `/freedomcell/api/users/edit_post`;
-    custom_file_upload_urladd = `/freedomcell/api/users/add_post`;
+    custom_file_upload_urlEdit = `https://freedomcells.net/freedomcell/api/users/edit_post`;
+    custom_file_upload_urladd = `https://freedomcells.net/freedomcell/api/users/add_post`;
 
 
-    custom_file_upload_url = `/freedomcell/api/users/profile_pic_update`;
-    custom_file_upload_url1 = `/freedomcell/api/users/post_comment`;
-    custom_file_upload_url2 = `/freedomcell/api/users/post_comment_reply`;
-    custom_file_upload_url3 = `/freedomcell/api/users/background_update`;
+    custom_file_upload_url = `https://freedomcells.net/freedomcell/api/users/profile_pic_update`;
+    custom_file_upload_url1 = `https://freedomcells.net/freedomcell/api/users/post_comment`;
+    custom_file_upload_url2 = `https://freedomcells.net/freedomcell/api/users/post_comment_reply`;
+    custom_file_upload_url3 = `https://freedomcells.net/freedomcell/api/users/background_update`;
 
 
 
@@ -249,7 +251,7 @@ export default class Timeline extends Component {
             this.post_id = ''
         }
 
-        axios.post(`/freedomcell/api/users/user_timeline`, { 'user_id': this.loginData.id, 'view_user_id': this.userId, 'api_key': this.loginData.api_key, 'post_id': this.post_id }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/user_timeline`, { 'user_id': this.loginData.id, 'view_user_id': this.userId, 'api_key': this.loginData.api_key, 'post_id': this.post_id }, { headers }).then((res) => {
             //on success
             this.codeData1 = res.data.code
             if (this.codeData1 === true) {
@@ -295,7 +297,7 @@ export default class Timeline extends Component {
 
 
 
-        axios.post(`/freedomcell/api/users/following_list`, { 'user_id': this.loginData.id, 'view_user_id': this.userId, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/following_list`, { 'user_id': this.loginData.id, 'view_user_id': this.userId, 'api_key': this.loginData.api_key }, { headers }).then((res) => {
             //on success
             this.codeDataFollowing = res.data.code
             if (this.codeDataFollowing === true) {
@@ -319,7 +321,7 @@ export default class Timeline extends Component {
 
 
 
-        axios.post(`/freedomcell/api/users/follower_list`, { 'user_id': this.loginData.id, 'view_user_id': this.userId, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/follower_list`, { 'user_id': this.loginData.id, 'view_user_id': this.userId, 'api_key': this.loginData.api_key }, { headers }).then((res) => {
             //on success
             this.codeDataFollower = res.data.code
             if (this.codeDataFollower === true) {
@@ -342,7 +344,7 @@ export default class Timeline extends Component {
 
 
     groupAPI() {
-        axios.post(`/freedomcell/api/users/group_list`, { 'user_id': this.loginData.id, 'view_user_id': this.userId, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/group_list`, { 'user_id': this.loginData.id, 'view_user_id': this.userId, 'api_key': this.loginData.api_key }, { headers }).then((res) => {
             //on success
             this.codeDataGroup = res.data.code
             if (this.codeDataGroup === true) {
@@ -361,7 +363,7 @@ export default class Timeline extends Component {
 
     BannerImageAPI() {
 
-        axios.post(`/freedomcell/api/users/avatar_banner`, { 'user_id': this.loginData.id, 'view_user_id': this.userId, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/avatar_banner`, { 'user_id': this.loginData.id, 'view_user_id': this.userId, 'api_key': this.loginData.api_key }, { headers }).then((res) => {
             //on success
             this.codeDataAvatarBanner = res.data.code
             if (this.codeDataAvatarBanner === true) {
@@ -524,12 +526,7 @@ export default class Timeline extends Component {
         axios.post(
             url,
             formData,
-            {
-                headers: {
-                    "Authorization": `/redblock/api/users/setting_update_test`,
-                    "Content-type": "multipart/form-data",
-                },
-            }
+            { headers }
         )
 
             .then(res => {
@@ -583,12 +580,7 @@ export default class Timeline extends Component {
         axios.post(
             this.custom_file_upload_url3,
             formData,
-            {
-                headers: {
-                    "Authorization": `/redblock/api/users/setting_update_test`,
-                    "Content-type": "multipart/form-data",
-                },
-            }
+            { headers }
         )
 
             .then(res => {
@@ -623,12 +615,7 @@ export default class Timeline extends Component {
         axios.post(
             this.custom_file_upload_url,
             formData,
-            {
-                headers: {
-                    "Authorization": `/redblock/api/users/setting_update_test`,
-                    "Content-type": "multipart/form-data",
-                },
-            }
+            { headers }
         )
 
             .then(res => {
@@ -651,7 +638,7 @@ export default class Timeline extends Component {
 
     submitLike(id) {
 
-        axios.post('/freedomcell/api/users/post_like', { 'post_id': id.post_id, 'user_id': this.loginData.id, 'api_key': this.loginData.api_key })
+        axios.post('https://freedomcells.net/freedomcell/api/users/post_like', { 'post_id': id.post_id, 'user_id': this.loginData.id, 'api_key': this.loginData.api_key })
             .then(response => {
                 if (response.data.code === true) {
 
@@ -677,7 +664,7 @@ export default class Timeline extends Component {
 
     submitdisLike(id) {
 
-        axios.post('/freedomcell/api/users/post_dislike', { 'post_id': id.post_id, 'user_id': this.loginData.id, 'api_key': this.loginData.api_key })
+        axios.post('https://freedomcells.net/freedomcell/api/users/post_dislike', { 'post_id': id.post_id, 'user_id': this.loginData.id, 'api_key': this.loginData.api_key })
             .then(response => {
                 if (response.data.code === true) {
 
@@ -731,12 +718,7 @@ export default class Timeline extends Component {
         axios.post(
             this.custom_file_upload_url1,
             formData,
-            {
-                headers: {
-                    "Authorization": `/redblock/api/users/setting_update_test`,
-                    "Content-type": "multipart/form-data",
-                },
-            }
+            { headers }
         )
             .then(res => {
                 this.setState({
@@ -794,12 +776,7 @@ export default class Timeline extends Component {
         axios.post(
             this.custom_file_upload_url2,
             formData,
-            {
-                headers: {
-                    "Authorization": `/redblock/api/users/setting_update_test`,
-                    "Content-type": "multipart/form-data",
-                },
-            }
+            { headers }
         )
             .then(res => {
                 this.timelineAPI()
@@ -828,7 +805,7 @@ export default class Timeline extends Component {
                 {
                     label: 'Yes',
                     onClick: () =>
-                        axios.post(`/freedomcell/api/users/post_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'post_id': id.post_id }).then((res) => {
+                        axios.post(`https://freedomcells.net/freedomcell/api/users/post_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'post_id': id.post_id }, { headers }).then((res) => {
                             this.timelineAPI()
                             $('#main_loader').show();
                             $('#root').css('opacity', '0.5');
@@ -861,7 +838,7 @@ export default class Timeline extends Component {
                     label: 'Yes',
                     onClick: () =>
 
-                        axios.post(`/freedomcell/api/users/block`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'blocked_user_id': id.user_id }).then((res) => {
+                        axios.post(`https://freedomcells.net/freedomcell/api/users/block`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'blocked_user_id': id.user_id }, { headers }).then((res) => {
                             this.componentDidMount()
 
                         }).catch((error) => {
@@ -886,7 +863,7 @@ export default class Timeline extends Component {
                     {
                         label: 'Yes',
                         onClick: () =>
-                            axios.post(`/freedomcell/api/users/follow`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'following_id': id.user_id }).then((res) => {
+                            axios.post(`https://freedomcells.net/freedomcell/api/users/follow`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'following_id': id.user_id }, { headers }).then((res) => {
                                 this.componentDidMount()
 
                             }).catch((error) => {
@@ -906,7 +883,7 @@ export default class Timeline extends Component {
                     {
                         label: 'Yes',
                         onClick: () =>
-                            axios.post(`/freedomcell/api/users/unfollow`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'following_id': id.user_id }).then((res) => {
+                            axios.post(`https://freedomcells.net/freedomcell/api/users/unfollow`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'following_id': id.user_id }, { headers }).then((res) => {
                                 this.componentDidMount()
 
                             }).catch((error) => {
@@ -932,7 +909,7 @@ export default class Timeline extends Component {
                 {
                     label: 'Yes',
                     onClick: () =>
-                        axios.post(`/freedomcell/api/users/post_comment_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'post_comment_id': id.post_comment_id }).then((res) => {
+                        axios.post(`https://freedomcells.net/freedomcell/api/users/post_comment_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'post_comment_id': id.post_comment_id }, { headers }).then((res) => {
                             this.timelineAPI()
                             $('#main_loader').show();
                             $('#root').css('opacity', '0.5');
@@ -965,7 +942,7 @@ export default class Timeline extends Component {
                 {
                     label: 'Yes',
                     onClick: () =>
-                        axios.post(`/freedomcell/api/users/post_comment_reply_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'post_comment_id': id.post_comment_reply_id }).then((res) => {
+                        axios.post(`https://freedomcells.net/freedomcell/api/users/post_comment_reply_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'post_comment_id': id.post_comment_reply_id }, { headers }).then((res) => {
                             this.timelineAPI()
                             $('#main_loader').show();
                             $('#root').css('opacity', '0.5');
@@ -1000,7 +977,7 @@ export default class Timeline extends Component {
                     {
                         label: 'Yes',
                         onClick: () =>
-                            axios.post(`/freedomcell/api/users/group_member_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_id': id.id, 'delete_user_id': this.loginData.id }).then((res) => {
+                            axios.post(`https://freedomcells.net/freedomcell/api/users/group_member_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_id': id.id, 'delete_user_id': this.loginData.id }, { headers }).then((res) => {
                                 this.componentDidMount()
                                 $('#main_loader').show();
                                 $('#root').css('opacity', '0.5');
@@ -1023,12 +1000,11 @@ export default class Timeline extends Component {
 
 
     groupDetail(id) {
-
+        window.location.hash = '/timeLine/' + id;
         setTimeout(() => {
 
-            window.location.href = '/timeLine/' + id;
             window.location.reload(true)
-        }, 200);
+        }, 500);
     }
 
 
@@ -1038,7 +1014,7 @@ export default class Timeline extends Component {
 
         setTimeout(() => {
 
-            window.location.href = '/timeLine/' + id;
+            window.location.hash = '/timeLine/' + id;
             window.location.reload(true)
         }, 200);
     }
@@ -1047,7 +1023,7 @@ export default class Timeline extends Component {
 
     AllHashtagListAPI() {
         var search = $('input[name="input_tag"]').val().replace(/\s/g, '');
-        axios.post(`/freedomcell/api/users/search_hashtag`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'search': search }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/search_hashtag`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'search': search }, { headers }).then((res) => {
             //on success
             this.codeDataHashtagList = res.data.code
             if (this.codeDataHashtagList === true) {
@@ -1071,7 +1047,7 @@ export default class Timeline extends Component {
     //==================================  List of nsfw List  ==============================
 
     AllNSFWAPI() {
-        axios.get(`/freedomcell/api/users/nsfw`, {}).then((res) => {
+        axios.get(`https://freedomcells.net/freedomcell/api/users/nsfw`, {}, { headers }).then((res) => {
             //on success
             this.codeDataNsfwList = res.data.code
             if (this.codeDataNsfwList === true) {
@@ -1095,7 +1071,7 @@ export default class Timeline extends Component {
     //==================================  Detail of Hashtag List  ==============================
 
     hashtagListAPI() {
-        axios.post(`/freedomcell/api/users/select_hashtag`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/select_hashtag`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }, { headers }).then((res) => {
             //on success
             this.codeDataHashtagsList = res.data.code
             if (this.codeDataHashtagsList === true) {
@@ -1118,7 +1094,7 @@ export default class Timeline extends Component {
 
 
 
-        axios.post(`/freedomcell/api/users/friend_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/friend_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key }, { headers }).then((res) => {
             //on success
             this.codeDataFriends = res.data.code
             if (this.codeDataFriends === true) {
@@ -1156,7 +1132,7 @@ export default class Timeline extends Component {
         $('#main_loader').show();
         $('#root').css('opacity', '0.5');
 
-        axios.post(`/freedomcell/api/users/wallet_balance`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/wallet_balance`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }, { headers }).then((res) => {
             //on success
             this.codeDataWalletBalance = res.data.code
             if (this.codeDataWalletBalance === true) {
@@ -1177,7 +1153,7 @@ export default class Timeline extends Component {
 
 
     postEdit(editPost) {
-        axios.post(`/freedomcell/api/users/post_detail`, { 'user_id': this.loginData.id, 'post_id': editPost.post_id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/post_detail`, { 'user_id': this.loginData.id, 'post_id': editPost.post_id, 'api_key': this.loginData.api_key }, { headers }).then((res) => {
             //on success
             this.codeDataPostDetail = res.data.code
             if (this.codeDataPostDetail === true) {
@@ -1237,7 +1213,7 @@ export default class Timeline extends Component {
 
 
     suggestedChannel() {
-        axios.post(`/freedomcell/api/users/sujjested_channels`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/sujjested_channels`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }, { headers }).then((res) => {
             //on success
             this.codeDataSuggested = res.data.code
             if (this.codeDataSuggested === true) {
@@ -1251,17 +1227,16 @@ export default class Timeline extends Component {
     }
 
     groupDetail(id) {
-
+        window.location.hash = '/timeLine/' + id;
         setTimeout(() => {
 
-            window.location.href = '/timeLine/' + id;
             window.location.reload(true)
-        }, 200);
+        }, 500);
     }
 
 
     deleteChannnels(channelsId) {
-        axios.post(`/freedomcell/api/users/block`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'blocked_user_id': channelsId.user_id }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/block`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'blocked_user_id': channelsId.user_id }, { headers }).then((res) => {
             //on success
             this.codeDataBlockChannels = res.data.code
             if (this.codeDataBlockChannels === true) {
@@ -1275,7 +1250,7 @@ export default class Timeline extends Component {
     //============================================   Join Open Group  ===============================================
 
     joinGroup(channelsId) {
-        axios.post(`/freedomcell/api/users/follow`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'following_id': channelsId.user_id }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/follow`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'following_id': channelsId.user_id }, { headers }).then((res) => {
             //on success
             this.codeDataJoinChannels = res.data.code
             if (this.codeDataJoinChannels === true) {
@@ -1294,7 +1269,7 @@ export default class Timeline extends Component {
     //============================================   Suggested Hash Tags  ===============================================
 
     suggestedTags() {
-        axios.post(`/freedomcell/api/users/sujjested_hashtag`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/sujjested_hashtag`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }, { headers }).then((res) => {
             //on success
             this.codeDataSuggestedHasTags = res.data.code
             if (this.codeDataSuggestedHasTags === true) {
@@ -1324,7 +1299,7 @@ export default class Timeline extends Component {
 
     exchangeDataSubmit(e) {
         e.preventDefault()
-        axios.post('/freedomcell/api/users/repost', {
+        axios.post('https://freedomcells.net/freedomcell/api/users/repost', {
             'user_id': this.loginData.id, 'api_key': this.loginData.api_key,
             'post_id': this.state.exchangeData?.post_id, 'repost_comment': this.state.repost_comment
         })
@@ -1373,7 +1348,7 @@ export default class Timeline extends Component {
                 {
                     label: 'Yes',
                     onClick: () =>
-                        axios.post(`/freedomcell/api/users/tip`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'post_id': this.state.crowdDetail.post_id, 'token': this.state.token }).then((res) => {
+                        axios.post(`https://freedomcells.net/freedomcell/api/users/tip`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'post_id': this.state.crowdDetail.post_id, 'token': this.state.token }, { headers }).then((res) => {
 
                             if (res.data.code === true) {
 
@@ -1423,7 +1398,7 @@ export default class Timeline extends Component {
     hashtagListData(id) {
         $('#main_loader').show();
         $('#root').css('opacity', '0.5');
-        axios.post(`/freedomcell/api/users/hashtag_timeline`, { 'user_id': this.loginData.id, 'hashtag': id.hashtag, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/hashtag_timeline`, { 'user_id': this.loginData.id, 'hashtag': id.hashtag, 'api_key': this.loginData.api_key }, { headers }).then((res) => {
             //on success
             this.codeDataHashtagDetail = res.data.code
             if (this.codeDataHashtagDetail === true) {
@@ -1635,7 +1610,7 @@ export default class Timeline extends Component {
                             </figure>
                             <div className="add-btn">
                                 {/* <span>{this.state.listFollower.length} followers</span> */}
-                                {/* <a href="#/" title="" data-ripple="">Follow</a> */}
+                                {/* <a href="javascript:;" title="" data-ripple="">Follow</a> */}
                             </div>
                             {this.loginData?.id === this.userId ?
                                 <form className="edit-phto edit_cover_photo"
@@ -1663,11 +1638,11 @@ export default class Timeline extends Component {
                                                     {
                                                         this.state.bannerImage?.is_friend === 1 ?
                                                             <>
-                                                                {/* <a className="active" href="#/" title="" data-ripple="" id="timeline-menu" onClick={this.change_section.bind(this, 'timeline')}>Time line</a> */}
-                                                                <a className="" href="#/" title="" data-ripple="" id="followers-menu" onClick={this.change_section.bind(this, 'followers')}>Followers</a>
-                                                                <a className="" href="#/" title="" data-ripple="" id="following-menu" onClick={this.change_section.bind(this, 'following')}>Following</a>
-                                                                {/* <a className="" href="#/" title="" data-ripple="" id="groups-menu" onClick={this.change_section.bind(this, 'groups')}>Groups</a> */}
-                                                                {/* <a className="" href="#/" title="" data-ripple="" id="about-menu" onClick={this.change_section.bind(this, 'about')}>About</a> */}
+                                                                {/* <a className="active" href="javascript:;" title="" data-ripple="" id="timeline-menu" onClick={this.change_section.bind(this, 'timeline')}>Time line</a> */}
+                                                                <a className="" href="javascript:;" title="" data-ripple="" id="followers-menu" onClick={this.change_section.bind(this, 'followers')}>Followers</a>
+                                                                <a className="" href="javascript:;" title="" data-ripple="" id="following-menu" onClick={this.change_section.bind(this, 'following')}>Following</a>
+                                                                {/* <a className="" href="javascript:;" title="" data-ripple="" id="groups-menu" onClick={this.change_section.bind(this, 'groups')}>Groups</a> */}
+                                                                {/* <a className="" href="javascript:;" title="" data-ripple="" id="about-menu" onClick={this.change_section.bind(this, 'about')}>About</a> */}
                                                             </>
                                                             : ''
                                                     }
@@ -1734,11 +1709,11 @@ export default class Timeline extends Component {
                                                 </li> */}
                                                 <li className="main-menu">
 
-                                                    <a className="active" href="#/" title="" data-ripple="" id="timeline-menu" onClick={this.change_section.bind(this, 'timeline')}>Timeline</a>
-                                                    {/* <a className="" href="#/" title="" data-ripple="" id="followers-menu" onClick={this.change_section.bind(this, 'followers')}>Followers</a>
-                                                    <a className="" href="#/" title="" data-ripple="" id="following-menu" onClick={this.change_section.bind(this, 'following')}>Following</a> */}
-                                                    {this.state.bannerImage?.is_friend === 1 ? <a className="" href="#/" title="" data-ripple="" id="groups-menu" onClick={this.change_section.bind(this, 'groups')}>Groups</a> : ''}
-                                                    {/* <a className="" href="#/" title="" data-ripple="" id="about-menu" onClick={this.change_section.bind(this, 'about')}>About</a> */}
+                                                    <a className="active" href="javascript:;" title="" data-ripple="" id="timeline-menu" onClick={this.change_section.bind(this, 'timeline')}>Timeline</a>
+                                                    {/* <a className="" href="javascript:;" title="" data-ripple="" id="followers-menu" onClick={this.change_section.bind(this, 'followers')}>Followers</a>
+                                                    <a className="" href="javascript:;" title="" data-ripple="" id="following-menu" onClick={this.change_section.bind(this, 'following')}>Following</a> */}
+                                                    {this.state.bannerImage?.is_friend === 1 ? <a className="" href="javascript:;" title="" data-ripple="" id="groups-menu" onClick={this.change_section.bind(this, 'groups')}>Groups</a> : ''}
+                                                    {/* <a className="" href="javascript:;" title="" data-ripple="" id="about-menu" onClick={this.change_section.bind(this, 'about')}>About</a> */}
                                                 </li>
                                             </ul>
                                         </div>
@@ -1851,9 +1826,9 @@ export default class Timeline extends Component {
                                                                             <div className="dropdown-menu" style={{ fontSize: '15px' }} aria-labelledby="dropdownMenuButton">
                                                                                 <a className="dropdown-item" style={{ cursor: 'pointer' }} data-toggle="modal" data-target="#myModalShare" onClick={this.postShare.bind(this, item)}>Share</a>
 
-                                                                                <a className="dropdown-item" href="#/" onClick={this.postDelete.bind(this, item)}>Delete</a>
-                                                                                <a className="dropdown-item" href="#/" onClick={this.postEdit.bind(this, item)}>Edit Post</a>
-                                                                                {/* <a className="dropdown-item" href="#/" onClick={this.postEdit.bind(this, item)}>Edit Post</a> */}
+                                                                                <a className="dropdown-item" href="javascript:;" onClick={this.postDelete.bind(this, item)}>Delete</a>
+                                                                                <a className="dropdown-item" href="javascript:;" onClick={this.postEdit.bind(this, item)}>Edit Post</a>
+                                                                                {/* <a className="dropdown-item" href="javascript:;" onClick={this.postEdit.bind(this, item)}>Edit Post</a> */}
                                                                                 {/* <a className="dropdown-item" href="#">Something else here</a> */}
                                                                             </div>
                                                                         </div> : <div className="dropdown three_dots">
@@ -1864,8 +1839,8 @@ export default class Timeline extends Component {
                                                                                 <div className="dropdown-menu" style={{ fontSize: '15px' }} aria-labelledby="dropdownMenuButton">
                                                                                     <a className="dropdown-item" style={{ cursor: 'pointer' }} data-toggle="modal" data-target="#myModalShare" onClick={this.postShare.bind(this, item)}>Share</a>
 
-                                                                                    <a className="dropdown-item" href="#/" onClick={this.postBlock.bind(this, item)}>Block User</a>
-                                                                                    {item.is_following === '0' ? <a className="dropdown-item" href="#/" onClick={this.postFollow.bind(this, item)}>Follow User</a> : <a className="dropdown-item" href="#/" onClick={this.postFollow.bind(this, item)}>Unfollow User</a>}
+                                                                                    <a className="dropdown-item" href="javascript:;" onClick={this.postBlock.bind(this, item)}>Block User</a>
+                                                                                    {item.is_following === '0' ? <a className="dropdown-item" href="javascript:;" onClick={this.postFollow.bind(this, item)}>Follow User</a> : <a className="dropdown-item" href="javascript:;" onClick={this.postFollow.bind(this, item)}>Unfollow User</a>}
 
                                                                                 </div>
                                                                             </div>}
@@ -1974,14 +1949,14 @@ export default class Timeline extends Component {
                                                                                     <li>
                                                                                         <span className="comment" data-toggle="tooltip">
 
-                                                                                            <a data-toggle="modal" href="#/" onClick={this.exchangeDetail.bind(this, item)} data-target="#myModalExchange"><i className="fa fa-exchange"></i></a>
+                                                                                            <a data-toggle="modal" href="javascript:;" onClick={this.exchangeDetail.bind(this, item)} data-target="#myModalExchange"><i className="fa fa-exchange"></i></a>
 
                                                                                             <ins>{item.repost_count}</ins>
                                                                                         </span>
                                                                                     </li>
 
                                                                                     {this.loginData?.id === item.user_id ? '' : <li className="pull-right" onClick={this.detailCrowd.bind(this, item)} style={{ marginRight: '5px', cursor: 'pointer' }}>
-                                                                                        <a data-toggle="modal" href="#/" data-target="#myModal2" ><span>Reward&nbsp;<i className="fa fa-dollar"></i></span></a>
+                                                                                        <a data-toggle="modal" href="javascript:;" data-target="#myModal2" ><span>Reward&nbsp;<i className="fa fa-dollar"></i></span></a>
                                                                                     </li>}
                                                                                     <li>
                                                                                         <span className="comment" data-toggle="tooltip" title="Comments">
@@ -2098,14 +2073,14 @@ export default class Timeline extends Component {
                                                                                                         className="fa fa-ellipsis-v" aria-hidden="true"></i>
 
                                                                                                     <div className="dropdown-menu" style={{ fontSize: '15px' }} aria-labelledby="dropdownMenuButton">
-                                                                                                        <a className="dropdown-item" href="#/" onClick={this.postCommentDelete.bind(this, item1)}>Delete</a>
+                                                                                                        <a className="dropdown-item" href="javascript:;" onClick={this.postCommentDelete.bind(this, item1)}>Delete</a>
                                                                                                         {/* <a className="dropdown-item" href="#">Another action</a>
 <a className="dropdown-item" href="#">Something else here</a> */}
                                                                                                     </div>
                                                                                                 </div> : ''}
                                                                                                 <h5><Link to={`/timeLine/${item1.user_id}`} title="">{item1.full_name}</Link></h5>
                                                                                                 <span>{item1.duration}</span>
-                                                                                                <a className="we-reply" href="#/" onClick={this.reply_box.bind(this, item1)} title="Reply"><i className="fa fa-reply"></i> {item1.reply_count > 0 ? item1.reply_count + ' Replies' : ''} </a>
+                                                                                                <a className="we-reply" href="javascript:;" onClick={this.reply_box.bind(this, item1)} title="Reply"><i className="fa fa-reply"></i> {item1.reply_count > 0 ? item1.reply_count + ' Replies' : ''} </a>
                                                                                             </div>
                                                                                             <p className="newLineText" dangerouslySetInnerHTML={{ __html: item1.comment }}></p>
                                                                                             {item1.file ? item1.file_type === 'video' ? <Player src={item1.file} alt="" style={{ width: '100%', height: '160px' }} /> :
@@ -2159,7 +2134,7 @@ export default class Timeline extends Component {
                                                                                                                             className="fa fa-ellipsis-v" aria-hidden="true"></i>
 
                                                                                                                         <div className="dropdown-menu" style={{ fontSize: '15px' }} aria-labelledby="dropdownMenuButton">
-                                                                                                                            <a className="dropdown-item" href="#/" onClick={this.postCommentReplyDelete.bind(this, item2)}>Delete</a>
+                                                                                                                            <a className="dropdown-item" href="javascript:;" onClick={this.postCommentReplyDelete.bind(this, item2)}>Delete</a>
                                                                                                                             {/* <a className="dropdown-item" href="#">Another action</a>
 <a className="dropdown-item" href="#">Something else here</a> */}
                                                                                                                         </div>
@@ -2252,7 +2227,7 @@ export default class Timeline extends Component {
                                                                                         <h4><Link to={`/timeLine/${item.user_id}`}
                                                                                             onClick={this.loading.bind(this, item.user_id)} title="">{item.full_name}</Link></h4>
                                                                                         <span>{item.duration}</span>
-                                                                                        {this.loginData.id === this.userId ? <a href="#/" title="" onClick={this.postBlock.bind(this, item)}
+                                                                                        {this.loginData.id === this.userId ? <a href="javascript:;" title="" onClick={this.postBlock.bind(this, item)}
                                                                                             className="add-butn" data-ripple="">Block User</a> : ''}
                                                                                     </div>
                                                                                 </div>
@@ -2291,7 +2266,7 @@ export default class Timeline extends Component {
                                                                                             <h4><Link to={`/timeLine/${item.user_id}`}
                                                                                                 onClick={this.loading.bind(this, item.user_id)} title="">{item.full_name}</Link></h4>
                                                                                             <span>{item.duration}</span>
-                                                                                            {this.loginData.id === this.userId ? <a href="#/" title="" onClick={this.postFollow.bind(this, item)}
+                                                                                            {this.loginData.id === this.userId ? <a href="javascript:;" title="" onClick={this.postFollow.bind(this, item)}
                                                                                                 className="add-butn" data-ripple="">Unfollow</a> : ''}
                                                                                         </div>
                                                                                     </div>
@@ -2325,7 +2300,7 @@ export default class Timeline extends Component {
                                                                             <h4><Link to={`/groupdetail/${item.id}`} onClick={this.groupDetail.bind(this, item.id)} title="">{item.group_name}</Link></h4>
                                                                             <span>{item.type} group</span>
                                                                             <em>{item.member_count} Members</em>
-                                                                            {this.loginData.id === this.userId ? <a href="#/" title="" onClick={this.postGroupMemberDelete.bind(this, item)}
+                                                                            {this.loginData.id === this.userId ? <a href="javascript:;" title="" onClick={this.postGroupMemberDelete.bind(this, item)}
                                                                                 className="add-butn" data-ripple="">leave group</a> : ''}
 
                                                                         </div>
@@ -2381,7 +2356,7 @@ export default class Timeline extends Component {
                                                                 <div className="tab-pane fade" id="work" role="tabpanel">
                                                                     <div>
 
-                                                                        <a href="#/" title="">Envato</a>
+                                                                        <a href="javascript:;" title="">Envato</a>
                                                                         <p>work as autohr in envato themeforest from 2013</p>
                                                                         <ul className="education">
                                                                             <li><i className="ti-facebook"></i> BSCS from Oxford University</li>
@@ -2527,7 +2502,7 @@ export default class Timeline extends Component {
                                                                                 {this.state.suggestedHashTagList.map(item => (
 
                                                                                     <li _ngcontent-m-app-c376="" className="m-discoveryTrends__trend ng-star-inserted" onClick={this.hashtagListData.bind(this, item)} style={{ listStyle: 'none' }}>
-                                                                                        <a _ngcontent-m-app-c376="" href="#/">
+                                                                                        <a _ngcontent-m-app-c376="" href="javascript:;">
                                                                                             <div _ngcontent-m-app-c376=""><h5 _ngcontent-m-app-c376="">{item.hashtag}</h5>
                                                                                                 <div _ngcontent-m-app-c376="" className="m-discoveryTrendListItem__supportingText--below ng-star-inserted">
                                                                                                     <span _ngcontent-m-app-c376="">{item.post_count} posts</span>
@@ -2807,7 +2782,7 @@ export default class Timeline extends Component {
                                     {this.state.listNSFWtag.map(item => (
                                         <div class={($.inArray(item.nsfw, this.state.selectnsfw) !== -1) ? 'select_nsfw active' : 'select_nsfw '} style={{ marginLeft: '10px' }}>
                                             <>
-                                                <a href="#/">{item.nsfw}</a>
+                                                <a href="javascript:;">{item.nsfw}</a>
                                             </>
                                         </div>
                                     ))}
@@ -2839,14 +2814,14 @@ export default class Timeline extends Component {
                                         <div class="m-activity__ownerBlock ">
                                             <div class="aviator_circle"><a href=""><img class="m-border" src={this.state.dataImage.profile_pic} /></a></div>
                                             <div class="aviator__body">
-                                                <a class="aviator__displayName" href="#">
+                                                <a class="aviator__displayName" href="javascript:;">
                                                     <strong title="aman_gupta11">{this.state.dataImage.full_name}</strong>
                                                     <div class="div-activity">
                                                         <ul class="div">
                                                         </ul>
                                                     </div>
                                                 </a>
-                                                <a class="aviator__permalink " href="#">
+                                                <a class="aviator__permalink " href="javascript:;">
                                                     <span class="aviatorPermalink__text--timestamp " title="Oct 8, 2020, 2:55:08 AM"> {this.state.dataImage.duration} </span>
                                                 </a>
                                             </div>

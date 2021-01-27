@@ -8,7 +8,9 @@ import InnerSidebar from '../directives/innerSidebar';
 import Fixedsidebarright from '../directives/Fixedsidebarright'
 import Messaging from '../components/messaging'
 
-
+const headers = {
+    'Content-Type': 'text/plain'
+};
 const TITLE = 'Freedom-cells-Createproject'
 const initialState = {
     group_name: '',
@@ -20,9 +22,9 @@ const initialState = {
 export default class Createproject extends Component {
 
 
-    // custom_file_upload_url = `/freedomcell/api/users/group_create`;
-    // custom_file_upload_url1 = `/freedomcell/api/users/post_comment`;
-    // // custom_file_upload_url2 = `/freedomcell/api/users/post_comment_reply`;
+    // custom_file_upload_url = `https://freedomcells.net/freedomcell/api/users/group_create`;
+    // custom_file_upload_url1 = `https://freedomcells.net/freedomcell/api/users/post_comment`;
+    // // custom_file_upload_url2 = `https://freedomcells.net/freedomcell/api/users/post_comment_reply`;
 
 
 
@@ -134,14 +136,9 @@ export default class Createproject extends Component {
         $('#pay_now').prop('disabled', true);
         $('#pay_now').html('processing...');
         axios.post(
-            '/freedomcell/api/users/project_create',
+            'https://freedomcells.net/freedomcell/api/users/project_create',
             formData,
-            {
-                headers: {
-                    "Authorization": `/freedomcell/api/users/group_create`,
-                    "Content-type": "multipart/form-data",
-                },
-            }
+            {headers}
 
         )
 
@@ -149,7 +146,7 @@ export default class Createproject extends Component {
                 if (res.data.code === true) {
 
                     this.group_id = res.data.recdata.id
-                    window.location.href = '/groupdetail/' + this.group_id
+                    window.location.hash = '/groupdetail/' + this.group_id
                     $('#main_loader').hide();
                     $('#root').css('opacity', '1');
                 }

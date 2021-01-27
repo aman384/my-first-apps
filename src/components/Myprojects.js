@@ -10,7 +10,9 @@ import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
-
+const headers = {
+    'Content-Type': 'text/plain'
+ };
 const TITLE = 'Freedom-cells-My-Projects'
 
 export default class MyProjects extends Component {
@@ -35,7 +37,7 @@ export default class MyProjects extends Component {
     //==================================  Detail of Project List  ==============================
 
     projectAPI() {
-        axios.post(`/freedomcell/api/users/project_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/project_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key },{headers}).then((res) => {
             this.codeDataProject = res.data.code
             if (this.codeDataProject === true) {
                 this.setState({
@@ -54,7 +56,7 @@ export default class MyProjects extends Component {
 
     groupDetail(id) {
         setTimeout(() => {
-            window.location.href = '/timeLine/' + id;
+            window.location.hash = '/timeLine/' + id;
             window.location.reload(true)
         }, 200);
     }
@@ -69,7 +71,7 @@ export default class MyProjects extends Component {
                 {
                     label: 'Yes',
                     onClick: () =>
-                        axios.post(`/freedomcell/api/users/group_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_id': id }).then((res) => {
+                        axios.post(`https://freedomcells.net/freedomcell/api/users/group_delete`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'group_id': id },{headers}).then((res) => {
                             $('#main_loader').show();
                             $('#root').css('opacity', '0.5');
 
@@ -161,7 +163,7 @@ export default class MyProjects extends Component {
                                                                                         title="">{item.group_name}</Link></h4>
                                                                                     <span>{item.type}</span>
 
-                                                                                    {item.user_type === 'admin' ? <a href="#/" onClick={this.groupDelete.bind(this, item.id)} alt="Nothing Found" title="" className="add-butn" data-ripple="">Delete Project<span className="ripple"><span className="ink" style={{ height: '83px', width: '83px', backgroundColor: 'rgb(10, 169, 246)', top: '-28.4063px', left: '39.9219px' }}></span></span></a> : ''}
+                                                                                    {item.user_type === 'admin' ? <a href="javascript:;" onClick={this.groupDelete.bind(this, item.id)} alt="Nothing Found" title="" className="add-butn" data-ripple="">Delete Project<span className="ripple"><span className="ink" style={{ height: '83px', width: '83px', backgroundColor: 'rgb(10, 169, 246)', top: '-28.4063px', left: '39.9219px' }}></span></span></a> : ''}
 
                                                                                 </div>
                                                                             </div>

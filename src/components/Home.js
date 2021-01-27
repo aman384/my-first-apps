@@ -3,12 +3,13 @@ import Headerhome from '../directives/headerhome'
 import Footer from '../directives/footer'
 import axios from 'axios';
 import toastr from 'reactjs-toastr';
-import { Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet'
 import Cookies from 'js-cookie';
-import { Link } from 'react-router-dom';
+import { browserHistory,Link } from 'react-router-dom';
 import $ from 'jquery'
-
+const headers = {
+    'Content-Type': 'text/plain'
+};
 const TITLE = 'Freedom-cells-Login'
 const initialState = {
     email: '',
@@ -29,7 +30,7 @@ export default class Home extends Component {
         this.onChange = this.onChange.bind(this);
         this.submitForm = this.submitForm.bind(this);
 
-        var pageURL = window.location.href;
+        var pageURL = window.location.hash;
         let res = pageURL.split("/");
 
         this.investFind = res[5]
@@ -41,7 +42,7 @@ export default class Home extends Component {
 
 
         this.lastUrl = lastURLSegment
-        if(Cookies.getJSON('name')){
+        if (Cookies.getJSON('name')) {
 
             let data = Cookies.getJSON('name');
             this.loginData = data.user_data
@@ -75,7 +76,7 @@ export default class Home extends Component {
     componentDidMount() {
         // $('#topcontrol').hide()
         setTimeout(() => {
-            
+
             $('#topcontrol').css('display', 'none');
         }, 1000);
 
@@ -94,6 +95,7 @@ export default class Home extends Component {
 
 
         e.preventDefault()
+        
 
         const isValid = this.validate();
         if (isValid) {
@@ -112,7 +114,7 @@ export default class Home extends Component {
             const data = this.state
 
 
-            axios.post('/freedomcell/api/users/login', data)
+            await axios.post('https://freedomcells.net/freedomcell/api/users/login', data, { headers })
                 .then(response => {
 
                     if (response.data.code === true) {
@@ -125,12 +127,12 @@ export default class Home extends Component {
                             message: response.data
                         })
                         if (this.state.message.user_data.is_enable_google_auth_code === '0') {
-                            window.location.reload(true);
-                            window.location.href = '/dashboard'
+                            
+                            window.location.hash = '/dashboard'
                         }
                         else if (this.state.message.user_data.is_enable_google_auth_code === '1') {
-                            window.location.reload(true);
-                            window.location.href = '/twofa'
+                            // window.location.reload(true);
+                            window.location.hash = '/twofa'
                         }
 
                     }
@@ -181,7 +183,10 @@ export default class Home extends Component {
 
 
 
-                        <section id="home-section" className="header-bg">
+                        <section id="home-section" className="header-bg" style={{
+                            background: "url('bg_banner_img.png') center no-repeat",
+                            backgroundSize: 'cover'
+                        }}>
 
                             {/* <div id="particles-js"></div> */}
 
@@ -238,17 +243,17 @@ export default class Home extends Component {
 
                         <section style={{ background: '#000' }} className="company_icon">
                             <div className="m-grid m-marketing__asFeaturedIn">
-                               
+
                                 <ul className="m-grid__column-10">
-                                    <li><a href="#/" rel="noopener noreferrer"><img alt="The Wall Street Journal" src="icon/free_speech.jpg" /><p>Free Speech</p></a></li>
-                                    <li><a href="#/" rel="noopener noreferrer"><img alt="Reuters" className="img_blck" src="icon/decentralisation.png" /><p>Decentralisation</p></a></li>
-                                    <li><a href="#/" rel="noopener noreferrer"><img alt="TechCrunch" src="icon/crowdfunding.jpg" /><p>Crowdfunding</p></a></li>
-                                    <li><a href="#/" rel="noopener noreferrer"><img alt="Fox News" src="icon/blockchain.png" /><p>Blockchain</p></a></li>
-                                    <li><a href="#/" rel="noopener noreferrer"><img alt="Independent" src="icon/transformation.jpg" /><p>Transformation</p></a></li>
-                                    <li><a href="#/" rel="noopener noreferrer"><img alt="The Joe Rogan Experience" src="icon/power2.jpg" /><p>Collective Power</p></a></li>
-                                    <li><a href="#/" rel="noopener noreferrer"><img alt="The Joe Rogan Experience" src="icon/vote3.png" /><p>Voting</p></a></li>
-                                    {/* <li><a href="#/" rel="noopener noreferrer"><img alt="Reuters" className="img_blck" src="icon/Cryptocurrency_decentralization-23-512.png" /><p>transformation</p></a></li> */}
-                                    {/* <li><a href="#/" rel="noopener noreferrer"><img alt="npr" src="icon/Projects_icon.png" /><p>Projects</p></a></li> */}
+                                    <li><a href="javascript:;" rel="noopener noreferrer"><img alt="The Wall Street Journal" src="icon/free_speech.jpg" /><p>Free Speech</p></a></li>
+                                    <li><a href="javascript:;" rel="noopener noreferrer"><img alt="Reuters" className="img_blck" src="icon/decentralisation.png" /><p>Decentralisation</p></a></li>
+                                    <li><a href="javascript:;" rel="noopener noreferrer"><img alt="TechCrunch" src="icon/crowdfunding.jpg" /><p>Crowdfunding</p></a></li>
+                                    <li><a href="javascript:;" rel="noopener noreferrer"><img alt="Fox News" src="icon/blockchain.png" /><p>Blockchain</p></a></li>
+                                    <li><a href="javascript:;" rel="noopener noreferrer"><img alt="Independent" src="icon/transformation.jpg" /><p>Transformation</p></a></li>
+                                    <li><a href="javascript:;" rel="noopener noreferrer"><img alt="The Joe Rogan Experience" src="icon/power2.jpg" /><p>Collective Power</p></a></li>
+                                    <li><a href="javascript:;" rel="noopener noreferrer"><img alt="The Joe Rogan Experience" src="icon/vote3.png" /><p>Voting</p></a></li>
+                                    {/* <li><a href="javascript:;" rel="noopener noreferrer"><img alt="Reuters" className="img_blck" src="icon/Cryptocurrency_decentralization-23-512.png" /><p>transformation</p></a></li> */}
+                                    {/* <li><a href="javascript:;" rel="noopener noreferrer"><img alt="npr" src="icon/Projects_icon.png" /><p>Projects</p></a></li> */}
                                 </ul>
                             </div>
                         </section>
@@ -291,14 +296,14 @@ export default class Home extends Component {
                             <div className="container">
                                 <div className="row">
                                     <div className="col-md-12">
-                                        <div className="col-md-5 col-md-offset-0 col-sm-10 col-sm-offset-1 col-xs-12" style={{marginTop:'60px',marginLeft:'40px'}} >
+                                        <div className="col-md-5 col-md-offset-0 col-sm-10 col-sm-offset-1 col-xs-12" style={{ marginTop: '60px', marginLeft: '40px' }} >
                                             <div className=" pull-left" data-aos="fade-left" data-aos-duration="1000">
 
                                                 <div className=" m-marketing__image">
                                                     <span>
-                                                        { this.loginData ? <img className="m-marketing__image--1" alt="No" src="homepage-3.jpg" />:<img className="m-marketing__image--1" alt="No" src="homepage-3.jpg" />
+                                                        {this.loginData ? <img className="m-marketing__image--1" alt="No" src="homepage-3.jpg" /> : <img className="m-marketing__image--1" alt="No" src="homepage-3.jpg" />
                                                         }
-                                                        
+
                                                     </span>
                                                 </div>
                                             </div>

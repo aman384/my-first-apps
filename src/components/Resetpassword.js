@@ -5,7 +5,9 @@ import axios from 'axios';
 import toastr from 'reactjs-toastr';
 import 'reactjs-toastr/lib/toast.css';
 import { Helmet } from 'react-helmet'
-
+const headers = {
+    'Content-Type': 'text/plain'
+ };
 const TITLE = 'Freedom-cells-Resetpassword'
 const initialState = {
     code: '',
@@ -92,7 +94,7 @@ export default class Resetpassword extends Component {
             const data = this.state
 
 
-            axios.post('/freedomcell/api/users/reset_password', data)
+            axios.post('https://freedomcells.net/freedomcell/api/users/reset_password', data,{headers})
                 .then(response => {
 
                     if (response.data.code === true) {
@@ -101,7 +103,7 @@ export default class Resetpassword extends Component {
                             loading: false,
                             message: response.data,
                         })
-                        window.location.href = '/'
+                        window.location.hash = '/'
                         setTimeout(() => {
                             window.location.reload(true)
                         }, 2000);

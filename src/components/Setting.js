@@ -12,7 +12,9 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import Messaging from '../components/messaging'
 import {Link} from 'react-router-dom'
-
+const headers = {
+    'Content-Type': 'text/plain'
+ };
 const TITLE = 'Freedom-cells-Setting'
 const initialState = {
     user_id: '',
@@ -416,7 +418,7 @@ export default class Setting extends Component {
         const data = this.state
 
 
-        axios.post('/freedomcell/api/users/change_password', data)
+        axios.post('https://freedomcells.net/freedomcell/api/users/change_password', data,{headers})
             .then(response => {
                 if (response.data.code === true) {
                     toastr.success(response.data.message, { displayDuration: 3000 })
@@ -459,7 +461,7 @@ export default class Setting extends Component {
 
     showDisplayNameAPI() {
 
-        axios.post(`/freedomcell/api/users/show_display_name`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/show_display_name`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
             //on success
             this.codeDataDisplayName = res.data.code
             if (this.codeDataDisplayName === true) {
@@ -479,7 +481,7 @@ export default class Setting extends Component {
 
     async submitFormDisplayName(e) {
         e.preventDefault()
-        axios.post('/freedomcell/api/users/update_display_name', { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'display_name': this.state.list.display_name })
+        axios.post('https://freedomcells.net/freedomcell/api/users/update_display_name', { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'display_name': this.state.list.display_name },{headers})
             .then(response => {
                 if (response.data.code === true) {
                     toastr.success(response.data.message, { displayDuration: 30000 })
@@ -506,7 +508,7 @@ export default class Setting extends Component {
     //=====================================   Show Email API    ====================================
 
     showEmailAPI() {
-        axios.post(`/freedomcell/api/users/show_email`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/show_email`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
             //on success
             this.codeDataEmail = res.data.code
             if (this.codeDataEmail === true) {
@@ -524,7 +526,7 @@ export default class Setting extends Component {
     //=====================================   Show Email Notification API    ====================================
 
     showEmailNotificationAPI() {
-        axios.post(`/freedomcell/api/users/show_email_notification`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/show_email_notification`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
             //on success
             this.codeDataEmailNotification = res.data.code
             if (this.codeDataEmailNotification === true) {
@@ -557,7 +559,7 @@ export default class Setting extends Component {
 
     async emailNotificationSubmit(e) {
         e.preventDefault()
-        axios.post('/freedomcell/api/users/update_email_notification', { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'email_notification': this.state.listEmailNotification.email_notification })
+        axios.post('https://freedomcells.net/freedomcell/api/users/update_email_notification', { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'email_notification': this.state.listEmailNotification.email_notification },{headers})
             .then(response => {
                 if (response.data.code === true) {
                     toastr.success(response.data.message, { displayDuration: 30000 })
@@ -585,7 +587,7 @@ export default class Setting extends Component {
 
     twoFaAPI() {
 
-        axios.post(`/freedomcell/api/users/check_two_factor_auth`, { 'user_id': this.loginData.id }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/check_two_factor_auth`, { 'user_id': this.loginData.id }).then((res) => {
             //on success
             this.setState({
                 listTwoFa: res.data.user_data
@@ -622,7 +624,7 @@ export default class Setting extends Component {
         delete data.email
         delete data.qrCodeUrl
 
-        axios.post('/freedomcell/api/users/two_factor_auth', data)
+        axios.post('https://freedomcells.net/freedomcell/api/users/two_factor_auth', data,{headers})
             .then(response => {
                 if (response.data.code === true) {
                     toastr.success(response.data.message, { displayDuration: 3000 })
@@ -656,7 +658,7 @@ export default class Setting extends Component {
             abc = this.count;
         }
 
-        axios.post(`/freedomcell/api/users/hashtag_list`, {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/hashtag_list`, {
             'user_id': this.loginData.id, 'api_key': this.loginData.api_key,
             "offset": abc,
             "limit": "5"
@@ -709,7 +711,7 @@ export default class Setting extends Component {
         const data = this.state
         $('#main_loader').show();
         $('#root').css('opacity', '0.5');
-        axios.post('/freedomcell/api/users/add_hashtag', data)
+        axios.post('https://freedomcells.net/freedomcell/api/users/add_hashtag', data,{headers})
             .then(response => {
                 if (response.data.code === true) {
                     toastr.success(response.data.message, { displayDuration: 3000 })
@@ -744,7 +746,7 @@ export default class Setting extends Component {
                 {
                     label: 'Yes',
                     onClick: () =>
-                        axios.post(`/freedomcell/api/users/delete_hashtag`, { 'hashtag_id': id.id, 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+                        axios.post(`https://freedomcells.net/freedomcell/api/users/delete_hashtag`, { 'hashtag_id': id.id, 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
                             toastr.success('Deleted Successfully!', { displayDuration: 3000 })
 
                             this.showHashTagListAPI()
@@ -782,7 +784,7 @@ export default class Setting extends Component {
         const data = this.state
 
 
-        axios.post('/freedomcell/api/users/update_language', data)
+        axios.post('https://freedomcells.net/freedomcell/api/users/update_language', data,{headers})
             .then(response => {
                 if (response.data.code === true) {
                     toastr.success(response.data.message, { displayDuration: 3000 })
@@ -813,7 +815,7 @@ export default class Setting extends Component {
 
     blockUserListAPI() {
 
-        axios.post(`/freedomcell/api/users/blocked_user_list`, {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/blocked_user_list`, {
             'user_id': this.loginData.id, 'api_key': this.loginData.api_key,
 
         }).then((res) => {
@@ -848,7 +850,7 @@ export default class Setting extends Component {
                 {
                     label: 'Yes',
                     onClick: () =>
-                        axios.post(`/freedomcell/api/users/unblock`, { 'blocked_user_id': id.blocked_user_id, 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+                        axios.post(`https://freedomcells.net/freedomcell/api/users/unblock`, { 'blocked_user_id': id.blocked_user_id, 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
                             toastr.success('Unblocked Successfully!', { displayDuration: 3000 })
 
                             this.componentDidMount()
@@ -865,7 +867,7 @@ export default class Setting extends Component {
     //==========================================  Referral API  =============
 
     referralAPI = () => {
-        axios.post(`/freedomcell/api/users/show_referral_code`, {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/show_referral_code`, {
             'user_id': this.loginData.id, 'api_key': this.loginData.api_key,
 
         }).then((res) => {
@@ -964,23 +966,23 @@ export default class Setting extends Component {
                                                                             <div id="hide_section">
                                                                                 <div className="m-nestedMenu__headerLabel1">General Account Settings</div>
                                                                                 <ul className="nav nav-tabs tabs-left ">
-                                                                                    <li className="active"><a href="#/" id="display_name" data-toggle="tab">Display Name<i className="fa fa-angle-right right-angle"></i></a></li>
-                                                                                    <li><a href="#/" id="email_address" data-toggle="tab">Email Address<i className="fa fa-angle-right right-angle"></i></a></li>
-                                                                                    <li><a href="#/" id="language" data-toggle="tab">Language<i className="fa fa-angle-right right-angle"></i></a></li>
-                                                                                    <li><a href="#/" id="password" data-toggle="tab">Password<i className="fa fa-angle-right right-angle"></i></a></li>
-                                                                                    <li className="active"><a href="#/" id="email" data-toggle="tab">Email<i className="fa fa-angle-right right-angle"></i></a></li>
-                                                                                    <li><a href="#/" style={{ borderBottom: '1px solid #c3bbbb' }} id="hashtags" data-toggle="tab">Hashtags<i className="fa fa-angle-right right-angle"></i></a></li>
-                                                                                    {/* <li><a href="#/" id="nsfw_content" data-toggle="tab">NSFW Content<i className="fa fa-angle-right right-angle"></i></a></li>
-                                                                                    <li><a href="#/" id="share_buttons" data-toggle="tab">Share Buttons<i className="fa fa-angle-right right-angle"></i></a></li>
-                                                                                    <li><a href="#/" id="autoplay_videos" data-toggle="tab">Autoplay Videos<i className="fa fa-angle-right right-angle"></i></a></li> */}
+                                                                                    <li className="active"><a href="javascript:;" id="display_name" data-toggle="tab">Display Name<i className="fa fa-angle-right right-angle"></i></a></li>
+                                                                                    <li><a href="javascript:;" id="email_address" data-toggle="tab">Email Address<i className="fa fa-angle-right right-angle"></i></a></li>
+                                                                                    <li><a href="javascript:;" id="language" data-toggle="tab">Language<i className="fa fa-angle-right right-angle"></i></a></li>
+                                                                                    <li><a href="javascript:;" id="password" data-toggle="tab">Password<i className="fa fa-angle-right right-angle"></i></a></li>
+                                                                                    <li className="active"><a href="javascript:;" id="email" data-toggle="tab">Email<i className="fa fa-angle-right right-angle"></i></a></li>
+                                                                                    <li><a href="javascript:;" style={{ borderBottom: '1px solid #c3bbbb' }} id="hashtags" data-toggle="tab">Hashtags<i className="fa fa-angle-right right-angle"></i></a></li>
+                                                                                    {/* <li><a href="javascript:;" id="nsfw_content" data-toggle="tab">NSFW Content<i className="fa fa-angle-right right-angle"></i></a></li>
+                                                                                    <li><a href="javascript:;" id="share_buttons" data-toggle="tab">Share Buttons<i className="fa fa-angle-right right-angle"></i></a></li>
+                                                                                    <li><a href="javascript:;" id="autoplay_videos" data-toggle="tab">Autoplay Videos<i className="fa fa-angle-right right-angle"></i></a></li> */}
                                                                                 </ul>
                                                                             </div>
                                                                             {/* <br />
                                                                             <div id="hide_section2">
                                                                                 <div className="m-nestedMenu__headerLabel1">Notifications</div>
                                                                                 <ul className="nav nav-tabs tabs-left ">
-                                                                                    <li className="active"><a href="#/" id="email" data-toggle="tab">Email<i className="fa fa-angle-right right-angle"></i></a></li>
-                                                                                    <li><a href="#/" id="popovers" style={{ borderBottom: '1px solid #c3bbbb' }} data-toggle="tab">Popovers<i className="fa fa-angle-right right-angle"></i></a></li>
+                                                                                    <li className="active"><a href="javascript:;" id="email" data-toggle="tab">Email<i className="fa fa-angle-right right-angle"></i></a></li>
+                                                                                    <li><a href="javascript:;" id="popovers" style={{ borderBottom: '1px solid #c3bbbb' }} data-toggle="tab">Popovers<i className="fa fa-angle-right right-angle"></i></a></li>
                                                                                 </ul>
                                                                             </div> */}
 
@@ -996,7 +998,7 @@ export default class Setting extends Component {
                                                                             <div className="display_name" style={{ display: 'none' }}>
                                                                                 <div className="m-settingsV2__headerWrapper">
                                                                                     <div className="m-settingsV2__backButton">
-                                                                                        <a href="#/" className="back"><i className="fa fa-arrow-left"></i></a>
+                                                                                        <a href="javascript:;" className="back"><i className="fa fa-arrow-left"></i></a>
                                                                                     </div>
                                                                                     <div className="m-settingsV2__headerLabel"> Display Name
                                                 </div>
@@ -1026,7 +1028,7 @@ export default class Setting extends Component {
                                                                             <div className="email_address" style={{ display: 'none' }}>
                                                                                 <div className="m-settingsV2__headerWrapper">
                                                                                     <div className="m-settingsV2__backButton">
-                                                                                        <a href="#/" className="back"><i className="fa fa-arrow-left"></i></a>
+                                                                                        <a href="javascript:;" className="back"><i className="fa fa-arrow-left"></i></a>
                                                                                     </div>
                                                                                     <div className="m-settingsV2__headerLabel"> Email Address
                                                 </div>
@@ -1054,7 +1056,7 @@ export default class Setting extends Component {
                                                                             <div className="language" style={{ display: 'none' }}>
                                                                                 <div className="m-settingsV2__headerWrapper">
                                                                                     <div className="m-settingsV2__backButton">
-                                                                                        <a href="#/" className="back"><i className="fa fa-arrow-left"></i></a>
+                                                                                        <a href="javascript:;" className="back"><i className="fa fa-arrow-left"></i></a>
                                                                                     </div>
                                                                                     <div className="m-settingsV2__headerLabel">
                                                                                         Language Settings
@@ -1095,7 +1097,7 @@ export default class Setting extends Component {
                                                                             <div className="password" style={{ display: 'none' }}>
                                                                                 <div className="m-settingsV2__headerWrapper">
                                                                                     <div className="m-settingsV2__backButton">
-                                                                                        <a href="#/" className="back"><i className="fa fa-arrow-left"></i></a>
+                                                                                        <a href="javascript:;" className="back"><i className="fa fa-arrow-left"></i></a>
                                                                                     </div>
                                                                                     <div className="m-settingsV2__headerLabel"> Password
                                                 </div>
@@ -1146,7 +1148,7 @@ export default class Setting extends Component {
                                                                             <div className="nsfw_content" style={{ display: 'none' }}>
                                                                                 <div className="m-settingsV2__headerWrapper">
                                                                                     <div className="m-settingsV2__backButton">
-                                                                                        <a href="#/" className="back"><i className="fa fa-arrow-left"></i></a>
+                                                                                        <a href="javascript:;" className="back"><i className="fa fa-arrow-left"></i></a>
                                                                                     </div>
                                                                                     <div className="m-settingsV2__headerLabel"> NSFW Content
                                                 </div>
@@ -1171,7 +1173,7 @@ export default class Setting extends Component {
                                                                             <div className="share_buttons" style={{ display: 'none' }}>
                                                                                 <div className="m-settingsV2__headerWrapper">
                                                                                     <div className="m-settingsV2__backButton">
-                                                                                        <a href="#/" className="back"><i className="fa fa-arrow-left"></i></a>
+                                                                                        <a href="javascript:;" className="back"><i className="fa fa-arrow-left"></i></a>
                                                                                     </div>
                                                                                     <div className="m-settingsV2__headerLabel"> Autoplay Videos
                                                 </div>
@@ -1179,7 +1181,7 @@ export default class Setting extends Component {
                                                                                 <div className="m-settingsV2__desc"> Control whether videos in your feed play automatically.
                                              </div>
                                                                                 <br />
-                                                                                <div className="m-settingsV2__desc"> This feature is only available to Plus users. <a href="#/">Upgrade to Plus</a>
+                                                                                <div className="m-settingsV2__desc"> This feature is only available to Plus users. <a href="javascript:;">Upgrade to Plus</a>
                                                                                 </div>
                                                                                 <div className="pad_left_form">
                                                                                     <form >
@@ -1201,7 +1203,7 @@ export default class Setting extends Component {
                                                                             <div className="autoplay_videos" style={{ display: 'none' }}>
                                                                                 <div className="m-settingsV2__headerWrapper">
                                                                                     <div className="m-settingsV2__backButton">
-                                                                                        <a href="#/" className="back"><i className="fa fa-arrow-left"></i></a>
+                                                                                        <a href="javascript:;" className="back"><i className="fa fa-arrow-left"></i></a>
                                                                                     </div>
                                                                                     <div className="m-settingsV2__headerLabel"> Autoplay Videos
                                                 </div>
@@ -1209,7 +1211,7 @@ export default class Setting extends Component {
                                                                                 <div className="m-settingsV2__desc"> Control whether videos in your feed play automatically.
                                              </div>
                                                                                 <br />
-                                                                                <div className="m-settingsV2__desc"> This feature is only available to Plus users. <a href="#/">Upgrade to Plus</a>
+                                                                                <div className="m-settingsV2__desc"> This feature is only available to Plus users. <a href="javascript:;">Upgrade to Plus</a>
                                                                                 </div>
                                                                                 <div className="pad_left_form">
                                                                                     <form >
@@ -1232,7 +1234,7 @@ export default class Setting extends Component {
                                                                             <div className="email" style={{ display: 'none' }}>
                                                                                 <div className="m-settingsV2__headerWrapper">
                                                                                     <div className="m-settingsV2__backButton">
-                                                                                        <a href="#/" className="back"><i className="fa fa-arrow-left"></i></a>
+                                                                                        <a href="javascript:;" className="back"><i className="fa fa-arrow-left"></i></a>
                                                                                     </div>
                                                                                     <div className="m-settingsV2__headerLabel"> Email Notifications
                                                 </div>
@@ -1329,7 +1331,7 @@ export default class Setting extends Component {
                                                                             <div className="popovers" style={{ display: 'none' }}>
                                                                                 <div className="m-settingsV2__headerWrapper">
                                                                                     <div className="m-settingsV2__backButton">
-                                                                                        <a href="#/" className="back"><i className="fa fa-arrow-left"></i></a>
+                                                                                        <a href="javascript:;" className="back"><i className="fa fa-arrow-left"></i></a>
                                                                                     </div>
                                                                                     <div className="m-settingsV2__headerLabel"> Notification Popovers
                                                 </div>
@@ -1358,7 +1360,7 @@ export default class Setting extends Component {
                                                                             <div className="hashtags" style={{ display: 'none' }}>
                                                                                 <div className="m-settingsV2__headerWrapper">
                                                                                     <div className="m-settingsV2__backButton">
-                                                                                        <a href="#/" className="back"><i className="fa fa-arrow-left"></i></a>
+                                                                                        <a href="javascript:;" className="back"><i className="fa fa-arrow-left"></i></a>
                                                                                     </div>
                                                                                     <div className="m-settingsV2__headerLabel">
                                                                                         Theme
@@ -1447,20 +1449,20 @@ export default class Setting extends Component {
                                                                             <div id="general_hide">
                                                                                 <div className="m-nestedMenu__headerLabel1">Pro Settings</div>
                                                                                 <ul className="nav nav-tabs tabs-left">
-                                                                                    <li className="active"><a href="#/" id="general" data-toggle="tab">General <i className="fa fa-angle-right right-angle"></i></a></li>
-                                                                                    <li><a href="#/" id="theme" data-toggle="tab">Theme<i className="fa fa-angle-right right-angle"></i></a></li>
-                                                                                    <li><a href="#/" id="assets" data-toggle="tab">Assets<i className="fa fa-angle-right right-angle"></i></a></li>
-                                                                                    <li><a href="#/" id="hashtags" data-toggle="tab">Hashtags<i className="fa fa-angle-right right-angle"></i></a></li>
-                                                                                    <li><a href="#/" id="footer" data-toggle="tab">Footer<i className="fa fa-angle-right right-angle"></i></a></li>
-                                                                                    <li><a href="#/" id="domain" data-toggle="tab">Domain<i className="fa fa-angle-right right-angle"></i></a></li>
-                                                                                    <li><a href="#/" id="payouts" data-toggle="tab">Payouts<i className="fa fa-angle-right right-angle"></i></a></li>
+                                                                                    <li className="active"><a href="javascript:;" id="general" data-toggle="tab">General <i className="fa fa-angle-right right-angle"></i></a></li>
+                                                                                    <li><a href="javascript:;" id="theme" data-toggle="tab">Theme<i className="fa fa-angle-right right-angle"></i></a></li>
+                                                                                    <li><a href="javascript:;" id="assets" data-toggle="tab">Assets<i className="fa fa-angle-right right-angle"></i></a></li>
+                                                                                    <li><a href="javascript:;" id="hashtags" data-toggle="tab">Hashtags<i className="fa fa-angle-right right-angle"></i></a></li>
+                                                                                    <li><a href="javascript:;" id="footer" data-toggle="tab">Footer<i className="fa fa-angle-right right-angle"></i></a></li>
+                                                                                    <li><a href="javascript:;" id="domain" data-toggle="tab">Domain<i className="fa fa-angle-right right-angle"></i></a></li>
+                                                                                    <li><a href="javascript:;" id="payouts" data-toggle="tab">Payouts<i className="fa fa-angle-right right-angle"></i></a></li>
                                                                                 </ul>
                                                                             </div>
                                                                             <br />
                                                                             <div className="general" style={{ display: 'none' }}>
                                                                                 <div className="m-settingsV2__headerWrapper">
                                                                                     <div className="m-settingsV2__backButton">
-                                                                                        <a href="#/" className="general_back"><i className="fa fa-arrow-left"></i></a>
+                                                                                        <a href="javascript:;" className="general_back"><i className="fa fa-arrow-left"></i></a>
                                                                                     </div>
                                                                                     <div className="m-settingsV2__headerLabel"> General Settings
                                                 </div>
@@ -1507,7 +1509,7 @@ export default class Setting extends Component {
                                                                             <div className="assets" style={{ display: 'none' }}>
                                                                                 <div className="m-settingsV2__headerWrapper">
                                                                                     <div className="m-settingsV2__backButton">
-                                                                                        <a href="#/" className="general_back"><i className="fa fa-arrow-left"></i></a>
+                                                                                        <a href="javascript:;" className="general_back"><i className="fa fa-arrow-left"></i></a>
                                                                                     </div>
                                                                                     <div className="m-settingsV2__headerLabel"> Assets
                                                 </div>
@@ -1559,7 +1561,7 @@ export default class Setting extends Component {
                                                                             <div className="theme" style={{ display: 'none' }}>
                                                                                 <div className="m-settingsV2__headerWrapper">
                                                                                     <div className="m-settingsV2__backButton">
-                                                                                        <a href="#/" className="general_back"><i className="fa fa-arrow-left"></i></a>
+                                                                                        <a href="javascript:;" className="general_back"><i className="fa fa-arrow-left"></i></a>
                                                                                     </div>
                                                                                     <div className="m-settingsV2__headerLabel"> Theme
                                                 </div>
@@ -1635,7 +1637,7 @@ export default class Setting extends Component {
                                                                             {/* <div className="hashtags" style={{ display: 'none' }}>
                                                                                 <div className="m-settingsV2__headerWrapper">
                                                                                     <div className="m-settingsV2__backButton">
-                                                                                        <a href="#/" className="general_back"><i className="fa fa-arrow-left"></i></a>
+                                                                                        <a href="javascript:;" className="general_back"><i className="fa fa-arrow-left"></i></a>
                                                                                     </div>
                                                                                     <div className="m-settingsV2__headerLabel">
                                                                                         Theme
@@ -1671,7 +1673,7 @@ export default class Setting extends Component {
                                                                             <div className="footer" style={{ display: 'none' }}>
                                                                                 <div className="m-settingsV2__headerWrapper">
                                                                                     <div className="m-settingsV2__backButton">
-                                                                                        <a href="#/" className="general_back"><i className="fa fa-arrow-left"></i></a>
+                                                                                        <a href="javascript:;" className="general_back"><i className="fa fa-arrow-left"></i></a>
                                                                                     </div>
                                                                                     <div className="m-settingsV2__headerLabel">
                                                                                         Footer
@@ -1716,7 +1718,7 @@ export default class Setting extends Component {
                                                                             <div className="domain" style={{ display: 'none' }}>
                                                                                 <div className="m-settingsV2__headerWrapper">
                                                                                     <div className="m-settingsV2__backButton">
-                                                                                        <a href="#/" className="general_back"><i className="fa fa-arrow-left"></i></a>
+                                                                                        <a href="javascript:;" className="general_back"><i className="fa fa-arrow-left"></i></a>
                                                                                     </div>
                                                                                     <div className="m-settingsV2__headerLabel">
                                                                                         Domain
@@ -1754,7 +1756,7 @@ export default class Setting extends Component {
                                                                             <div className="payouts" style={{ display: 'none' }}>
                                                                                 <div className="m-settingsV2__headerWrapper">
                                                                                     <div className="m-settingsV2__backButton">
-                                                                                        <a href="#/" id="back5"><i className="fa fa-arrow-left"></i></a>
+                                                                                        <a href="javascript:;" id="back5"><i className="fa fa-arrow-left"></i></a>
                                                                                     </div>
                                                                                     <div className="m-settingsV2__headerLabel"> Payouts
                                                 </div>
@@ -1803,11 +1805,11 @@ export default class Setting extends Component {
                                                                                 <div className="m-nestedMenu__headerLabel1">Security</div>
                                                                                 <ul className="nav nav-tabs tabs-left">
                                                                                     <li className="active">
-                                                                                        <a href="#/" id="two-factor_authen" style={{ borderBottom: '1px solid #c3bbbb' }} data-toggle="tab">Two-factor Authentication<i className="fa fa-angle-right right-angle"></i>
+                                                                                        <a href="javascript:;" id="two-factor_authen" style={{ borderBottom: '1px solid #c3bbbb' }} data-toggle="tab">Two-factor Authentication<i className="fa fa-angle-right right-angle"></i>
                                                                                         </a>
                                                                                     </li>
                                                                                     {/* <li>
-                                                                                        <a href="#/" id="sessions" data-toggle="tab">Sessions<i className="fa fa-angle-right right-angle"></i>
+                                                                                        <a href="javascript:;" id="sessions" data-toggle="tab">Sessions<i className="fa fa-angle-right right-angle"></i>
                                                                                         </a>
                                                                                     </li> */}
                                                                                 </ul>
@@ -1816,7 +1818,7 @@ export default class Setting extends Component {
                                                                                 <br />
                                                                                 <div className="m-settingsV2__headerWrapper">
                                                                                     <div className="m-settingsV2__backButton">
-                                                                                        <a href="#/" className="security_back"><i className="fa fa-arrow-left"></i></a>
+                                                                                        <a href="javascript:;" className="security_back"><i className="fa fa-arrow-left"></i></a>
                                                                                     </div>
                                                                                     <div className="m-settingsV2__headerLabel"> Two-factor Authentication
                                                 </div>
@@ -1871,7 +1873,7 @@ export default class Setting extends Component {
                                                                                 <br />
                                                                                 <div className="m-settingsV2__headerWrapper">
                                                                                     <div className="m-settingsV2__backButton">
-                                                                                        <a href="#/" className="security_back"><i className="fa fa-arrow-left"></i></a>
+                                                                                        <a href="javascript:;" className="security_back"><i className="fa fa-arrow-left"></i></a>
                                                                                     </div>
                                                                                     <div className="m-settingsV2__headerLabel"> Sessions
                                                 </div>
@@ -1900,11 +1902,11 @@ export default class Setting extends Component {
                                                                                 <div className="m-nestedMenu__headerLabel1">Billing</div>
                                                                                 <ul className="nav nav-tabs tabs-left">
                                                                                     <li className="active">
-                                                                                        <a href="#/" id="payment_methods" data-toggle="tab">Payment Methods <i className="fa fa-angle-right right-angle"></i>
+                                                                                        <a href="javascript:;" id="payment_methods" data-toggle="tab">Payment Methods <i className="fa fa-angle-right right-angle"></i>
                                                                                         </a>
                                                                                     </li>
                                                                                     <li>
-                                                                                        <a href="#/" id="recurring_payments" style={{ borderBottom: '1px solid #c3bbbb' }} data-toggle="tab">Recurring Payments<i className="fa fa-angle-right right-angle"></i>
+                                                                                        <a href="javascript:;" id="recurring_payments" style={{ borderBottom: '1px solid #c3bbbb' }} data-toggle="tab">Recurring Payments<i className="fa fa-angle-right right-angle"></i>
                                                                                         </a>
                                                                                     </li>
                                                                                 </ul>
@@ -1913,7 +1915,7 @@ export default class Setting extends Component {
                                                                                 <br />
                                                                                 <div className="m-settingsV2__headerWrapper">
                                                                                     <div className="m-settingsV2__backButton">
-                                                                                        <a href="#/" className="payment_back"><i className="fa fa-arrow-left"></i></a>
+                                                                                        <a href="javascript:;" className="payment_back"><i className="fa fa-arrow-left"></i></a>
                                                                                     </div>
                                                                                     <div className="m-settingsV2__headerLabel"> Payment Methods
                                                 </div>
@@ -1925,7 +1927,7 @@ export default class Setting extends Component {
                                                                                 <br />
                                                                                 <div className="m-settingsV2__headerWrapper">
                                                                                     <div className="m-settingsV2__backButton">
-                                                                                        <a href="#/" className="payment_back"><i className="fa fa-arrow-left"></i></a>
+                                                                                        <a href="javascript:;" className="payment_back"><i className="fa fa-arrow-left"></i></a>
                                                                                     </div>
                                                                                     <div className="m-settingsV2__headerLabel"> Recurring Payments
                                                 </div>
@@ -1942,31 +1944,31 @@ export default class Setting extends Component {
                                                                                 <div className="m-nestedMenu__headerLabel1">Referrals</div>
                                                                                 <ul className="nav nav-tabs tabs-left">
                                                                                     <li>
-                                                                                        <a href="#/" id="referrals" style={{ borderBottom: '1px solid #c3bbbb' }} data-toggle="tab">Referrals<i className="fa fa-angle-right right-angle"></i></a>
+                                                                                        <a href="javascript:;" id="referrals" style={{ borderBottom: '1px solid #c3bbbb' }} data-toggle="tab">Referrals<i className="fa fa-angle-right right-angle"></i></a>
                                                                                     </li>
                                                                                 </ul>
                                                                                 <br />
                                                                                 <div className="m-nestedMenu__headerLabel1">Content Admin</div>
                                                                                 <ul className="nav nav-tabs tabs-left">
                                                                                     <li className="active">
-                                                                                        <a href="#/" id="reported_content" data-toggle="tab">Reported Content <i className="fa fa-angle-right right-angle"></i></a>
+                                                                                        <a href="javascript:;" id="reported_content" data-toggle="tab">Reported Content <i className="fa fa-angle-right right-angle"></i></a>
                                                                                     </li>
                                                                                     <li>
-                                                                                        <a href="#/" id="blocked_channels" style={{ borderBottom: '1px solid #c3bbbb' }} data-toggle="tab">Blocked Channels<i className="fa fa-angle-right right-angle"></i></a>
+                                                                                        <a href="javascript:;" id="blocked_channels" style={{ borderBottom: '1px solid #c3bbbb' }} data-toggle="tab">Blocked Channels<i className="fa fa-angle-right right-angle"></i></a>
                                                                                     </li>
                                                                                 </ul>
                                                                                 <br />
                                                                                 <div className="m-nestedMenu__headerLabel1">Paid Content</div>
                                                                                 <ul className="nav nav-tabs tabs-left">
                                                                                     <li className="active">
-                                                                                        <a href="#/" id="subscription_tier_management" style={{ borderBottom: '1px solid #c3bbbb' }} data-toggle="tab">Subscription Tier Management <i className="fa fa-angle-right right-angle"></i></a>
+                                                                                        <a href="javascript:;" id="subscription_tier_management" style={{ borderBottom: '1px solid #c3bbbb' }} data-toggle="tab">Subscription Tier Management <i className="fa fa-angle-right right-angle"></i></a>
                                                                                     </li>
                                                                                 </ul>
                                                                                 <br />
                                                                                 <div className="m-nestedMenu__headerLabel1">Deactivate and Delete Account</div>
                                                                                 <ul className="nav nav-tabs tabs-left">
-                                                                                    <li className="active"><a href="#/" id="deactivate_account" data-toggle="tab">Deactivate Account <i className="fa fa-angle-right right-angle"></i></a></li>
-                                                                                    <li className="active"><a href="#/" style={{ borderBottom: '1px solid #c3bbbb' }} id="delete_account" data-toggle="tab">Delete Account<i className="fa fa-angle-right right-angle"></i></a></li>
+                                                                                    <li className="active"><a href="javascript:;" id="deactivate_account" data-toggle="tab">Deactivate Account <i className="fa fa-angle-right right-angle"></i></a></li>
+                                                                                    <li className="active"><a href="javascript:;" style={{ borderBottom: '1px solid #c3bbbb' }} id="delete_account" data-toggle="tab">Delete Account<i className="fa fa-angle-right right-angle"></i></a></li>
                                                                                 </ul>
 
                                                                             </div>
@@ -1975,7 +1977,7 @@ export default class Setting extends Component {
                                                                                 <br />
                                                                                 <div className="m-settingsV2__headerWrapper">
                                                                                     <div className="m-settingsV2__backButton">
-                                                                                        <a href="#/" className="other_back"><i className="fa fa-arrow-left"></i></a>
+                                                                                        <a href="javascript:;" className="other_back"><i className="fa fa-arrow-left"></i></a>
                                                                                     </div>
                                                                                     <div className="m-settingsV2__headerLabel">
                                                                                         Referrals
@@ -2034,7 +2036,7 @@ export default class Setting extends Component {
                                                                             <br />
                                                                             <div className="m-settingsV2__headerWrapper">
                                                                                 <div className="m-settingsV2__backButton">
-                                                                                    <a href="#/" className="other_back"><i className="fa fa-arrow-left"></i></a>
+                                                                                    <a href="javascript:;" className="other_back"><i className="fa fa-arrow-left"></i></a>
                                                                                 </div>
                                                                                 <div className="m-settingsV2__headerLabel">
                                                                                     Reported Content
@@ -2049,7 +2051,7 @@ export default class Setting extends Component {
                                                                             <br />
                                                                             <div className="m-settingsV2__headerWrapper">
                                                                                 <div className="m-settingsV2__backButton">
-                                                                                    <a href="#/" className="other_back"><i className="fa fa-arrow-left"></i></a>
+                                                                                    <a href="javascript:;" className="other_back"><i className="fa fa-arrow-left"></i></a>
                                                                                 </div>
                                                                                 <div className="m-settingsV2__headerLabel">
                                                                                     Blocked Channels
@@ -2111,7 +2113,7 @@ export default class Setting extends Component {
                                                                             <br />
                                                                             <div className="m-settingsV2__headerWrapper">
                                                                                 <div className="m-settingsV2__backButton">
-                                                                                    <a href="#/" className="other_back"><i className="fa fa-arrow-left"></i></a>
+                                                                                    <a href="javascript:;" className="other_back"><i className="fa fa-arrow-left"></i></a>
                                                                                 </div>
                                                                                 <div className="m-settingsV2__headerLabel">
                                                                                     Subscription tier Management
@@ -2150,7 +2152,7 @@ export default class Setting extends Component {
                                                                             <br />
                                                                             <div className="m-settingsV2__headerWrapper">
                                                                                 <div className="m-settingsV2__backButton">
-                                                                                    <a href="#/" className="other_back"><i className="fa fa-arrow-left"></i></a>
+                                                                                    <a href="javascript:;" className="other_back"><i className="fa fa-arrow-left"></i></a>
                                                                                 </div>
                                                                                 <div className="m-settingsV2__headerLabel">
                                                                                     Deactivate Account
@@ -2180,7 +2182,7 @@ export default class Setting extends Component {
                                                                             <br />
                                                                             <div className="m-settingsV2__headerWrapper">
                                                                                 <div className="m-settingsV2__backButton">
-                                                                                    <a href="#/" className="other_back"><i className="fa fa-arrow-left"></i></a>
+                                                                                    <a href="javascript:;" className="other_back"><i className="fa fa-arrow-left"></i></a>
                                                                                 </div>
                                                                                 <div className="m-settingsV2__headerLabel">
                                                                                     Delete Account

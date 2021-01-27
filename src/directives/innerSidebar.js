@@ -3,7 +3,9 @@ import Cookies from 'js-cookie';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import $ from 'jquery'
-
+const headers = {
+    'Content-Type': 'text/plain'
+ };
 export default class InnerSidebar extends Component {
 
     constructor(props) {
@@ -18,7 +20,7 @@ export default class InnerSidebar extends Component {
     componentDidMount() {
         this.groupAPI()
         this.showDisplayNameAPI()
-        var urlGroup = window.location.href.split('groupdetail/')[1]
+        var urlGroup = window.location.hash.split('groupdetail/')[1]
         this.setState({
             urlGroup: urlGroup
         })
@@ -54,7 +56,7 @@ export default class InnerSidebar extends Component {
     groupAPI() {
         $('#main_loader').show();
         $('#root').css('opacity', '0.5');
-        axios.post(`/freedomcell/api/users/group_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/group_list`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key },{headers}).then((res) => {
             this.codeDataGroup = res.data.code
             if (this.codeDataGroup === true) {
                 this.setState({
@@ -71,7 +73,7 @@ export default class InnerSidebar extends Component {
         $('#main_loader').show();
         $('#root').css('opacity', '0.5');
         setTimeout(() => {
-            window.location.href = '/timeLine/' + id;
+            window.location.hash = '/timeLine/' + id;
             $('#main_loader').hide();
             $('#root').css('opacity', '1.0');
         }, 200);
@@ -81,7 +83,7 @@ export default class InnerSidebar extends Component {
         $('#main_loader').show();
         $('#root').css('opacity', '0.5');
         setTimeout(() => {
-            window.location.href = '/timeLine/' + id;
+            window.location.hash = '/timeLine/' + id;
             $('#main_loader').hide();
             $('#root').css('opacity', '1.0');
         }, 200);
@@ -92,7 +94,7 @@ export default class InnerSidebar extends Component {
     showDisplayNameAPI() {
         $('#main_loader').show();
         $('#root').css('opacity', '0.5');
-        axios.post(`/freedomcell/api/users/show_display_name`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/show_display_name`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key },{headers}).then((res) => {
             this.codeDataDisplayName = res.data.code
             if (this.codeDataDisplayName === true) {
                 this.setState({
@@ -125,7 +127,7 @@ export default class InnerSidebar extends Component {
                                 <Link to="/wallet" title="" > Wallet </Link>
                             </li>
                             <li className="sidebar-dropdown">
-                                <a href="#" className="group_arrow" style={{ marginLeft: '23px' }}> <img style={{ color: '#999', marginLeft: '-28px' }} src="https://espsofttechnologies.com/Projects_icon_small.png" /><span>Projects</span></a>
+                                <a href="javascript:;" className="group_arrow" style={{ marginLeft: '23px' }}> <img style={{ color: '#999', marginLeft: '-28px' }} src="https://freedomcells.net/freedom-cells-react/Projects_icon_small.png" /><span>Projects</span></a>
                                 <div className="sidebar-submenu" style={{ display: 'none' }}>
                                     <ul>
                                         <li id="li_projects">
@@ -137,7 +139,7 @@ export default class InnerSidebar extends Component {
                                 </div>
                             </li>
                             <li className="sidebar-dropdown">
-                                <a href="#" className="group_arrow" style={{ marginLeft: '23px' }}>  <i className="fa fa-users" style={{ color: '#999', marginLeft: '-42px' }} aria-hidden="true"></i><span>Groups</span></a>
+                                <a href="javascript:;" className="group_arrow" style={{ marginLeft: '23px' }}>  <i className="fa fa-users" style={{ color: '#999', marginLeft: '-42px' }} aria-hidden="true"></i><span>Groups</span></a>
                                 <div className="sidebar-submenu" style={{ display: 'none' }}>
                                     <ul>
                                         <li id="li_creategroup"><Link to="/creategroup" >

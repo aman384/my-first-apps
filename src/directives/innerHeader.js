@@ -6,7 +6,9 @@ import axios from 'axios';
 import toastr from 'reactjs-toastr';
 import { Notifications } from 'react-push-notification';
 import addNotification from 'react-push-notification';
-
+const headers = {
+    'Content-Type': 'text/plain'
+ };
 export default class InnerHeader extends Component {
 
     constructor(props) {
@@ -29,7 +31,7 @@ export default class InnerHeader extends Component {
         this.setState({
             [e.target.name]: e.target.value
         })
-        axios.post(`/freedomcell/api/users/all_search`, { 'user_id': this.loginData.id, 'search': this.state.main_search_val, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/all_search`, { 'user_id': this.loginData.id, 'search': this.state.main_search_val, 'api_key': this.loginData.api_key },{headers}).then((res) => {
             this.codeDataAvatarBanner1 = res.data.code
             if (this.codeDataAvatarBanner1 === true) {
                 this.setState({
@@ -92,7 +94,7 @@ export default class InnerHeader extends Component {
             $('.search_ul').hide();
             return false;
         }
-        axios.post(`/freedomcell/api/users/all_search`, { 'user_id': this.loginData.id, 'search': this.state.main_search_val, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/all_search`, { 'user_id': this.loginData.id, 'search': this.state.main_search_val, 'api_key': this.loginData.api_key },{headers}).then((res) => {
             this.codeDataAvatarBanner1 = res.data.code
             if (this.codeDataAvatarBanner1 === true) {
                 this.setState({
@@ -112,7 +114,7 @@ export default class InnerHeader extends Component {
     //==================================  Detail of Avatar Banner  ==============================
 
     BannerImageAPI() {
-        axios.post(`/freedomcell/api/users/avatar_banner`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/avatar_banner`, { 'user_id': this.loginData.id, 'view_user_id': this.loginData.id, 'api_key': this.loginData.api_key },{headers}).then((res) => {
             this.codeDataAvatarBanner = res.data.code
             if (this.codeDataAvatarBanner === true) {
                 this.setState({
@@ -124,7 +126,7 @@ export default class InnerHeader extends Component {
                 setTimeout(() => {
                     Cookies.remove('name');
 
-                    window.location.href = '/';
+                    window.location.hash = '/';
                 }, 200);
             }
         }).catch((error) => {
@@ -137,20 +139,20 @@ export default class InnerHeader extends Component {
         Cookies.remove('name');
         setTimeout(() => {
 
-            window.location.href = '/';
+            window.location.hash = '/';
         }, 200);
     }
 
     loading(id) {
         setTimeout(() => {
-            window.location.href = '/timeLine/' + id;
+            window.location.hash = '/timeLine/' + id;
             window.location.reload(true)
         }, 500);
     }
 
     loadingGroup(id) {
         setTimeout(() => {
-            window.location.href = '/groupdetail/' + id;
+            window.location.hash = '/groupdetail/' + id;
             window.location.reload(true)
         }, 500);
     }
@@ -164,7 +166,7 @@ export default class InnerHeader extends Component {
     //==================================  Notifications list  ==============================
 
     notificationList() {
-        axios.post(`/freedomcell/api/users/notification_list`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'limit': 10 }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/notification_list`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'limit': 10 },{headers}).then((res) => {
             this.codeDataNotification = res.data.code
             if (this.codeDataNotification === true) {
                 this.notifCount = res.data
@@ -216,10 +218,10 @@ export default class InnerHeader extends Component {
     //===================================== Notification Read  ===========================
 
     notificationRead() {
-        axios.post(`/freedomcell/api/users/notification_read`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'notification_id': "0" }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/notification_read`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'notification_id': "0" },{headers}).then((res) => {
             this.codeDataNotificationReadAll = res.data.code
             if (this.codeDataNotificationReadAll === true) {
-                window.location.href = '/AllNotification';
+                window.location.hash = '/AllNotification';
                 window.location.reload(true)
 
             }
@@ -233,7 +235,7 @@ export default class InnerHeader extends Component {
     //===================================== Notification Bell click Read  ===========================
 
     notificationReadBell() {
-        axios.post(`/freedomcell/api/users/notification_read`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'notification_id': "0" }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/notification_read`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'notification_id': "0" },{headers}).then((res) => {
             this.codeDataNotificationReadAll = res.data.code
             if (this.codeDataNotificationReadAll === true) {
 
@@ -249,10 +251,10 @@ export default class InnerHeader extends Component {
 
     notificationReadSingle(id) {
         console.log(id)
-        axios.post(`/freedomcell/api/users/notification_read`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'notification_id': id.notification_id }).then((res) => {
+        axios.post(`https://freedomcells.net/freedomcell/api/users/notification_read`, { 'user_id': this.loginData.id, 'api_key': this.loginData.api_key, 'notification_id': id.notification_id },{headers}).then((res) => {
             this.codeDataNotificationReadAll = res.data.code
             if (this.codeDataNotificationReadAll === true) {
-                window.location.href = id.link
+                window.location.hash = id.link
                 setTimeout(() => {
                     window.location.reload(true)
                 }, 1000);
@@ -268,7 +270,7 @@ export default class InnerHeader extends Component {
     loading1(id) {
         console.log(id.link);
         
-        window.location.href = id.link
+        window.location.hash = id.link
         setTimeout(() => {
             window.location.reload(true)
         }, 1000);
@@ -278,7 +280,7 @@ export default class InnerHeader extends Component {
         return (
             <div className="topbar stick stickClass">
                 <div className="logo text-right innerLogo">
-                    <Link title="" to="/" onClick={this.loginPage}><img src="http://espsofttechnologies.com/logo_freedom.png" alt="" /></Link>
+                    <Link title="" to="/" onClick={this.loginPage}><img src="http://espsofttechnologies.com/freedom-cells-react/logo_freedom.png" alt="" /></Link>
 
                 </div>
                 <Notifications />
@@ -304,7 +306,7 @@ export default class InnerHeader extends Component {
                     <ul className="setting-area" >
                         {/* <li id="notification_bell" onClick={this.abc}>kkk</li> */}
                         <li >
-                            <a href="#/" title="Home" data-ripple="" className="head-menu menu-search">
+                            <a href="javascript:;" title="Home" data-ripple="" className="head-menu menu-search">
                                 <i className="fa fa-search" aria-hidden="true"></i>
                             </a>
 
@@ -350,7 +352,7 @@ export default class InnerHeader extends Component {
                         </a></li> */}
                         {/* <span > */}
                         <li >
-                            <a href="#/" title="Notification" onClick={this.notificationReadBell} data-ripple="" className="head-menu menu-a">
+                            <a href="javascript:;" title="Notification" onClick={this.notificationReadBell} data-ripple="" className="head-menu menu-a">
                                 <i className="fa fa-bell-o" aria-hidden="true"></i><span className="badge" >{this.notifCount?.unread_count}</span>
                             </a>
                             <div className="dropdowns ps-container ps-theme-default ps-active-y notif" >
@@ -386,14 +388,14 @@ export default class InnerHeader extends Component {
                             {/* </span> */}
                         </li>
                         {/* <li>
-                            <a href="#/" title="Messages" data-ripple="" className="head-menu">
+                            <a href="javascript:;" title="Messages" data-ripple="" className="head-menu">
                                 <i className="ti-comment"></i>
                                 <span>1200</span></a>
                             <div className="dropdowns ps-container ps-theme-default ps-active-y ">
                                 <span>5 New Messages</span>
                                 <ul className="drops-menu">
                                     <li>
-                                        <a href="#/" title="">
+                                        <a href="javascript:;" title="">
                                             <img src="../../thumb-1.jpg" alt="" />
                                             <div className="mesg-meta">
                                                 <h6>sarah Loren</h6>
@@ -404,7 +406,7 @@ export default class InnerHeader extends Component {
                                         <span className="tag green">New</span>
                                     </li>
                                     <li>
-                                        <a href="#/" title="">
+                                        <a href="javascript:;" title="">
                                             <img src="../../thumb-2.jpg" alt="" />
                                             <div className="mesg-meta">
                                                 <h6>Jhon doe</h6>
@@ -415,7 +417,7 @@ export default class InnerHeader extends Component {
                                         <span className="tag red">Reply</span>
                                     </li>
                                     <li>
-                                        <a href="#/" title="">
+                                        <a href="javascript:;" title="">
                                             <img src="../../thumb-3.jpg" alt="" />
                                             <div className="mesg-meta">
                                                 <h6>Andrew</h6>
@@ -426,7 +428,7 @@ export default class InnerHeader extends Component {
                                         <span className="tag blue">Unseen</span>
                                     </li>
                                     <li>
-                                        <a href="#/" title="">
+                                        <a href="javascript:;" title="">
                                             <img src="../../thumb-4.jpg" alt="" />
                                             <div className="mesg-meta">
                                                 <h6>Tom cruse</h6>
@@ -437,7 +439,7 @@ export default class InnerHeader extends Component {
                                         <span className="tag">New</span>
                                     </li>
                                     <li>
-                                        <a href="#/" title="">
+                                        <a href="javascript:;" title="">
                                             <img src="../../thumb-5.jpg" alt="" />
                                             <div className="mesg-meta">
                                                 <h6>Amy</h6>
@@ -452,11 +454,11 @@ export default class InnerHeader extends Component {
                             </div>
                         </li>
                          */}
-                        <li><a href="#/" title="Languages" data-ripple="" className="head-menu menu-a"><i className="fa fa-globe"></i></a>
+                        <li><a href="javascript:;" title="Languages" data-ripple="" className="head-menu menu-a"><i className="fa fa-globe"></i></a>
                             <div className="dropdowns ps-container ps-theme-default ps-active-y languages">
-                                <a href="#/" title=""><i className="ti-check"></i>English</a>
-                                <a href="#/" title="">Czech</a>
-                                <a href="#/" title="">Hindi</a>
+                                <a href="javascript:;" title=""><i className="ti-check"></i>English</a>
+                                <a href="javascript:;" title="">Czech</a>
+                                <a href="javascript:;" title="">Hindi</a>
                             </div>
                         </li>
                     </ul>
@@ -465,16 +467,16 @@ export default class InnerHeader extends Component {
                         <img src={this.state?.bannerImage?.avatar} alt="" />
                         <span className="status f-online"></span>
                         <div className="user-setting" style={{ marginRight: '30px' }}>
-                            {/* <a href="#/" title=""><span className="status f-online"></span>online</a>
-                            <a href="#/" title=""><span className="status f-away"></span>away</a>
-                            <a href="#/" title=""><span className="status f-off"></span>offline</a> */}
+                            {/* <a href="javascript:;" title=""><span className="status f-online"></span>online</a>
+                            <a href="javascript:;" title=""><span className="status f-away"></span>away</a>
+                            <a href="javascript:;" title=""><span className="status f-off"></span>offline</a> */}
                             <span style={{ marginLeft: '15px' }}>{this.state?.bannerImage?.full_name}</span>
                             <Link to={`/timeLine/${this.loginData?.id}`} onClick={this.loading.bind(this, this.loginData?.id)} title=""><i className="fa fa-user-o" aria-hidden="true"></i>
                                 view profile</Link>
                             {/* <Link to={`/timeLine/${this.loginData?.id}`} onClick={this.loading.bind(this, this.loginData?.id)} title=""><i className="ti-pencil-alt"></i>edit profile</Link> */}
-                            {/* <a href="#/" title=""><i className="ti-target"></i>activity log</a> */}
+                            {/* <a href="javascript:;" title=""><i className="ti-target"></i>activity log</a> */}
                             <Link to={`/setting`} onClick={this.loading.bind(this, this.loginData?.id)} title=""><i className="ti-settings"></i>account setting</Link>
-                            <Link to="/freedom-cells-react" onClick={this.Logout} title=""><i className="ti-power-off"></i>log out</Link>
+                            <Link to="/" onClick={this.Logout} title=""><i className="ti-power-off"></i>log out</Link>
                         </div>
                     </div>
                     {/* <span className="ti-menu main-menu" data-ripple=""><span className="ripple"><span className="ink" style={{ height: '20px', width: '20px', backgroundColor: 'rgb(217, 217, 217)', top: '-3px', left: '-1.39062px' }}></span></span></span> */}
